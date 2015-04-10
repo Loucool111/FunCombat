@@ -1,0 +1,24 @@
+name: FunCombat
+version: 1
+main: fr.reaamz.funcombat.FunCombat
+
+commands:
+ sethub:
+  description: Permet de set la location du Hub
+  usage: /<command>
+
+ hub:
+  description: Retourne au Hub
+  usage: /<command>
+
+ gethub:
+  description: Retourne la location du Hub
+  usage: /<command>
+
+ resethubdata:
+  description: Reset toutes le data du Hub
+  usage: /<command>
+
+ getmenu:
+  description: test
+  usage: /<command>
