@@ -4,12 +4,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
@@ -37,7 +40,7 @@ public class MetamorphListener implements Listener
 	
 	Map<Player, Entity> entities = Maps.newHashMap();
 	
-	private void createNewSheep(DyeColor color,Player player)
+	private void spawnNewSheep(DyeColor color,Player player)
 	{
 		Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.SHEEP);
 		
@@ -53,65 +56,41 @@ public class MetamorphListener implements Listener
 		entities.put(player, ent);
 	}
 	
-	private void createNewCreeper(Player player)
+	public void spawnNewEntity(Player player, Class<? extends Entity> clazz)
 	{
-		Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.CREEPER);
+		Entity ent = player.getWorld().spawn(player.getLocation(), clazz);
 		
-		Creeper creeper = (Creeper) ent;
+		Class<? extends Entity> c = ent.getClass();
 		
-		creeper.setCustomName(player.getDisplayName());
-		creeper.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,1000000000,127));
-		creeper.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,1000000000,127));
-		creeper.setPowered(true);
+		try 
+		{	
+			Method setCustomName = c.getMethod("setCustomName", String.class);
+			setCustomName.setAccessible(true);
+			setCustomName.invoke(ent, player.getDisplayName());	
+			
+			Method addPotionEffect = c.getMethod("addPotionEffect", PotionEffect.class);
+			addPotionEffect.setAccessible(true);
+			addPotionEffect.invoke(ent, new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,1000000000,127));
+			addPotionEffect.invoke(ent, (new PotionEffect(PotionEffectType.SLOW,1000000000,127)));
+			
+			if (ent instanceof Creeper)
+			{
+				Method setPowered = c.getMethod("setPowered", boolean.class);
+				setPowered.setAccessible(true);
+				setPowered.invoke(ent, true);
+			}
+			
+			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000000,1));
+			
+			entities.put(player, ent);
+		} 
+		catch (SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
+		{
+			e.printStackTrace();
+		}
 		
-		player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000000,1));
 		
-		entities.put(player, ent);
 	}
-	
-	private void createNewCow(Player player)
-	{
-		Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.COW);
-		
-		Cow cow = (Cow) ent;
-		
-		cow.setCustomName(player.getDisplayName());
-		cow.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,1000000000,127));
-		cow.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,1000000000,127));
-		
-		player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000000,1));
-		
-		entities.put(player, ent);
-	}
-	
-	private void createNewGiant(Player player)
-	{
-		Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.GIANT);
-		
-		Giant giant = (Giant) ent;
-		
-		giant.setCustomName(player.getDisplayName());
-		giant.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,1000000000,127));
-		giant.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,1000000000,127));
-		
-		player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000000,1));
-		
-		entities.put(player, ent);
-	}
-	
-	//private void createNewEntity(Player player, EntityType type, Class<? extends EntityType> entityClass)
-	//{
-		//Entity ent = player.getWorld().spawnEntity(player.getLocation(), type);
-		
-		//entityClass. a = (entityClass) ent;
-		
-		//preciseEnt.setCustomName(player.getDisplayName());
-		//preciseEnt.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,1000000000,127));
-		
-		//player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000000,1));
-		
-		//entities.put(player, ent);
-	//}
 	
 	@EventHandler
 	public void onPlayerMove(final PlayerMoveEvent e)
@@ -211,7 +190,7 @@ public class MetamorphListener implements Listener
 					{
 						if(!(entities.containsKey(player)))
 						{
-							createNewSheep(dColor, player);
+							spawnNewSheep(dColor, player);
 							Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en mouton !");
 						}
 						else
@@ -226,7 +205,7 @@ public class MetamorphListener implements Listener
 				{
 					if(!(entities.containsKey(player)))
 					{
-						createNewCreeper(player);
+						spawnNewEntity(player, Creeper.class);
 						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en creeper !");
 					}
 					else
@@ -240,7 +219,7 @@ public class MetamorphListener implements Listener
 				{
 					if(!(entities.containsKey(player)))
 					{
-						createNewCow(player);
+						spawnNewEntity(player, Cow.class);
 						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en vache !");
 					}
 					else
@@ -254,8 +233,22 @@ public class MetamorphListener implements Listener
 				{
 					if(!(entities.containsKey(player)))
 					{
-						createNewGiant(player);
+						spawnNewEntity(player, Giant.class);
 						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en géant !");
+					}
+					else
+					{
+						Utils.sendCustomMessage(player, ChatColor.RED + "Vous êtes déjà Métamorphosé !");
+					}
+					player.closeInventory();
+				}
+				
+				if(e.getCurrentItem().getType().equals(Material.FEATHER))
+				{
+					if(!(entities.containsKey(player)))
+					{
+						spawnNewEntity(player, Chicken.class);
+						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en poulet !");
 					}
 					else
 					{

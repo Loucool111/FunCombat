@@ -15,7 +15,7 @@ public class MetamorphUtils
 		ItemMeta moutonMeta = mouton.getItemMeta();
 		
 		moutonMeta.setDisplayName(ChatColor.GOLD + "Métamorphosez-vous en mouton !");
-		moutonMeta.setLore(Arrays.asList(ChatColor.WHITE + "Clic pour vous transformer en mouton !",ChatColor.WHITE + "Couleur ajustable"));
+		moutonMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour vous transformer en mouton !",ChatColor.WHITE + "Couleur selon couleur préférée"));
 		
 		mouton.setItemMeta(moutonMeta);
 		
@@ -25,7 +25,7 @@ public class MetamorphUtils
 		ItemMeta enleverMeta = enlever.getItemMeta();
 		
 		enleverMeta.setDisplayName(ChatColor.RED + "Enlever votre Métamorphose");
-		enleverMeta.setLore(Arrays.asList(ChatColor.WHITE + "Clic pour enlever votre Métamorphose !"));
+		enleverMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour enlever votre Métamorphose !"));
 		
 		enlever.setItemMeta(enleverMeta);
 		
@@ -35,7 +35,7 @@ public class MetamorphUtils
 		ItemMeta cowMeta = cow.getItemMeta();
 				
 		cowMeta.setDisplayName(ChatColor.GOLD + "Métamorphosez-vous en vache !");
-		cowMeta.setLore(Arrays.asList(ChatColor.WHITE + "Clic pour vous transformer en vache !"));
+		cowMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour vous transformer en vache !"));
 		
 		cow.setItemMeta(cowMeta);
 				
@@ -44,7 +44,7 @@ public class MetamorphUtils
 		ItemMeta creeperMeta = creeper.getItemMeta();
 		
 		creeperMeta.setDisplayName(ChatColor.GOLD + "Métamorphosez-vous en creeper !");
-		creeperMeta.setLore(Arrays.asList(ChatColor.WHITE + "Clic pour vous transformer en creeper!"));
+		creeperMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour vous transformer en creeper!"));
 		
 		creeper.setItemMeta(creeperMeta);
 		
@@ -52,13 +52,21 @@ public class MetamorphUtils
 		//-----------------------------
 		
 		ItemStack giant = new ItemStack(Material.ROTTEN_FLESH);
-		ItemMeta giantMeta = creeper.getItemMeta();
+		ItemMeta giantMeta = giant.getItemMeta();
 		
 		giantMeta.setDisplayName(ChatColor.GOLD + "Métamorphosez-vous en géant !");
-		giantMeta.setLore(Arrays.asList(ChatColor.WHITE + "Clic pour vous transformer en géant !"));
+		giantMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour vous transformer en géant !"));
 		
 		giant.setItemMeta(giantMeta);
 		
+		//-----------------------------
+		
+		ItemStack poulet = new ItemStack(Material.FEATHER);
+		ItemMeta pouletMeta = poulet.getItemMeta();
+		
+		pouletMeta.setDisplayName(ChatColor.GOLD + "Métamorphosez-vous en poulet !");
+		pouletMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour vous transformer en poulet !"));		
+		poulet.setItemMeta(pouletMeta);
 		
 		//-----------------------------
 		
@@ -68,6 +76,7 @@ public class MetamorphUtils
 		items[1] = cow;
 		items[2] = creeper;
 		items[3] = giant;
+		items[4] = poulet;
 		
 		items[17] = enlever;
 		
