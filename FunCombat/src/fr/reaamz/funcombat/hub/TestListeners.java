@@ -2,13 +2,11 @@ package fr.reaamz.funcombat.hub;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Chicken;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-
-import fr.reaamz.funcombat.Utils;
 
 public class TestListeners implements Listener
 {
@@ -18,16 +16,13 @@ public class TestListeners implements Listener
 	{
 		if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)
 		{
-			if(event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getType() == Material.DIAMOND_PICKAXE)
+			if(event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getType() == Material.LEVER)
 			{				
-				Block block = event.getPlayer().getTargetBlock(null, 20);
-				
-				if (block.getType() != Material.AIR)
-				{				
-					block.getWorld().spawn(block.getLocation().add(0.5, 0.5, 0.5), Chicken.class);
-					Utils.sendCustomMessage(event.getPlayer(), block.getType().toString().toLowerCase());
-					block.setType(Material.AIR);
-				}
+				Block block = event.getPlayer().getTargetBlock(null, 50);
+				if (event.getPlayer().getInventory().contains(Material.TNT))
+				{
+					block.getWorld().spawn(block.getLocation().add(1.5, 1.5, 1.5), TNTPrimed.class);
+				}								
 			}
 		}
 	}
