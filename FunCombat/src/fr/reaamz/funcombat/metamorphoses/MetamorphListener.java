@@ -18,8 +18,10 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Horse.Variant;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -63,7 +65,7 @@ public class MetamorphListener implements Listener
 		Class<? extends Entity> c = ent.getClass();
 		
 		try 
-		{	
+		{
 			Method setCustomName = c.getMethod("setCustomName", String.class);
 			setCustomName.setAccessible(true);
 			setCustomName.invoke(ent, player.getDisplayName());	
@@ -75,9 +77,14 @@ public class MetamorphListener implements Listener
 			
 			if (ent instanceof Creeper)
 			{
-				Method setPowered = c.getMethod("setPowered", boolean.class);
-				setPowered.setAccessible(true);
-				setPowered.invoke(ent, true);
+				Creeper creeper = (Creeper) ent;
+				creeper.setPowered(true);
+			}
+			
+			if (ent instanceof Horse)
+			{
+				Horse horse = (Horse) ent;
+				horse.setVariant(Variant.SKELETON_HORSE);
 			}
 			
 			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000000,1));
@@ -87,9 +94,7 @@ public class MetamorphListener implements Listener
 		catch (SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
 		{
 			e.printStackTrace();
-		}
-		
-		
+		}		
 	}
 	
 	@EventHandler
@@ -249,6 +254,20 @@ public class MetamorphListener implements Listener
 					{
 						spawnNewEntity(player, Chicken.class);
 						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en poulet !");
+					}
+					else
+					{
+						Utils.sendCustomMessage(player, ChatColor.RED + "Vous êtes déjà Métamorphosé !");
+					}
+					player.closeInventory();
+				}
+				
+				if(e.getCurrentItem().getType().equals(Material.SADDLE))
+				{
+					if(!(entities.containsKey(player)))
+					{
+						spawnNewEntity(player, Horse.class);
+						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en cheval-squelette !");
 					}
 					else
 					{

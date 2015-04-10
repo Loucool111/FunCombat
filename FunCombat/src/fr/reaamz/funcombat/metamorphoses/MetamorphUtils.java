@@ -69,6 +69,13 @@ public class MetamorphUtils
 		poulet.setItemMeta(pouletMeta);
 		
 		//-----------------------------
+		ItemStack horse = new ItemStack(Material.SADDLE);
+		ItemMeta horseMeta = horse.getItemMeta();
+		
+		horseMeta.setDisplayName(ChatColor.GOLD + "Métamorphosez-vous en cheval-squelette !");
+		horseMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour vous transformer en cheval-squelette !"));		
+		horse.setItemMeta(horseMeta);
+		//-----------------------------
 		
 		ItemStack[] items = new ItemStack[18];
 		
@@ -77,6 +84,7 @@ public class MetamorphUtils
 		items[2] = creeper;
 		items[3] = giant;
 		items[4] = poulet;
+		items[5] = horse;
 		
 		items[17] = enlever;
 		
