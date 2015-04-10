@@ -19,8 +19,6 @@ public class FunCombat extends JavaPlugin
 {
 	public static Plugin instance;
 	
-	Location loc = null;
-	
 	@Override
 	public void onEnable() 
 	{
