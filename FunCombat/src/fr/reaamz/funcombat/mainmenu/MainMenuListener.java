@@ -17,15 +17,6 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleursVirtualMenu;
 
 public class MainMenuListener implements Listener 
 {
-	/*
-	Plugin pl;
-	public MainMenuListener(Plugin p) 
-	{
-		Bukkit.getPluginManager().registerEvents(this, p);
-		pl = p;
-	}
-	*/
-	
 	@EventHandler
 	public void onInventoryClick (final InventoryClickEvent e)
 	{		
