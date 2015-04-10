@@ -21,34 +21,54 @@ public class FunCombat extends JavaPlugin
 	@Override
 	public void onEnable() 
 	{
+		//définition de l'instance du plugin
 		instance = this;
 		
-		CommandExecutor hubExecutor = new HubCommandExecutor();
-		
+		//init du command executor
 		HubCommandExecutor.init();
+				
+		//initialisation de listeners du plugin
+		initListeners();
 		
+		//initialisation des commandes
+		initCommands();
+		
+		//petit message dans la console
 		Utils.logInfo("Init de FunCombat");
+	}
+
+	@Override
+	public void onDisable()
+	{
+		//Sauvegarde de la config
+		saveConfig();
 		
+		//message de fin
+		Utils.logInfo("Savegarde de FunCombat");		
+	}
+	
+	private void initListeners()
+	{
 		Bukkit.getPluginManager().registerEvents(new HubClickListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HubJoinListener(), this);		
 		Bukkit.getPluginManager().registerEvents(new MetamorphListener(), this);
 		Bukkit.getPluginManager().registerEvents(new MainMenuListener(), this);
 		Bukkit.getPluginManager().registerEvents(new SelectionCouleurListener(), this);
 		Bukkit.getPluginManager().registerEvents(new KitpvpListener(), this);
-		
+		//test
 		Bukkit.getPluginManager().registerEvents(new TestListeners(), this);
+	}
+	
+	private void initCommands()
+	{
+		//instance de l'executor
+		CommandExecutor hubExecutor = new HubCommandExecutor();
 		
+		//définition des commandes
 		getCommand("hub").setExecutor(hubExecutor);
 		getCommand("sethub").setExecutor(hubExecutor);
 		getCommand("gethub").setExecutor(hubExecutor);
 		getCommand("resethubdata").setExecutor(hubExecutor);
 		getCommand("getmenu").setExecutor(hubExecutor);
-	}
-
-	@Override
-	public void onDisable()
-	{
-		Utils.logInfo("Savegarde de FunCombat");
-		saveConfig();
 	}
 }
