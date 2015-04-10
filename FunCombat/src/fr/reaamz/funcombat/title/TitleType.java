@@ -2,5 +2,8 @@ package fr.reaamz.funcombat.title;
 
 public enum TitleType {
 	LOGIN,
-	EVENT
+	EVENT,
+	DEATH,
+	KILL,
+	OTHER
 }

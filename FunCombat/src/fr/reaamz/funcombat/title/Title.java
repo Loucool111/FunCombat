@@ -5,7 +5,6 @@ import net.minecraft.server.v1_8_R1.EnumTitleAction;
 import net.minecraft.server.v1_8_R1.IChatBaseComponent;
 import net.minecraft.server.v1_8_R1.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R1.PlayerConnection;
-
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
@@ -44,7 +43,7 @@ public class Title
             title = ChatColor.translateAlternateColorCodes('$', title);
             IChatBaseComponent titleMain = ChatSerializer.a("{\"text\": \"" + title + "\"}");
             PacketPlayOutTitle packetPlayOutTitle = new PacketPlayOutTitle(EnumTitleAction.TITLE, titleMain);
-            connection.sendPacket(packetPlayOutTitle);
+            connection.sendPacket(packetPlayOutTitle);            
         }
 	}
 	
