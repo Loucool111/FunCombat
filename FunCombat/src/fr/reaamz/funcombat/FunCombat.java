@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import fr.reaamz.funcombat.command.HubCommandExecutor;
 import fr.reaamz.funcombat.hub.HubClickListener;
 import fr.reaamz.funcombat.hub.HubJoinListener;
+import fr.reaamz.funcombat.hub.HubMotdListener;
 import fr.reaamz.funcombat.hub.TestListeners;
 import fr.reaamz.funcombat.kitpvp.KitpvpListener;
 import fr.reaamz.funcombat.mainmenu.MainMenuListener;
@@ -55,6 +56,7 @@ public class FunCombat extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new MainMenuListener(), this);
 		Bukkit.getPluginManager().registerEvents(new SelectionCouleurListener(), this);
 		Bukkit.getPluginManager().registerEvents(new KitpvpListener(), this);
+		Bukkit.getPluginManager().registerEvents(new HubMotdListener(), this);
 		//test
 		Bukkit.getPluginManager().registerEvents(new TestListeners(), this);
 	}
