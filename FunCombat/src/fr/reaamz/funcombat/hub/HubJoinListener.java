@@ -1,5 +1,7 @@
 package fr.reaamz.funcombat.hub;
 
+import me.confuser.barapi.BarAPI;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -25,6 +27,8 @@ public class HubJoinListener implements Listener
 		Utils.sendCustomMessage(player, ChatColor.AQUA + "Bienvenue sur FunCombat, " + ChatColor.YELLOW + player.getName());
 		
 		player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());	
+		
+		BarAPI.setMessage(player, ChatColor.RED + "Bienvenue sur Fun Combat !");
 				
 		Bukkit.getScheduler().runTaskLater(FunCombat.instance, new Runnable() 
 		{			

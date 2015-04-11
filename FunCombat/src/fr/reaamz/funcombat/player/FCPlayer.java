@@ -1,5 +1,7 @@
 package fr.reaamz.funcombat.player;
 
+import me.confuser.barapi.BarAPI;
+
 import org.bukkit.entity.Player;
 
 import fr.reaamz.funcombat.title.TabTitle;
@@ -30,6 +32,11 @@ public class FCPlayer
 	public void sendRawTitle(int fadeIn, int stayTime, int fadeOut, String title, String subtitle)
 	{
 		Title.send(this.player, fadeIn, stayTime, fadeOut, title, subtitle);
+	}
+	
+	public void setTitleBar(String message)
+	{
+		BarAPI.setMessage(this.player, message);
 	}
 	
 	public int getCoins()
