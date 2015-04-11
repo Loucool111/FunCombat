@@ -9,7 +9,8 @@ import fr.reaamz.funcombat.command.HubCommandExecutor;
 import fr.reaamz.funcombat.hub.HubClickListener;
 import fr.reaamz.funcombat.hub.HubJoinListener;
 import fr.reaamz.funcombat.hub.HubMotdListener;
-import fr.reaamz.funcombat.hub.TestListeners;
+import fr.reaamz.funcombat.otherlisteners.BungeeMessagesListener;
+import fr.reaamz.funcombat.otherlisteners.TestListeners;
 import fr.reaamz.funcombat.kitpvp.KitpvpListener;
 import fr.reaamz.funcombat.mainmenu.MainMenuListener;
 import fr.reaamz.funcombat.metamorphoses.MetamorphListener;
@@ -24,9 +25,6 @@ public class FunCombat extends JavaPlugin
 	{
 		//définition de l'instance du plugin
 		instance = this;
-		
-		//utlisation des chanels pour intéragire avec BungeeCord.
-		Bukkit.getMessenger().registerOutgoingPluginChannel(FunCombat.instance, "BungeeCord");
 		
 		//init du command executor
 		HubCommandExecutor.init();
@@ -53,6 +51,7 @@ public class FunCombat extends JavaPlugin
 	
 	private void initListeners()
 	{
+		//Listeners normaux
 		Bukkit.getPluginManager().registerEvents(new HubClickListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HubJoinListener(), this);		
 		Bukkit.getPluginManager().registerEvents(new MetamorphListener(), this);
@@ -60,6 +59,13 @@ public class FunCombat extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new SelectionCouleurListener(), this);
 		Bukkit.getPluginManager().registerEvents(new KitpvpListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HubMotdListener(), this);
+				
+		//Outgoing messages
+		Bukkit.getMessenger().registerOutgoingPluginChannel(FunCombat.instance, "BungeeCord");
+		
+		//Incoming messages
+		Bukkit.getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new BungeeMessagesListener());
+		
 		//test
 		Bukkit.getPluginManager().registerEvents(new TestListeners(), this);
 	}

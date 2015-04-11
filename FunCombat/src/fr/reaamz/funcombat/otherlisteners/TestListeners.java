@@ -1,4 +1,4 @@
-package fr.reaamz.funcombat.hub;
+package fr.reaamz.funcombat.otherlisteners;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
