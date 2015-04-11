@@ -1,5 +1,7 @@
 package fr.reaamz.funcombat;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -50,4 +52,9 @@ public class Utils
 			}
 		}
 	}
+	
+	public static UUID getUUID(String uuid)
+    {
+        return UUID.fromString( uuid.substring( 0, 8 ) + "-" + uuid.substring( 8, 12 ) + "-" + uuid.substring( 12, 16 ) + "-" + uuid.substring( 16, 20 ) + "-" + uuid.substring( 20, 32 ) );
+    }
 }

@@ -18,12 +18,7 @@ import fr.reaamz.funcombat.Utils;
 public class SelectionCouleurListener implements Listener
 {
 	DyeColor dColor = null;
-	/*
-	public SelectionCouleurListener(Plugin p) 
-	{
-		Bukkit.getPluginManager().registerEvents(this, p);
-	}
-	*/
+
 	@EventHandler
 	public void onInventoryClick(final InventoryClickEvent e)
 	{
