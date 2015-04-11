@@ -33,46 +33,39 @@ public class MainMenuListener implements Listener
 
 		if (e.getInventory().getName().contains("Menu principal"))
 		{	
-			if(!(e.getCurrentItem() == null))
-			{				
-				if(!(e.getCurrentItem().getType() == Material.AIR))
+			if(e.getCurrentItem() != null && e.getCurrentItem().getType() != Material.AIR)
+			{									
+				e.setCancelled(true);
+				
+				if(e.getCurrentItem().getType() == Material.DIAMOND_SWORD)
 				{					
-					e.setCancelled(true);
+					Inventory KitpvpInv = kitpvpVMInstance.createInventory(KitpvpUtils.getItemsPourMenu());
 					
-					try
-					{
-						if(e.getCurrentItem().getType() == Material.DIAMOND_SWORD)
-						{					
-							Inventory KitpvpInv = kitpvpVMInstance.createInventory(KitpvpUtils.getItemsPourMenu());
+					kitpvpVMInstance.showInventory(player, KitpvpInv);
+				}
 					
-							kitpvpVMInstance.showInventory(player, KitpvpInv);
-						}
-					
-						if(e.getCurrentItem().getType() == Material.BLAZE_ROD)
-						{						
-							Inventory metamorphInv = morphVMInstance.createInventory(MetamorphUtils.getMetaMorphMenuItems());
+				if(e.getCurrentItem().getType() == Material.BLAZE_ROD)
+				{						
+					Inventory metamorphInv = morphVMInstance.createInventory(MetamorphUtils.getMetaMorphMenuItems());
 							
-							morphVMInstance.showInventory(player, metamorphInv);
-						}
+					morphVMInstance.showInventory(player, metamorphInv);
+				}
 					
-						if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Choissisez votre couleur"))
-						{					
-							Inventory colorWools = couleurInstance.createInventory(SelectionCouleurUtils.getItemsForMenu());
+				if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Choissisez votre couleur"))
+				{					
+					Inventory colorWools = couleurInstance.createInventory(SelectionCouleurUtils.getItemsForMenu());
 							
-							couleurInstance.showInventory(player, colorWools);
-						}
+					couleurInstance.showInventory(player, colorWools);
+				}
 						
-						if (e.getCurrentItem().getType() == Material.HOPPER)
-						{
-							fcplayer.sentToServer("Minigame");
-						}
+				if (e.getCurrentItem().getType() == Material.HOPPER)
+				{
+					fcplayer.sentToServer("Minigame");
+				}
 						
-						if (e.getCurrentItem().getType() == Material.FEATHER)
-						{
-							player.teleport(new Location(player.getWorld(),-265,100,361));	
-						}
-					}
-					catch(Exception e1){}
+				if (e.getCurrentItem().getType() == Material.FEATHER)
+				{
+					player.teleport(new Location(player.getWorld(),-265,100,361));	
 				}
 			}	
 		}
