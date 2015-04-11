@@ -12,6 +12,7 @@ import fr.reaamz.funcombat.kitpvp.KitpvpUtils;
 import fr.reaamz.funcombat.kitpvp.KitpvpVirtualInventory;
 import fr.reaamz.funcombat.metamorphoses.MetamorphUtils;
 import fr.reaamz.funcombat.metamorphoses.MetamorphVirtualInventory;
+import fr.reaamz.funcombat.player.FCPlayer;
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleursVirtualMenu;
 
@@ -21,6 +22,8 @@ public class MainMenuListener implements Listener
 	public void onInventoryClick (final InventoryClickEvent e)
 	{		
 		Player player = (Player) e.getWhoClicked();
+		
+		FCPlayer fcplayer = new FCPlayer(player);
 
 		KitpvpVirtualInventory kitpvpVMInstance = new KitpvpVirtualInventory();
 		
@@ -59,9 +62,14 @@ public class MainMenuListener implements Listener
 							couleurInstance.showInventory(player, colorWools);
 						}
 						
+						if (e.getCurrentItem().getType() == Material.HOPPER)
+						{
+							fcplayer.sentToServer("Minigame");
+						}
+						
 						if (e.getCurrentItem().getType() == Material.FEATHER)
 						{
-							player.teleport(new Location(player.getWorld(),1200,75,640));	
+							player.teleport(new Location(player.getWorld(),-265,100,361));	
 						}
 					}
 					catch(Exception e1){}

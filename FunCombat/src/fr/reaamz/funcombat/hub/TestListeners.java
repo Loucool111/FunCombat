@@ -1,33 +1,28 @@
 package fr.reaamz.funcombat.hub;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
-
-import fr.reaamz.funcombat.FunCombat;
-
 public class TestListeners implements Listener
 {
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerUse(PlayerInteractEvent event)	
 	{
 		if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)
 		{
 			if(event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getType() == Material.LEVER)
-			{				
-				Bukkit.getMessenger().registerOutgoingPluginChannel(FunCombat.instance, "BungeeCord");
-				ByteArrayDataOutput out = ByteStreams.newDataOutput();
-				
-				out.writeUTF("Connect");
-				out.writeUTF("Minigame");
-				
-				event.getPlayer().sendPluginMessage(FunCombat.instance, "BungeeCord", out.toByteArray());
+			{
+				Block block = event.getPlayer().getTargetBlock(null, 30);
+				if (event.getPlayer().getInventory().contains(Material.TNT))
+				{
+					block.getWorld().spawn(block.getLocation().add(1.5, 1.5, 1.5), TNTPrimed.class);
+				}				
 			}
 		}
 	}

@@ -21,7 +21,7 @@ public class MainMenuUtils
 		
 		kitpvpMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		
-		kitpvpMeta.setLore(Arrays.asList(ChatColor.WHITE + "Clic pour choisir votre kit !"));
+		kitpvpMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour choisir votre kit !"));
 		
 		kitpvp.setItemMeta(kitpvpMeta);
 		
@@ -31,7 +31,7 @@ public class MainMenuUtils
 		ItemMeta jumpMeta = jump.getItemMeta();
 		
 		jumpMeta.setDisplayName(ChatColor.GOLD + "Essayez le jump !");
-		jumpMeta.setLore(Arrays.asList(ChatColor.WHITE + "Clic pour tenter le jump !"));
+		jumpMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour tenter le jump !"));
 		
 		jump.setItemMeta(jumpMeta);
 		
@@ -41,7 +41,7 @@ public class MainMenuUtils
 		ItemMeta metamorph = morph.getItemMeta();
 			
 		metamorph.setDisplayName(ChatColor.GOLD + "Changez de Métamorphose !");
-		metamorph.setLore(Arrays.asList(ChatColor.WHITE + "Clic pour changer de Métamorphose !"));
+		metamorph.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour changer de Métamorphose !"));
 			
 		morph.setItemMeta(metamorph);
 		
@@ -53,9 +53,19 @@ public class MainMenuUtils
 		ItemMeta CouleursMeta = Couleurs.getItemMeta();
 		
 		CouleursMeta.setDisplayName(ChatColor.GOLD + "Choissisez votre couleur préférée !");
-		CouleursMeta.setLore(Arrays.asList(ChatColor.WHITE + "Clic pour définir votre couleur préférée !",ChatColor.WHITE + "Nécessaire pour les montures à plusieurs couleurs")); 
+		CouleursMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour définir votre couleur préférée !",ChatColor.WHITE + "Nécessaire pour les montures à plusieurs couleurs")); 
 		
 		Couleurs.setItemMeta(CouleursMeta);
+		
+		//-----------------------------------
+		
+		ItemStack hopper = new ItemStack(Material.HOPPER);
+		ItemMeta hopperMeta = hopper.getItemMeta();
+		
+		hopperMeta.setDisplayName(ChatColor.GOLD + "Serveur du Mini-jeux !");
+		hopperMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour aller sur le serveur de mini-jeux"));
+		
+		hopper.setItemMeta(hopperMeta);
 		
 		//-----------------------------------
 		
@@ -64,6 +74,8 @@ public class MainMenuUtils
 		items[0] = kitpvp;
 		
 		items[8] = jump;
+		
+		items[13] = hopper;
 		
 		items[18] = morph;
 		

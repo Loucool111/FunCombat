@@ -25,6 +25,9 @@ public class FunCombat extends JavaPlugin
 		//définition de l'instance du plugin
 		instance = this;
 		
+		//utlisation des chanels pour intéragire avec BungeeCord.
+		Bukkit.getMessenger().registerOutgoingPluginChannel(FunCombat.instance, "BungeeCord");
+		
 		//init du command executor
 		HubCommandExecutor.init();
 				
