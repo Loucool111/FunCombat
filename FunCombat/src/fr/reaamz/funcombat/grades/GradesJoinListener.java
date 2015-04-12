@@ -68,5 +68,8 @@ public class GradesJoinListener implements Listener
 			player.setCustomName(ChatColor.GRAY + "" + ChatColor.ITALIC + player.getName() + ChatColor.RESET + ChatColor.GRAY);
 			player.setPlayerListName(ChatColor.ITALIC + "" + ChatColor.GRAY + player.getName());
 		}
+		
+		
+		event.setJoinMessage(player.getDisplayName() + ChatColor.ITALIC + "" + ChatColor.GRAY +  " joined the game");
 	}
 }
