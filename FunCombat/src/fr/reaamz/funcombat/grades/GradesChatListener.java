@@ -15,8 +15,7 @@ public class GradesChatListener implements Listener
 		event.setCancelled(true);
 		String message = event.getMessage();
 		Player player = event.getPlayer();
-		
-		if (player.getName().equalsIgnoreCase("Reaamz"))
-			Utils.sendMessageAllPlayers((player.getDisplayName() + " " +  message));
+
+		Utils.sendMessageAllPlayers((player.getDisplayName() + " " +  message));
 	}
 }

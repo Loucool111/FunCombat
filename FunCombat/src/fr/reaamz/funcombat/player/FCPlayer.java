@@ -9,6 +9,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
 import fr.reaamz.funcombat.FunCombat;
+import fr.reaamz.funcombat.grades.GradeType;
 import fr.reaamz.funcombat.title.TabTitle;
 import fr.reaamz.funcombat.title.Title;
 import fr.reaamz.funcombat.title.TitleType;
@@ -17,6 +18,7 @@ public class FCPlayer
 {
 	private Player player;
 	private int coins;
+	private GradeType grade;
 		
 	public FCPlayer(Player player) 
 	{
@@ -57,6 +59,16 @@ public class FCPlayer
 		out.writeUTF(serverName);
 		
 		this.player.sendPluginMessage(FunCombat.instance, "BungeeCord", out.toByteArray());
+	}
+	
+	public void setGrade(GradeType type)
+	{
+		this.grade = type;
+	}
+	
+	public GradeType getGrade()
+	{
+		return this.grade;
 	}
 	
 	public int getCoins()
