@@ -1,5 +1,6 @@
 package fr.reaamz.funcombat.otherlisteners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.TNTPrimed;
@@ -7,6 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+
+import fr.reaamz.funcombat.player.FCPlayer;
 
 public class TestListeners implements Listener
 {
@@ -25,5 +29,12 @@ public class TestListeners implements Listener
 				}				
 			}
 		}
+	}
+	
+	@EventHandler
+	public void onPlayerMove(PlayerMoveEvent event)
+	{
+		FCPlayer player = new FCPlayer(event.getPlayer());
+		player.setTitleBar(ChatColor.YELLOW + "Bienvenue sur FunCombat !, " + ChatColor.RED + player.getPlayer().getName());
 	}
 }

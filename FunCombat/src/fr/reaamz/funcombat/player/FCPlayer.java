@@ -25,6 +25,12 @@ public class FCPlayer
 		this.player = player;
 	}
 	
+	public void loadPlayer(Player player)
+	{
+		this.player = player;
+		//TODO READ FROM FILES
+	}
+	
 	public Player getPlayer()
 	{
 		return this.player;
