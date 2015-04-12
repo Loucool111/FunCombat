@@ -6,14 +6,16 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.reaamz.funcombat.command.HubCommandExecutor;
+import fr.reaamz.funcombat.grades.GradesChatListener;
+import fr.reaamz.funcombat.grades.GradesJoinListener;
 import fr.reaamz.funcombat.hub.HubClickListener;
 import fr.reaamz.funcombat.hub.HubJoinListener;
 import fr.reaamz.funcombat.hub.HubMotdListener;
-import fr.reaamz.funcombat.otherlisteners.BungeeMessagesListener;
-import fr.reaamz.funcombat.otherlisteners.TestListeners;
 import fr.reaamz.funcombat.kitpvp.KitpvpListener;
 import fr.reaamz.funcombat.mainmenu.MainMenuListener;
 import fr.reaamz.funcombat.metamorphoses.MetamorphListener;
+import fr.reaamz.funcombat.otherlisteners.BungeeMessagesListener;
+import fr.reaamz.funcombat.otherlisteners.TestListeners;
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 
 public class FunCombat extends JavaPlugin
@@ -59,7 +61,11 @@ public class FunCombat extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new SelectionCouleurListener(), this);
 		Bukkit.getPluginManager().registerEvents(new KitpvpListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HubMotdListener(), this);
-				
+		
+		//Grades listeners
+		Bukkit.getPluginManager().registerEvents(new GradesJoinListener(), this);
+		Bukkit.getPluginManager().registerEvents(new GradesChatListener(), this);
+		
 		//Outgoing messages
 		Bukkit.getMessenger().registerOutgoingPluginChannel(FunCombat.instance, "BungeeCord");
 		

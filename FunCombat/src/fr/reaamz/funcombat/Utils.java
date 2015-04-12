@@ -9,11 +9,19 @@ import org.bukkit.potion.PotionEffect;
 
 public class Utils 
 {
-	public static void sendMessageAllPlayers(String message)
+	public static void sendCustomMessageAllPlayers(String message)
 	{
 		for(Player p : Bukkit.getServer().getOnlinePlayers())
 		{
 			p.sendMessage(ChatColor.GOLD + "[FunCombat] " + ChatColor.RESET + message);
+		}
+	}
+	
+	public static void sendMessageAllPlayers(String message)
+	{
+		for(Player p : Bukkit.getServer().getOnlinePlayers())
+		{
+			p.sendMessage(message);
 		}
 	}
 	
