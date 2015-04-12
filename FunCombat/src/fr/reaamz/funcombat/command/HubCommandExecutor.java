@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
+import fr.reaamz.funcombat.event.HubEvent;
 import fr.reaamz.funcombat.hub.HubUtils;
 import fr.reaamz.funcombat.kitpvp.KitpvpKits;
 
@@ -69,6 +70,9 @@ public class HubCommandExecutor implements CommandExecutor
 				HubUtils.equipHubStuff(player);
 				
 				player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+				
+				//envoi du HubEvent
+				Bukkit.getServer().getPluginManager().callEvent(new HubEvent(Bukkit.getServerName(),player));
 				
 				player.setGameMode(GameMode.CREATIVE);
 				

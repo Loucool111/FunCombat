@@ -20,6 +20,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import com.google.common.collect.Maps;
 
 import fr.reaamz.funcombat.Utils;
+import fr.reaamz.funcombat.event.HubEvent;
 
 public class Kitpvp implements Listener
 {
@@ -152,6 +153,13 @@ public class Kitpvp implements Listener
 	}
 	
 	@EventHandler
+	public void onHubEvent(HubEvent event)
+	{
+		Player player = event.getPlayer();
+		Utils.sendMessageAllPlayers("HubEvent passed, " + player.getName());
+	}
+	
+	@EventHandler
 	public void onRespawnEvent(final PlayerRespawnEvent e)
 	{
 		Player player = e.getPlayer();
@@ -172,12 +180,6 @@ public class Kitpvp implements Listener
 	@EventHandler
 	public void onPlayerQuit(final PlayerQuitEvent e)
 	{
-		//try
-		//{
-			//sc.getObjective(e.getPlayer().getName()).unregister();
-		//}
-		//catch (Exception e1) {}
-
 		if (playerKit.containsKey(e.getPlayer()))
 		{
 			playerKit.remove(e.getPlayer());
