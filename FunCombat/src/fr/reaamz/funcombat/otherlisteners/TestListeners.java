@@ -35,6 +35,7 @@ public class TestListeners implements Listener
 	public void onPlayerMove(PlayerMoveEvent event)
 	{
 		FCPlayer player = new FCPlayer(event.getPlayer());
+
 		player.sendWelcomeTitle();
 	}
 	
