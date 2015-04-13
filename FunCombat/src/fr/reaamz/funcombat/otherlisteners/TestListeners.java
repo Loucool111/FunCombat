@@ -36,7 +36,7 @@ public class TestListeners implements Listener
 	{
 		FCPlayer player = new FCPlayer(event.getPlayer());
 
-		player.sendWelcomeTitle();
+		player.sendWelcomeMessages();
 	}
 	
 	@EventHandler

@@ -61,6 +61,8 @@ public class Kitpvp implements Listener
 			object = sc.registerNewObjective(player.getName(), "dummy");		
 			object.setDisplayName(ChatColor.GOLD + "Kit : Archer");
 			object.setDisplaySlot(DisplaySlot.SIDEBAR);
+			
+			
 		}
 		
 		player.setScoreboard(sc);
@@ -89,6 +91,8 @@ public class Kitpvp implements Listener
 			object = sc.registerNewObjective(player.getName(), "dummy");
 			object.setDisplayName(ChatColor.GOLD + "Kit : Guerrier");
 			object.setDisplaySlot(DisplaySlot.SIDEBAR);
+			
+			
 		}
 		
 		player.setScoreboard(sc);
@@ -162,6 +166,7 @@ public class Kitpvp implements Listener
 	@EventHandler
 	public void onRespawnEvent(final PlayerRespawnEvent e)
 	{
+		
 		Player player = e.getPlayer();
 		
 		if (playerKit.containsKey(player))
@@ -175,6 +180,7 @@ public class Kitpvp implements Listener
 				getKitGuerrierComplet(player);
 			}
 		}
+		
 	}
 	
 	@EventHandler
