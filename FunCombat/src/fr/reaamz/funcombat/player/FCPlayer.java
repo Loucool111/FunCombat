@@ -14,6 +14,9 @@ import fr.reaamz.funcombat.title.TabTitle;
 import fr.reaamz.funcombat.title.Title;
 import fr.reaamz.funcombat.title.TitleType;
 
+/**
+ * Represents a FunCombatPlayer 
+ */
 public class FCPlayer 
 {
 	private Player player;
