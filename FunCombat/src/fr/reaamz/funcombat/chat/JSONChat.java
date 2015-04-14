@@ -21,12 +21,12 @@ public class JSONChat
 	}
 	
 	/**
-	 * CELUI CI EST POUR LE CLIC UNIQUEMENT {@link ChatUtils}
+	 * CELUI CI EST POUR LE CLIC UNIQUEMENT : {@link ChatUtils}
 	 * 
 	 * @param player le player
 	 * @param debutMessage le début du message
 	 * @param partieEvent la partie qui as les events
-	 * @param clicAction Peut etre : "run_command" , "suggest_command" et "open_ulr"
+	 * @param clicAction Peut etre : {@link ChatUtils#ClicActions}
 	 * @param valueAction la value de l'action
 	 */
 	public static void sendClicMessage(Player player, String debutMessage, String partieEvent,ChatUtils.ClicActions clicAction, String valueAction)
@@ -39,12 +39,12 @@ public class JSONChat
 	}
 	
 	/**
-	 * CELUI CI EST POUR LE HOVER UNIQUEMENT {@link ChatUtils}
+	 * CELUI CI EST POUR LE HOVER UNIQUEMENT : {@link ChatUtils}
 	 * 
 	 * @param player la player
 	 * @param debutMessage le message
 	 * @param partieEvent la partie avec hover
-	 * @param hoverAction Peut etre : "show_text" , "show_item" et "show_achievement"
+	 * @param hoverAction Peut etre :  {@link ChatUtils#HoverActions}
 	 * @param valueAction la valeur de l'action
 	 */
 	public static void sendHoverMessage(Player player, String debutMessage, String partieEvent, ChatUtils.HoverActions hoverAction, String valueAction)
@@ -57,14 +57,14 @@ public class JSONChat
 	}
 	
 	/**
-	 * CELUI CI EST POUR LE HOVER AVEC LE CLIC {@link ChatUtils}
+	 * CELUI CI EST POUR LE HOVER AVEC LE CLIC : {@link ChatUtils}
 	 * 
 	 * @param player la player
 	 * @param debutMessage le message
 	 * @param partieEvent la partie avec event
-	 * @param clicAction Peut etre : "run_command" , "suggest_command" et "open_ulr"
+	 * @param clicAction Peut etre :  {@link ChatUtils#ClicActions}
 	 * @param valueClic la valeur du clic
-	 * @param hoverAction Peut etre : "show_text" , "show_item" et "show_achievement"
+	 * @param hoverAction Peut etre :  {@link ChatUtils#HoverActions}
 	 * @param valueHover la valeur du hover
 	 */
 	public static void sendClicHoverEvent(Player player, String debutMessage, String partieEvent, ChatUtils.ClicActions clicAction, String valueClic, ChatUtils.HoverActions hoverAction, String valueHover)
