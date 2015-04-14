@@ -11,9 +11,9 @@ import org.bukkit.ChatColor;
 
 public class Title 
 {
-	public static int defaultFadeIn = 20;
-	public static int defautStayTime = 100;
-	public static int defaultFadeOut = 20;
+	public static final int defaultFadeIn = 20;
+	public static final int defautStayTime = 100;
+	public static final int defaultFadeOut = 20;
 	
 	/** 
 	 * @param player Le player à qui envoyer le title
