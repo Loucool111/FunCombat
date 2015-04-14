@@ -39,6 +39,11 @@ public class ChatUtils
 	
 	public static final String COMP_BOTHEND2 =  "\"}}]}";
 	
+	/**
+	 * 
+	 * Enum des actions disponibles pour un HoverEvent.
+	 *
+	 */
 	public enum HoverActions
 	{
 		SHOW_TEXT("show_text"),
@@ -56,6 +61,11 @@ public class ChatUtils
 		}
 	}
 	
+	/**
+	 * 
+	 * Enum des actions disponibles pour un ClicEvent.
+	 *
+	 */
 	public enum ClicActions
 	{
 		RUN_COMMAND("run_command"),
