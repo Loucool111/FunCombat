@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
@@ -19,31 +20,33 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.Horse;
+import org.bukkit.entity.Horse.Variant;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
-import org.bukkit.entity.Horse.Variant;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.google.common.collect.Maps;
 
+import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 
 public class MetamorphListener implements Listener 
 {
-	DyeColor dColor;
+	private DyeColor dColor;
 	
-	Map<Player, Entity> entities = Maps.newHashMap();
+	private HashMap<Player, Entity> entities = Maps.newHashMap();
 	
-	private void spawnNewSheep(DyeColor color,Player player)
+	private HashMap<Player, Integer> tasksIds = Maps.newHashMap();
+	
+	private Entity spawnNewSheep(DyeColor color,Player player)
 	{
 		Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.SHEEP);
 		
@@ -57,9 +60,11 @@ public class MetamorphListener implements Listener
 		player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000000,1));
 		
 		entities.put(player, ent);
+		
+		return ent;
 	}
 	
-	public void spawnNewEntity(Player player, Class<? extends Entity> clazz)
+	public Entity spawnNewEntity(Player player, Class<? extends Entity> clazz)
 	{
 		Entity ent = player.getWorld().spawn(player.getLocation(), clazz);
 		
@@ -95,25 +100,33 @@ public class MetamorphListener implements Listener
 		catch (SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) 
 		{
 			e.printStackTrace();
-		}		
+		}
+		
+		return ent;
 	}
 	
-	@EventHandler
-	public void onPlayerMove(final PlayerMoveEvent e)
+	private void setTeleporter(final Player player, final Entity ent)
 	{
-		if(entities.containsKey(e.getPlayer()))
+		int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(FunCombat.instance, new Runnable() 
 		{
-			Entity ent = entities.get(e.getPlayer());
-			
-			if(!(ent == null))
+			@Override
+			public void run() 
 			{
-				ent.teleport(e.getPlayer().getLocation());
+				if(entities.containsKey(player))
+				{
+					if(!(ent == null))
+					{
+						ent.teleport(player.getLocation());
+					}
+					else
+					{
+						Utils.sendCustomMessage(player, ChatColor.RED + "Il y a eu un problème, s.v.p report au staff et essayer de deco-reco");
+					}
+				}
 			}
-			else
-			{
-				Utils.sendCustomMessage(e.getPlayer(), ChatColor.RED + "Il y a eu un problème, s.v.p report au staff et essayer de deco-reco");
-			}
-		}
+		}, 0L, Long.MAX_VALUE);
+		
+		tasksIds.put(player, id);
 	}
 	
 	@EventHandler
@@ -128,6 +141,9 @@ public class MetamorphListener implements Listener
 				{
 					ent.getValue().remove();
 					entities.remove(e.getEntity());
+
+					Bukkit.getScheduler().cancelTask(tasksIds.get(e.getEntity()));
+					tasksIds.remove(e.getEntity());
 				}
 			}
 		}
@@ -141,6 +157,9 @@ public class MetamorphListener implements Listener
 			Entity ent = entities.get(e.getPlayer());
 			
 			entities.remove(e.getPlayer());
+
+			Bukkit.getScheduler().cancelTask(tasksIds.get(e.getPlayer()));
+			tasksIds.remove(e.getPlayer());
 			
 			ent.remove();
 			
@@ -156,6 +175,9 @@ public class MetamorphListener implements Listener
 			Entity ent = entities.get(e.getPlayer());
 			
 			entities.remove(e.getPlayer());
+
+			Bukkit.getScheduler().cancelTask(tasksIds.get(e.getPlayer()));
+			tasksIds.remove(e.getPlayer());
 			
 			ent.remove();
 			
@@ -211,7 +233,8 @@ public class MetamorphListener implements Listener
 					{
 						if(!(entities.containsKey(player)))
 						{
-							spawnNewSheep(dColor, player);
+							Entity sheep = spawnNewSheep(dColor, player);
+							setTeleporter(player, sheep);
 							Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en mouton !");
 						}
 						else
@@ -226,7 +249,8 @@ public class MetamorphListener implements Listener
 				{
 					if(!(entities.containsKey(player)))
 					{
-						spawnNewEntity(player, Creeper.class);
+						Entity creep = spawnNewEntity(player, Creeper.class);
+						setTeleporter(player, creep);
 						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en creeper !");
 					}
 					else
@@ -240,7 +264,8 @@ public class MetamorphListener implements Listener
 				{
 					if(!(entities.containsKey(player)))
 					{
-						spawnNewEntity(player, Cow.class);
+						Entity cow = spawnNewEntity(player, Cow.class);
+						setTeleporter(player, cow);
 						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en vache !");
 					}
 					else
@@ -254,7 +279,8 @@ public class MetamorphListener implements Listener
 				{
 					if(!(entities.containsKey(player)))
 					{
-						spawnNewEntity(player, Giant.class);
+						Entity giant = spawnNewEntity(player, Giant.class);
+						setTeleporter(player, giant);
 						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en géant !");
 					}
 					else
@@ -268,7 +294,8 @@ public class MetamorphListener implements Listener
 				{
 					if(!(entities.containsKey(player)))
 					{
-						spawnNewEntity(player, Chicken.class);
+						Entity chicken = spawnNewEntity(player, Chicken.class);
+						setTeleporter(player, chicken);
 						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en poulet !");
 					}
 					else
@@ -282,7 +309,8 @@ public class MetamorphListener implements Listener
 				{
 					if(!(entities.containsKey(player)))
 					{
-						spawnNewEntity(player, Horse.class);
+						Entity horse = spawnNewEntity(player, Horse.class);
+						setTeleporter(player, horse);
 						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en cheval-squelette !");
 					}
 					else
@@ -302,6 +330,10 @@ public class MetamorphListener implements Listener
 						Utils.sendCustomMessage(player,ChatColor.GREEN + "Votre Métamorphose à été supprimée");
 						
 						entities.remove(player);
+						
+						Bukkit.getScheduler().cancelTask(tasksIds.get(player));
+						tasksIds.remove(player);
+						
 						Utils.removeAllPotionEffects(player);
 						
 						player.closeInventory();
