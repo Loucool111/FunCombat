@@ -1,5 +1,10 @@
 package fr.reaamz.funcombat.chat;
 
+/**
+ * 
+ * Random Stuff
+ *
+ */
 public class ChatUtils 
 {
 	//ALL PART

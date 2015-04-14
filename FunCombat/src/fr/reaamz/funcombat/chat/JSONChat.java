@@ -21,7 +21,7 @@ public class JSONChat
 	}
 	
 	/**
-	 * CELUI CI EST POUR LE CLIC UNIQUEMENT
+	 * CELUI CI EST POUR LE CLIC UNIQUEMENT {@link ChatUtils}
 	 * 
 	 * @param player le player
 	 * @param debutMessage le début du message
@@ -39,7 +39,7 @@ public class JSONChat
 	}
 	
 	/**
-	 * CELUI CI EST POUR LE HOVER UNIQUEMENT
+	 * CELUI CI EST POUR LE HOVER UNIQUEMENT {@link ChatUtils}
 	 * 
 	 * @param player la player
 	 * @param debutMessage le message
@@ -57,7 +57,7 @@ public class JSONChat
 	}
 	
 	/**
-	 * CELUI CI EST POUR LE HOVER AVEC LE CLIC
+	 * CELUI CI EST POUR LE HOVER AVEC LE CLIC {@link ChatUtils}
 	 * 
 	 * @param player la player
 	 * @param debutMessage le message
