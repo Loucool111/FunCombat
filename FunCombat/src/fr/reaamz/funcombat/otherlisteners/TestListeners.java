@@ -9,8 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import fr.reaamz.funcombat.chat.JSONChat;
 import fr.reaamz.funcombat.chat.ChatUtils;
+import fr.reaamz.funcombat.chat.JSONChat;
 
 public class TestListeners implements Listener
 {
