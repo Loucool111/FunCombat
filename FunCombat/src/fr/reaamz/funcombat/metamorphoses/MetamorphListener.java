@@ -26,6 +26,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
@@ -135,6 +136,21 @@ public class MetamorphListener implements Listener
 	@EventHandler
 	public void onPlayerQuit(final PlayerQuitEvent e)
 	{	
+		if (entities.containsKey(e.getPlayer()))
+		{
+			Entity ent = entities.get(e.getPlayer());
+			
+			entities.remove(e.getPlayer());
+			
+			ent.remove();
+			
+			Utils.removeAllPotionEffects(e.getPlayer());
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerKick(final PlayerKickEvent e)
+	{
 		if (entities.containsKey(e.getPlayer()))
 		{
 			Entity ent = entities.get(e.getPlayer());
