@@ -31,7 +31,7 @@ public class FunCombat extends JavaPlugin
 		
 		//init du command executor
 		HubCommandExecutor.init();
-				
+		
 		//initialisation de listeners du plugin
 		initListeners();
 		
@@ -56,7 +56,7 @@ public class FunCombat extends JavaPlugin
 	{
 		//Listeners normaux
 		Bukkit.getPluginManager().registerEvents(new HubClickListener(), this);
-		Bukkit.getPluginManager().registerEvents(new HubJoinListener(), this);		
+		Bukkit.getPluginManager().registerEvents(new HubJoinListener(), this);
 		Bukkit.getPluginManager().registerEvents(new MetamorphListener(), this);
 		Bukkit.getPluginManager().registerEvents(new MainMenuListener(), this);
 		Bukkit.getPluginManager().registerEvents(new SelectionCouleurListener(), this);

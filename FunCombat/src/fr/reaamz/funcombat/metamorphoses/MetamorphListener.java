@@ -17,7 +17,6 @@ import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Horse.Variant;
@@ -46,6 +45,7 @@ public class MetamorphListener implements Listener
 	
 	private HashMap<Player, Integer> tasksIds = Maps.newHashMap();
 	
+	/*
 	private Entity spawnNewSheep(DyeColor color,Player player)
 	{
 		Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.SHEEP);
@@ -63,6 +63,7 @@ public class MetamorphListener implements Listener
 		
 		return ent;
 	}
+	*/
 	
 	public Entity spawnNewEntity(Player player, Class<? extends Entity> clazz)
 	{
@@ -91,6 +92,12 @@ public class MetamorphListener implements Listener
 			{
 				Horse horse = (Horse) ent;
 				horse.setVariant(Variant.SKELETON_HORSE);
+			}
+			
+			if (ent instanceof Sheep)
+			{
+				Sheep sheep = (Sheep) ent;
+				sheep.setColor(dColor);
 			}
 			
 			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000000,1));
@@ -127,6 +134,34 @@ public class MetamorphListener implements Listener
 		}, 0L, Long.MAX_VALUE);
 		
 		tasksIds.put(player, id);
+	}
+	
+	private void refreshColor(Player player)
+	{
+		File file = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\" + player.getName() + ".txt");
+		
+		BufferedReader br = null;
+		
+		if (file.exists())
+		{
+			try
+			{
+				String currentLine;
+			
+				br = new BufferedReader(new FileReader(file));
+			
+				currentLine = br.readLine();
+				
+				if(!(currentLine == null))
+					dColor = SelectionCouleurUtils.getDyeColorFromString(currentLine);
+			
+				br.close();
+			}
+			catch (IOException e1)
+			{
+				e1.printStackTrace();
+			}
+		}
 	}
 	
 	@EventHandler
@@ -193,38 +228,13 @@ public class MetamorphListener implements Listener
 		if (e.getInventory().getTitle().contains("Sélécteur de Métamorphoses"))
 		{
 			e.setCancelled(true);
-			
-			//----------------------------------------------------------------------------------------------------------------------
-			File file = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\" + player.getName() + ".txt");
-			
-			BufferedReader br = null;
-			
-			if (file.exists())
-			{
-				try
-				{
-					String currentLine;
-				
-					br = new BufferedReader(new FileReader(file));
-				
-					currentLine = br.readLine();
-					
-					if(!(currentLine == null))
-						dColor = SelectionCouleurUtils.getDyeColorFromString(currentLine);
-				
-					br.close();
-				}
-				catch (IOException e1)
-				{
-					e1.printStackTrace();
-				}
-			}
-			//-----------------------------------------------------------------------------------------------------------------------
-			
+						
 			if(!(e.getCurrentItem() == null))
 			{				
 				if(e.getCurrentItem().getType().equals(Material.WOOL))
 				{
+					refreshColor(player);
+					
 					if (dColor == null)
 					{
 						Utils.sendCustomMessage(player, ChatColor.RED + "Votre couleur préférée n'est pas définie ! Veuillez choisir votre couleur préférée, via le menu prévu à cet effet, dans le menu principal.");
@@ -232,8 +242,8 @@ public class MetamorphListener implements Listener
 					else
 					{
 						if(!(entities.containsKey(player)))
-						{
-							Entity sheep = spawnNewSheep(dColor, player);
+						{				
+							Entity sheep = spawnNewEntity(player, Sheep.class);
 							setTeleporter(player, sheep);
 							Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en mouton !");
 						}

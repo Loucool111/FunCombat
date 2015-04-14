@@ -3,6 +3,8 @@ package fr.reaamz.funcombat.chat;
 /**
  * 
  * Random Stuff
+ * <p>
+ * Utils pour le JSONChat
  *
  */
 public class ChatUtils 
