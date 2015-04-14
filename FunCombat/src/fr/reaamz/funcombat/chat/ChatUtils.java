@@ -42,6 +42,10 @@ public class ChatUtils
 	/**
 	 * 
 	 * Enum des actions disponibles pour un HoverEvent.
+	 * 
+	 * SHOW_TEXT("show_text")
+	 * SHOW_ITEM("show_item")
+ 	 * SHOW_ACHIEVEMENT("show_achievement")
 	 *
 	 */
 	public enum HoverActions
@@ -64,6 +68,10 @@ public class ChatUtils
 	/**
 	 * 
 	 * Enum des actions disponibles pour un ClicEvent.
+	 *
+	 * RUN_COMMAND("run_command")
+	 * SUGGEST_COMMAND("suggest_command")
+	 * OPEN_URL("open_url")
 	 *
 	 */
 	public enum ClicActions
