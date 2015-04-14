@@ -11,8 +11,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.reaamz.funcombat.FunCombat;
+import fr.reaamz.funcombat.player.FCPlayer;
 
 public class GradesJoinListener implements Listener 
 {
@@ -71,5 +74,19 @@ public class GradesJoinListener implements Listener
 		
 		
 		event.setJoinMessage(player.getDisplayName() + ChatColor.ITALIC + ChatColor.GRAY + " joined the game");
+	}
+	
+	@EventHandler
+	public void onPlayerMove(PlayerMoveEvent event)
+	{
+		FCPlayer player = new FCPlayer(event.getPlayer());
+
+		player.sendWelcomeMessages();
+	}
+	
+	@EventHandler
+	public void onPlayerDisconnect(PlayerQuitEvent event)
+	{
+		event.setQuitMessage(null);
 	}
 }
