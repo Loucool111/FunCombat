@@ -7,6 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import fr.reaamz.funcombat.chat.UnsafeText;
+
 public class MetamorphUtils 
 {
 	public static ItemStack[] getMetaMorphMenuItems()
@@ -24,7 +26,7 @@ public class MetamorphUtils
 		ItemStack enlever = new ItemStack(Material.THIN_GLASS);
 		ItemMeta enleverMeta = enlever.getItemMeta();
 		
-		enleverMeta.setDisplayName(ChatColor.RED + "Enlever votre Métamorphose");
+		enleverMeta.setDisplayName(UnsafeText.METAMORPH_ITEM_ENLEVER);
 		enleverMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour enlever votre Métamorphose !"));
 		
 		enlever.setItemMeta(enleverMeta);
