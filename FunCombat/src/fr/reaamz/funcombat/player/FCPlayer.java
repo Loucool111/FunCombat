@@ -38,7 +38,7 @@ public class FCPlayer
 	public void sendWelcomeMessages()
 	{
 		TabTitle.sendTabTitle(this.player, "$eBienvenue sur FunCombat !", "$4Have Fun !");
-		setTitleBar(ChatColor.YELLOW + "Bienvenue sur FunCombat ! , " + ChatColor.RED + this.player.getName());
+		setTitleBar(ChatColor.YELLOW + "Bienvenue sur FunCombat !");
 	}
 	
 	public void sendRawTitle(int fadeIn, int stayTime, int fadeOut, String title, String subtitle)
