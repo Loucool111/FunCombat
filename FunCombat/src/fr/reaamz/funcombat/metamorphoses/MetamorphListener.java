@@ -104,6 +104,7 @@ public class MetamorphListener implements Listener
 					if(!(ent == null))
 					{
 						ent.teleport(player.getLocation());
+						ent.setFallDistance(0);
 					}
 					else
 					{
