@@ -24,6 +24,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -141,6 +142,21 @@ public class MetamorphListener implements Listener
 			catch (IOException e1)
 			{
 				e1.printStackTrace();
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onDamageByEntity(EntityDamageByEntityEvent event)
+	{
+		if (event.getDamager() instanceof Player)
+		{
+			for (Entity ent : entities.values())
+			{
+				if (ent.equals(event.getEntity()))
+				{
+					event.setCancelled(true);
+				}
 			}
 		}
 	}
