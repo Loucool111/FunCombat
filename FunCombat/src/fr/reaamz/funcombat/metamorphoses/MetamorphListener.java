@@ -45,26 +45,6 @@ public class MetamorphListener implements Listener
 	
 	private HashMap<Player, Integer> tasksIds = Maps.newHashMap();
 	
-	/*
-	private Entity spawnNewSheep(DyeColor color,Player player)
-	{
-		Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.SHEEP);
-		
-		Sheep sheep = (Sheep) ent;
-		sheep.setColor(color);
-		
-		sheep.setCustomName(player.getDisplayName());
-		sheep.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,1000000000,127));
-		sheep.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,1000000000,127));
-		
-		player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000000,1));
-		
-		entities.put(player, ent);
-		
-		return ent;
-	}
-	*/
-	
 	public Entity spawnNewEntity(Player player, Class<? extends Entity> clazz)
 	{
 		Entity ent = player.getWorld().spawn(player.getLocation(), clazz);

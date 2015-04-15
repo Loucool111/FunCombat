@@ -49,7 +49,7 @@ public class FunCombat extends JavaPlugin
 		saveConfig();
 		
 		//message de fin
-		Utils.logInfo("Savegarde de FunCombat");		
+		Utils.logInfo("Savegarde de FunCombat");
 	}
 	
 	private void initListeners()
