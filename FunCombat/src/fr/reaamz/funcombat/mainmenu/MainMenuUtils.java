@@ -62,7 +62,7 @@ public class MainMenuUtils
 		ItemStack hopper = new ItemStack(Material.HOPPER);
 		ItemMeta hopperMeta = hopper.getItemMeta();
 		
-		hopperMeta.setDisplayName(ChatColor.GOLD + "Serveur du Mini-jeux !");
+		hopperMeta.setDisplayName(ChatColor.GOLD + "Serveur de Mini-jeux !");
 		hopperMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour aller sur le serveur de mini-jeux"));
 		
 		hopper.setItemMeta(hopperMeta);
