@@ -159,8 +159,10 @@ public class Kitpvp implements Listener
 	@EventHandler
 	public void onHubEvent(HubEvent event)
 	{
+		/*
 		Player player = event.getPlayer();
 		Utils.sendCustomMessageAllPlayers("HubEvent passed, " + player.getName());
+		*/
 	}
 	
 	@EventHandler

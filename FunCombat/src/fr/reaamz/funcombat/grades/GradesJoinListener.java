@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.reaamz.funcombat.FunCombat;
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.player.FCPlayer;
 
 public class GradesJoinListener implements Listener 
@@ -30,13 +31,15 @@ public class GradesJoinListener implements Listener
 		List<String> ADMIN = conf.getStringList("ADMIN");
 		List<String> DEV = conf.getStringList("DEV");
 		List<String> MODO = conf.getStringList("MODO");
-		
-		if (!(ADMIN.contains(player.getName()) || DEV.contains(player.getName()) || MODO.contains(player.getName())))
-		{
-			conf.getStringList("JOUEUR").add(player.getName());
-		}
-		
 		List<String> JOUEUR = conf.getStringList("JOUEUR");
+		
+		if (!(ADMIN.contains(player.getName()) || DEV.contains(player.getName()) || MODO.contains(player.getName()) || JOUEUR.contains(player.getName())))
+		{
+			JOUEUR.add(player.getName());
+			conf.set("JOUEUR", JOUEUR);
+			
+			Utils.logInfo("added to player");
+		}
 		
 		try
 		{
@@ -67,13 +70,19 @@ public class GradesJoinListener implements Listener
 		}
 		if (JOUEUR.contains(player.getName()))
 		{
-			player.setDisplayName(ChatColor.GRAY + "" + ChatColor.ITALIC + player.getName() + ChatColor.RESET + ChatColor.GRAY);
-			player.setCustomName(ChatColor.GRAY + "" + ChatColor.ITALIC + player.getName() + ChatColor.RESET + ChatColor.GRAY);
-			player.setPlayerListName(ChatColor.ITALIC + "" + ChatColor.GRAY + player.getName());
+			player.setDisplayName(ChatColor.GRAY + player.getName() + ChatColor.RESET + ChatColor.GRAY);
+			player.setCustomName(ChatColor.GRAY  + player.getName() + ChatColor.RESET + ChatColor.GRAY);
+			player.setPlayerListName(ChatColor.GRAY + player.getName());
 		}
 		
-		
-		event.setJoinMessage(player.getDisplayName() + ChatColor.ITALIC + ChatColor.GRAY + " joined the game");
+		if (JOUEUR.contains(player.getName()))
+		{
+			event.setJoinMessage(player.getDisplayName() + ChatColor.GRAY + "" + ChatColor.ITALIC + " joined the game");
+		}
+		else
+		{
+			event.setJoinMessage(player.getDisplayName() + ChatColor.WHITE + "" + ChatColor.ITALIC + " joined the game");
+		}
 	}
 	
 	@EventHandler

@@ -24,9 +24,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
@@ -142,6 +144,36 @@ public class MetamorphListener implements Listener
 			catch (IOException e1)
 			{
 				e1.printStackTrace();
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerInteractEntity(PlayerInteractEntityEvent event)
+	{
+		if (event.getRightClicked() instanceof Creeper)
+		{
+			for (Entity ent : entities.values())
+			{
+				if (ent instanceof Creeper && ent.getCustomName() == event.getRightClicked().getCustomName())
+				{
+					if (event.getPlayer().getItemInHand().getType().equals(Material.FLINT_AND_STEEL))
+					{
+						event.setCancelled(true);
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onDamageByBlock(EntityDamageByBlockEvent event)
+	{
+		for (Entity ent : entities.values())
+		{
+			if (ent.equals(event.getEntity()))
+			{
+				event.setCancelled(true);
 			}
 		}
 	}

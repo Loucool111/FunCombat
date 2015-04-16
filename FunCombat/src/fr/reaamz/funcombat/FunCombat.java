@@ -14,7 +14,6 @@ import fr.reaamz.funcombat.hub.HubMotdListener;
 import fr.reaamz.funcombat.kitpvp.KitpvpListener;
 import fr.reaamz.funcombat.mainmenu.MainMenuListener;
 import fr.reaamz.funcombat.metamorphoses.MetamorphListener;
-import fr.reaamz.funcombat.otherlisteners.UTF8Test;
 import fr.reaamz.funcombat.otherlisteners.BungeeMessagesListener;
 import fr.reaamz.funcombat.otherlisteners.TestListeners;
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
@@ -75,7 +74,6 @@ public class FunCombat extends JavaPlugin
 		
 		//test
 		Bukkit.getPluginManager().registerEvents(new TestListeners(), this);
-		Bukkit.getPluginManager().registerEvents(new UTF8Test(), this);
 	}
 	
 	private void initCommands()
