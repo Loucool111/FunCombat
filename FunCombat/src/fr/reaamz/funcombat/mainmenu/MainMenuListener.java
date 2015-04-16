@@ -33,7 +33,7 @@ public class MainMenuListener implements Listener
 
 		if (e.getInventory().getName().contains("Menu principal"))
 		{	
-			if(e.getCurrentItem() != null && e.getCurrentItem().getType() != Material.AIR)
+			if(e.getCurrentItem() != null && e.getCurrentItem().getType() != Material.AIR && e.getCurrentItem().hasItemMeta())
 			{									
 				e.setCancelled(true);
 				
