@@ -117,25 +117,24 @@ public class SelectionCouleurListener implements Listener
 						if(!e.getCurrentItem().getItemMeta().getDisplayName().contains("Menu principal"))
 						{
 							//Variables nécessaires au système
-							File color = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\" + player.getName() + ".txt");
+							File dossier = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\Couleurs\\");
+							File color = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
 							FileWriter out = null;
 						
 							//création du fichier avec contenu
 							try 
-							{
-								out = new FileWriter(color);
-							
+							{	
+								if (!(dossier.exists()))
+								{
+									dossier.mkdir();
+								}
+								
 								if (!(color.exists()))
 								{
-									try 
-									{
-										color.createNewFile();
-									} 
-									catch (IOException e1) 
-									{
-										e1.printStackTrace();
-									}
+									color.createNewFile();
 								}
+								
+								out = new FileWriter(color);
 							
 								if (!(dColor == null))
 								{													

@@ -33,9 +33,9 @@ public class GradesJoinListener implements Listener
 		List<String> MODO = conf.getStringList("MODO");
 		List<String> JOUEUR = conf.getStringList("JOUEUR");
 		
-		if (!(ADMIN.contains(player.getName()) || DEV.contains(player.getName()) || MODO.contains(player.getName()) || JOUEUR.contains(player.getName())))
+		if (!(ADMIN.contains(player.getUniqueId().toString()) || DEV.contains(player.getUniqueId().toString()) || MODO.contains(player.getUniqueId().toString()) || JOUEUR.contains(player.getUniqueId().toString())))
 		{
-			JOUEUR.add(player.getName());
+			JOUEUR.add(player.getUniqueId().toString());
 			conf.set("JOUEUR", JOUEUR);
 			
 			Utils.logInfo("added to player");
@@ -50,32 +50,32 @@ public class GradesJoinListener implements Listener
 			e.printStackTrace();
 		}
 		
-		if (ADMIN.contains(player.getName()))
+		if (ADMIN.contains(player.getUniqueId().toString()))
 		{
 			player.setDisplayName(ChatColor.RED + "[ADMIN] " + player.getName() + ChatColor.RESET);
 			player.setCustomName(ChatColor.RED + "[ADMIN] " + player.getName() + ChatColor.RESET);
 			player.setPlayerListName(ChatColor.RED + "[ADMIN] " + player.getName());
 		}
-		if (DEV.contains(player.getName()))
+		if (DEV.contains(player.getUniqueId().toString()))
 		{
 			player.setDisplayName(ChatColor.GOLD + "[DEV] " + player.getName() + ChatColor.RESET);
 			player.setCustomName(ChatColor.GOLD + "[DEV] " + player.getName() + ChatColor.RESET);
 			player.setPlayerListName(ChatColor.GOLD + "[DEV] " + player.getName());
 		}
-		if (MODO.contains(player.getName()))
+		if (MODO.contains(player.getUniqueId().toString()))
 		{
 			player.setDisplayName(ChatColor.AQUA + "[MODO] " + player.getName() + ChatColor.RESET);
 			player.setCustomName(ChatColor.AQUA + "[MODO] " + player.getName() + ChatColor.RESET);
 			player.setPlayerListName(ChatColor.AQUA + "[MODO] " + player.getName());
 		}
-		if (JOUEUR.contains(player.getName()))
+		if (JOUEUR.contains(player.getUniqueId().toString()))
 		{
 			player.setDisplayName(ChatColor.GRAY + player.getName() + ChatColor.RESET + ChatColor.GRAY);
 			player.setCustomName(ChatColor.GRAY  + player.getName() + ChatColor.RESET + ChatColor.GRAY);
 			player.setPlayerListName(ChatColor.GRAY + player.getName());
 		}
 		
-		if (JOUEUR.contains(player.getName()))
+		if (JOUEUR.contains(player.getUniqueId().toString()))
 		{
 			event.setJoinMessage(player.getDisplayName() + ChatColor.GRAY + "" + ChatColor.ITALIC + " joined the game");
 		}

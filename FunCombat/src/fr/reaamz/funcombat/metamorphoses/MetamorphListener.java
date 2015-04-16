@@ -122,7 +122,7 @@ public class MetamorphListener implements Listener
 	
 	private void refreshColor(Player player)
 	{
-		File file = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\" + player.getName() + ".txt");
+		File file = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
 		
 		BufferedReader br = null;
 		
