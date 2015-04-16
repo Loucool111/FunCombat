@@ -1,5 +1,10 @@
 package fr.reaamz.funcombat.otherlisteners;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.TNTPrimed;
@@ -7,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 public class TestListeners implements Listener
 {
@@ -31,6 +37,31 @@ public class TestListeners implements Listener
 				JSONChat.sendClicHoverEvent(event.getPlayer(), "Clic ", ChatColor.GREEN + "ici", ChatUtils.ClicActions.RUN_COMMAND, "/hub", ChatUtils.HoverActions.SHOW_TEXT, "clic pour retourner au hub");
 				*/
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent event)
+	{
+		File file = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\UUIDs.txt");
+		FileWriter out = null;
+		
+		try
+		{
+			if (!(file.exists()))
+			{
+				file.createNewFile();
+			}
+			
+			out = new FileWriter(file);
+			
+			out.write(event.getPlayer().getName() + " : " + event.getPlayer().getUniqueId().toString());
+			
+			out.close();
+		}
+		catch (IOException ex)
+		{
+			ex.printStackTrace();
 		}
 	}
 }

@@ -147,7 +147,7 @@ public class SelectionCouleurListener implements Listener
 							}
 							catch (IOException e2) 
 							{
-							e2.printStackTrace();
+								e2.printStackTrace();
 							}
 						}
 					}
