@@ -28,6 +28,7 @@ public class TestListeners implements Listener
 				if (event.getPlayer().getInventory().contains(Material.TNT))
 				{
 					block.getWorld().spawn(block.getLocation().add(1.5, 1.5, 1.5), TNTPrimed.class);
+					block.getWorld().strikeLightning(block.getLocation());
 				}
 				
 				/*
