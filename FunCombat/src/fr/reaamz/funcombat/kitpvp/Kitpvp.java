@@ -60,10 +60,9 @@ public class Kitpvp implements Listener
 		{
 			object = sc.registerNewObjective(player.getName(), "dummy");		
 			object.setDisplayName(ChatColor.GOLD + "Kit : Archer");
-			object.setDisplaySlot(DisplaySlot.SIDEBAR);
-			
-			
 		}
+		
+		object.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
 		player.setScoreboard(sc);
 		
@@ -90,10 +89,9 @@ public class Kitpvp implements Listener
 		{
 			object = sc.registerNewObjective(player.getName(), "dummy");
 			object.setDisplayName(ChatColor.GOLD + "Kit : Guerrier");
-			object.setDisplaySlot(DisplaySlot.SIDEBAR);
-			
-			
 		}
+		
+		object.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
 		player.setScoreboard(sc);
 		
