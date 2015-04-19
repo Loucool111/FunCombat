@@ -334,4 +334,22 @@ public class KitpvpKits
 		sword.setItemMeta(swordMeta);
 		player.getInventory().addItem(sword);
 	}
+	
+	public enum Kits
+	{
+		ARCHER("Archer"),
+		GUERRIER("Guerrier");
+		
+		private String type;
+		
+		Kits(String type)
+		{
+			this.type = type;
+		}
+		
+		public String toStringKit()
+		{
+			return this.type;
+		}
+	}
 }

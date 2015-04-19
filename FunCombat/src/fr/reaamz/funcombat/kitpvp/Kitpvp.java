@@ -1,7 +1,6 @@
 package fr.reaamz.funcombat.kitpvp;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -19,140 +17,102 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import com.google.common.collect.Maps;
 
+import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.event.HubEvent;
+import fr.reaamz.funcombat.kitpvp.KitpvpKits.Kits;
 
 public class Kitpvp implements Listener
 {
-	Map<Player, Integer> ArcherLevels = Maps.newHashMap();
-	Map<Player, Integer> GuerrierLevels = Maps.newHashMap();
+	//----------------------------------------------------------
+	HashMap<Player, Integer> ArcherLevels = Maps.newHashMap();
+	HashMap<Player, Integer> GuerrierLevels = Maps.newHashMap();
 
-	Map<Player, String> playerKit = Maps.newHashMap();
+	//----------------------------------------------------------
 	
-	Map<Player, Score> ScoreKills = Maps.newHashMap(); 
-	Map<Player, Score> ScoreNiv = Maps.newHashMap();
+	HashMap<Player, String> playerKit = Maps.newHashMap();
 	
-	Scoreboard sc = Bukkit.getScoreboardManager().getNewScoreboard();
+	HashMap<Player, Score> ScoreKills = Maps.newHashMap(); 
+	HashMap<Player, Score> ScoreNiv = Maps.newHashMap();
 	
-	public Kitpvp(Plugin p)
+	HashMap<Player, Scoreboard> scs = Maps.newHashMap();
+	
+	public Kitpvp()
 	{
-		Bukkit.getPluginManager().registerEvents(this, p);
+		Bukkit.getPluginManager().registerEvents(this, FunCombat.instance);
 	}
 	
-		
-	private Objective registerArcher(Player player)
+	private void registerPlayer(Player player, KitpvpKits.Kits type, HashMap<Player, Integer> level)
 	{
-		Objective object = null;
-		
-		Boolean found = false;
-		Set<Objective> objs = sc.getObjectives();
-		
-		for (Objective a : objs)
+		if (scs.containsKey(player))
 		{
-			if (a.getName().equalsIgnoreCase(player.getName()))
-			{
-				object = a;
-				found = true;
-			}
-		}
-		
-		if(!(found))
-		{
-			object = sc.registerNewObjective(player.getName(), "dummy");		
-			object.setDisplayName(ChatColor.GOLD + "Kit : Archer");
-		}
-		
-		object.setDisplaySlot(DisplaySlot.SIDEBAR);
-		
-		player.setScoreboard(sc);
-		
-		return object;
-	}
-	
-	private Objective registerGuerrier(Player player)
-	{
-		Objective object = null;
-		
-		Boolean found = false;
-		Set<Objective> objs = sc.getObjectives();
-		
-		for (Objective a : objs)
-		{
-			if (a.getName().equalsIgnoreCase(player.getName()))
-			{
-				object = a;
-				found = true;
-			}
-		}
-		
-		if(!(found))
-		{
-			object = sc.registerNewObjective(player.getName(), "dummy");
-			object.setDisplayName(ChatColor.GOLD + "Kit : Guerrier");
-		}
-		
-		object.setDisplaySlot(DisplaySlot.SIDEBAR);
-		
-		player.setScoreboard(sc);
-		
-		return object;
-	}
-	
-	private void createScores(Objective obj, Player player, Map<Player, Integer> level)
-	{
-		Score kills = obj.getScore(ChatColor.AQUA + "Kills");
-		Score niv = obj.getScore(ChatColor.AQUA + "Niveau");
-		
-		ScoreKills.put(player, kills);
-		ScoreNiv.put(player, niv);
-		
-		ScoreKills.get(player).setScore(level.get(player));
-		ScoreNiv.get(player).setScore(KitpvpUtils.getLevelFromKills(player, level));
-	}
-	
-	public void getKitArcherComplet(Player player)
-	{
-		playerKit.put(player, "archer");
-		
-		Utils.ClearInventoryAndPotionEffects(player);
-
-		if (ArcherLevels.containsKey(player))
-		{
-			KitpvpKits.equipKitArcherStuff(player,ArcherLevels.get(player));
-			KitpvpKits.equipKitArcherArmor(player,ArcherLevels.get(player));
+			player.setScoreboard(scs.get(player));
 		}
 		else
 		{
-			ArcherLevels.put(player, 1);
-			KitpvpKits.equipKitArcherStuff(player,ArcherLevels.get(player));
-			KitpvpKits.equipKitArcherArmor(player,ArcherLevels.get(player));
+			Scoreboard sc = Bukkit.getScoreboardManager().getNewScoreboard();
+			
+			scs.put(player, sc);
+			
+			Objective object = sc.registerNewObjective(player.getName(), "dummy");
+			
+			object.setDisplayName(ChatColor.GREEN + "Kit : " + type.toStringKit());
+			object.setDisplaySlot(DisplaySlot.SIDEBAR);
+			
+			Score kills = object.getScore(ChatColor.AQUA + "Kills");
+			Score niv = object.getScore(ChatColor.AQUA + "Niveau");
+			
+			ScoreKills.put(player, kills);
+			ScoreNiv.put(player, niv);
+			
+			ScoreKills.get(player).setScore(level.get(player));
+			ScoreNiv.get(player).setScore(KitpvpUtils.getLevelFromKills(player, level));
+			
+			player.setScoreboard(sc);
 		}
-		
-		Objective archer = registerArcher(player);
-		createScores(archer, player, ArcherLevels);
 	}
 	
-	public void getKitGuerrierComplet(Player player)
+	public void newKitpvpPlayer(Player player, KitpvpKits.Kits type)
 	{
-		playerKit.put(player, "guerrier");
+		playerKit.put(player, type.toStringKit());
 		
 		Utils.ClearInventoryAndPotionEffects(player);
 		
-		if (GuerrierLevels.containsKey(player))
+		if (type.toStringKit().equals(KitpvpKits.Kits.ARCHER.toStringKit()))
 		{
-			KitpvpKits.equipKitGuerrierStuff(player,GuerrierLevels.get(player));
-			KitpvpKits.equipKitGuerrierArmure(player,GuerrierLevels.get(player));
-		}
-		else
-		{
-			GuerrierLevels.put(player, 1);
-			KitpvpKits.equipKitGuerrierStuff(player,GuerrierLevels.get(player));
-			KitpvpKits.equipKitGuerrierArmure(player,GuerrierLevels.get(player));
+			if (ArcherLevels.containsKey(player))
+			{
+				KitpvpKits.equipKitArcherStuff(player,ArcherLevels.get(player));
+				KitpvpKits.equipKitArcherArmor(player,ArcherLevels.get(player));
+			}
+			else
+			{
+				ArcherLevels.put(player, 1);
+				KitpvpKits.equipKitArcherStuff(player,ArcherLevels.get(player));
+				KitpvpKits.equipKitArcherArmor(player,ArcherLevels.get(player));
+			}
+			
+			registerPlayer(player, type, ArcherLevels);
 		}
 		
-		Objective guerrier = registerGuerrier(player);
-		createScores(guerrier, player, GuerrierLevels);
+		if (type.toStringKit().equals(KitpvpKits.Kits.GUERRIER.toStringKit()))
+		{
+			if (GuerrierLevels.containsKey(player))
+			{
+				KitpvpKits.equipKitGuerrierStuff(player,GuerrierLevels.get(player));
+				KitpvpKits.equipKitGuerrierArmure(player,GuerrierLevels.get(player));
+			}
+			else
+			{
+				GuerrierLevels.put(player, 1);
+				KitpvpKits.equipKitGuerrierStuff(player,GuerrierLevels.get(player));
+				KitpvpKits.equipKitGuerrierArmure(player,GuerrierLevels.get(player));
+			}
+			
+			registerPlayer(player, type, GuerrierLevels);
+		}
 	}
+	
 	
 	@EventHandler
 	public void onHubEvent(HubEvent event)
@@ -166,18 +126,18 @@ public class Kitpvp implements Listener
 	@EventHandler
 	public void onRespawnEvent(final PlayerRespawnEvent e)
 	{
-		
 		Player player = e.getPlayer();
 		
 		if (playerKit.containsKey(player))
 		{
-			if (playerKit.get(player) == "archer")
+			if (playerKit.get(player) == Kits.ARCHER.toStringKit())
 			{
-				getKitArcherComplet(player);
+				newKitpvpPlayer(player, Kits.ARCHER);
+				//ON NE DOIT PAS RECREER LE PLAYER MAIS JUSTE LUI DIMINUER SON SCORE ET REEQUIPPER SON STUFF
 			}
-			if (playerKit.get(player) == "guerrier")
+			if (playerKit.get(player) == Kits.GUERRIER.toStringKit())
 			{
-				getKitGuerrierComplet(player);
+				newKitpvpPlayer(player, Kits.GUERRIER);
 			}
 		}
 		
@@ -203,7 +163,7 @@ public class Kitpvp implements Listener
 			
 			if (playerKit.containsKey(killer))
 			{
-				if(playerKit.get(killer).equalsIgnoreCase("archer"))			
+				if(playerKit.get(killer).equals(KitpvpKits.Kits.ARCHER))			
 				{
 					ArcherLevels.put(killer, ArcherLevels.get(killer) + 1);
 
@@ -211,8 +171,6 @@ public class Kitpvp implements Listener
 										
 					if (ArcherLevels.get(killer) == 5||ArcherLevels.get(killer) == 10||ArcherLevels.get(killer) == 20||ArcherLevels.get(killer) == 50)
 					{
-						
-						
 						Utils.ClearInventoryAndPotionEffects(killer);
 						KitpvpKits.equipKitArcherStuff(killer,ArcherLevels.get(killer));
 						KitpvpKits.equipKitArcherArmor(killer,ArcherLevels.get(killer));
@@ -221,7 +179,7 @@ public class Kitpvp implements Listener
 					ScoreNiv.get(killer).setScore(KitpvpUtils.getLevelFromKills(killer, ArcherLevels));
 				}
 				
-				if(playerKit.get(killer).equalsIgnoreCase("guerrier"))
+				if(playerKit.get(killer).equals(KitpvpKits.Kits.GUERRIER))
 				{
 					GuerrierLevels.put(killer, GuerrierLevels.get(killer) + 1);
 
@@ -242,7 +200,7 @@ public class Kitpvp implements Listener
 			
 			if (playerKit.containsKey(victim))
 			{
-				if (playerKit.get(victim).equalsIgnoreCase("archer"))
+				if (playerKit.get(victim).equals(KitpvpKits.Kits.ARCHER))
 				{
 					if (ArcherLevels.get(victim) > 1)
 					{
@@ -261,7 +219,7 @@ public class Kitpvp implements Listener
 					}
 				}
 			
-				if (playerKit.get(victim).equalsIgnoreCase("guerrier"))
+				if (playerKit.get(victim).equals(KitpvpKits.Kits.GUERRIER))
 				{
 					if (GuerrierLevels.get(victim) > 1)
 					{

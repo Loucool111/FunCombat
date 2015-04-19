@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-import fr.reaamz.funcombat.FunCombat;
+import fr.reaamz.funcombat.kitpvp.KitpvpKits.Kits;
 
 public class KitpvpListener implements Listener 
 {
@@ -15,7 +15,7 @@ public class KitpvpListener implements Listener
 	
 	public KitpvpListener() 
 	{		
-		kits = new Kitpvp(FunCombat.instance);
+		kits = new Kitpvp();
 	}
 	
 	@EventHandler
@@ -30,7 +30,7 @@ public class KitpvpListener implements Listener
 			{
 				if(e.getCurrentItem().getType() == Material.DIAMOND_SWORD)
 				{
-					kits.getKitGuerrierComplet(player);
+					kits.newKitpvpPlayer(player, Kits.GUERRIER);
 					e.setCancelled(true);
 					player.closeInventory();
 					player.setGameMode(GameMode.SURVIVAL);
@@ -38,7 +38,7 @@ public class KitpvpListener implements Listener
 				
 				if(e.getCurrentItem().getType() == Material.BOW)
 				{
-					kits.getKitArcherComplet(player);
+					kits.newKitpvpPlayer(player, Kits.ARCHER);
 					e.setCancelled(true);
 					player.closeInventory();
 					player.setGameMode(GameMode.SURVIVAL);
