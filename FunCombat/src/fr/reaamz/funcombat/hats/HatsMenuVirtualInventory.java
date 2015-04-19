@@ -21,7 +21,7 @@ public class HatsMenuVirtualInventory implements IVirtualInventory
 	@Override
 	public Inventory createInventory(ItemStack[] items) 
 	{
-		this.inventory = Bukkit.createInventory(null, 18, ChatColor.UNDERLINE + "Sélécteur de chapeaux");
+		this.inventory = Bukkit.createInventory(null, 27, ChatColor.UNDERLINE + "Sélécteur de chapeaux");
 		
 		this.inventory.setContents(items);
 		
