@@ -69,11 +69,23 @@ public class MainMenuUtils
 		
 		//-----------------------------------
 		
+		ItemStack casque = new ItemStack(Material.CHAINMAIL_HELMET);
+		ItemMeta casqueMeta = casque.getItemMeta();
+		
+		casqueMeta.setDisplayName(ChatColor.GOLD + "Choissisez votre chapeau !");
+		casqueMeta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour choisir votre chapeau !"));
+		
+		casque.setItemMeta(casqueMeta);
+		
+		//-----------------------------------
+		
 		ItemStack[] items = new ItemStack[27];
 		
 		items[0] = kitpvp;
 		
 		items[8] = jump;
+		
+		items[11] = casque;
 		
 		items[13] = hopper;
 		

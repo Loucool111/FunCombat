@@ -8,6 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
+import fr.reaamz.funcombat.hats.HatsMenuVirtualInventory;
+import fr.reaamz.funcombat.hats.HatsUitls;
 import fr.reaamz.funcombat.kitpvp.KitpvpUtils;
 import fr.reaamz.funcombat.kitpvp.KitpvpVirtualInventory;
 import fr.reaamz.funcombat.metamorphoses.MetamorphUtils;
@@ -30,6 +32,8 @@ public class MainMenuListener implements Listener
 		MetamorphVirtualInventory morphVMInstance  = new MetamorphVirtualInventory();
 		
 		SelectionCouleursVirtualMenu couleurInstance = new SelectionCouleursVirtualMenu();
+		
+		HatsMenuVirtualInventory hatsInstance = new HatsMenuVirtualInventory();
 
 		if (e.getInventory().getName().contains("Menu principal"))
 		{	
@@ -66,6 +70,13 @@ public class MainMenuListener implements Listener
 				if (e.getCurrentItem().getType() == Material.FEATHER)
 				{
 					player.teleport(new Location(player.getWorld(),-265,100,361));	
+				}
+				
+				if (e.getCurrentItem().getType() == Material.CHAINMAIL_HELMET)
+				{
+					Inventory inv = hatsInstance.createInventory(HatsUitls.getItemForMenu());
+					
+					hatsInstance.showInventory(player, inv);
 				}
 			}	
 		}
