@@ -42,33 +42,56 @@ public class Kitpvp implements Listener
 		Bukkit.getPluginManager().registerEvents(this, FunCombat.instance);
 	}
 	
+	private void registerPass(Player player, KitpvpKits.Kits type, HashMap<Player, Integer> level)
+	{
+		Scoreboard sc = Bukkit.getScoreboardManager().getNewScoreboard();
+		
+		scs.put(player, sc);
+		
+		Objective object = sc.registerNewObjective(type.toStringKit(), "dummy");
+		
+		object.setDisplayName(ChatColor.GREEN + "Kit : " + type.toStringKit());
+		object.setDisplaySlot(DisplaySlot.SIDEBAR);
+		
+		Score kills = object.getScore(ChatColor.AQUA + "Kills");
+		Score niv = object.getScore(ChatColor.AQUA + "Niveau");
+		
+		ScoreKills.put(player, kills);
+		ScoreNiv.put(player, niv);
+		
+		ScoreKills.get(player).setScore(level.get(player));
+		ScoreNiv.get(player).setScore(KitpvpUtils.getLevelFromKills(player, level));
+		
+		player.setScoreboard(sc);
+	}
+	
 	private void registerPlayer(Player player, KitpvpKits.Kits type, HashMap<Player, Integer> level)
 	{
 		if (scs.containsKey(player))
 		{
-			player.setScoreboard(scs.get(player));
+			String name = null;
+			
+			try {
+				//Utils.sendCustomMessage(player, "av");
+				name = scs.get(player).getObjective(type.toStringKit()).getName();
+				//Utils.sendCustomMessage(player, "ap");
+			} catch (IllegalArgumentException | NullPointerException ex) {}
+			
+			if (name == type.toStringKit())
+			{
+				player.setScoreboard(scs.get(player));
+				//Utils.sendCustomMessage(player, "score existe objective exsite");
+			}
+			else
+			{
+				registerPass(player, type, level);
+				//Utils.sendCustomMessage(player, "score existe mais pas objective");
+			}
 		}
 		else
 		{
-			Scoreboard sc = Bukkit.getScoreboardManager().getNewScoreboard();
-			
-			scs.put(player, sc);
-			
-			Objective object = sc.registerNewObjective(player.getName(), "dummy");
-			
-			object.setDisplayName(ChatColor.GREEN + "Kit : " + type.toStringKit());
-			object.setDisplaySlot(DisplaySlot.SIDEBAR);
-			
-			Score kills = object.getScore(ChatColor.AQUA + "Kills");
-			Score niv = object.getScore(ChatColor.AQUA + "Niveau");
-			
-			ScoreKills.put(player, kills);
-			ScoreNiv.put(player, niv);
-			
-			ScoreKills.get(player).setScore(level.get(player));
-			ScoreNiv.get(player).setScore(KitpvpUtils.getLevelFromKills(player, level));
-			
-			player.setScoreboard(sc);
+			registerPass(player, type, level);
+			//Utils.sendCustomMessage(player, "score n'existe pas");
 		}
 	}
 	
@@ -161,8 +184,10 @@ public class Kitpvp implements Listener
 			Player killer = (Player)ede.getEntity().getKiller();
 			Player victim = (Player)ede.getEntity();
 			
+			ede.getDrops().clear();
+			
 			if (playerKit.containsKey(killer))
-			{
+			{				
 				if(playerKit.get(killer).equals(KitpvpKits.Kits.ARCHER))			
 				{
 					ArcherLevels.put(killer, ArcherLevels.get(killer) + 1);
