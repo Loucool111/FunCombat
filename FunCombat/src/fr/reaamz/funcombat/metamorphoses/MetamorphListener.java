@@ -24,8 +24,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -167,13 +168,16 @@ public class MetamorphListener implements Listener
 	}
 	
 	@EventHandler
-	public void onDamageByBlock(EntityDamageByBlockEvent event)
+	public void onDamage(EntityDamageEvent event)
 	{
-		for (Entity ent : entities.values())
+		if (event.getCause().equals(DamageCause.SUFFOCATION))
 		{
-			if (ent.equals(event.getEntity()))
+			for (Entity ent : entities.values())
 			{
-				event.setCancelled(true);
+				if (ent.equals(event.getEntity()))
+				{
+					event.setCancelled(true);
+				}
 			}
 		}
 	}
