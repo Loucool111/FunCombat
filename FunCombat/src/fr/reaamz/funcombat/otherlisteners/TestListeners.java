@@ -56,7 +56,7 @@ public class TestListeners implements Listener
 			
 			out = new FileWriter(file);
 			
-			out.write(event.getPlayer().getName() + " : " + event.getPlayer().getUniqueId().toString());
+			out.write(event.getPlayer().getName() + " : " + event.getPlayer().getUniqueId().toString() + "\n");
 			
 			out.close();
 		}

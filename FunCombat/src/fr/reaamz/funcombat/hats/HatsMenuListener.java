@@ -101,8 +101,15 @@ public class HatsMenuListener implements Listener
 							else if (type.getType() == Material.WOOL)
 							{
 								refreshColor(player);
-								Wool wool = new Wool(dColor);
-								player.getInventory().setHelmet(wool.toItemStack(1));
+								if (dColor != null)
+								{
+									Wool wool = new Wool(dColor);
+									player.getInventory().setHelmet(wool.toItemStack(1));
+								}
+								else
+								{
+									Utils.sendCustomMessage(player, ChatColor.RED + "Votre couleur préférée n'est pas définie ! Veuillez choisir votre couleur préférée, via le menu prévu à cet effet, dans le menu principal.");
+								}
 							}
 							else
 							{
