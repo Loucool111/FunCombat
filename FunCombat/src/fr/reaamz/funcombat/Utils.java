@@ -10,7 +10,6 @@ import org.bukkit.potion.PotionEffect;
 
 public class Utils 
 {
-	
 	public static final String PLUGIN_NAME = "FunCombat";
 	
 	public static void sendCustomMessageAllPlayers(String message)

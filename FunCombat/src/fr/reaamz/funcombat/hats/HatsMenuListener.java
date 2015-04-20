@@ -11,7 +11,6 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -26,7 +25,7 @@ public class HatsMenuListener implements Listener
 	private DyeColor dColor;
 	
 	@SuppressWarnings("deprecation")
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event)
 	{
 		if (event.getInventory().getName().equals(Utils.SlotNames.FC_HATS.getName()))
@@ -85,7 +84,7 @@ public class HatsMenuListener implements Listener
 			{
 				for (HatsType type : HatsType.values())
 				{
-					if (event.getWhoClicked().getInventory().getHelmet().getType() != Material.AIR && event.getWhoClicked().getInventory().getHelmet() != null)
+					if (event.getWhoClicked().getInventory().getHelmet() != null)
 					{
 						if (type.getType() == event.getWhoClicked().getInventory().getHelmet().getType())
 						{
