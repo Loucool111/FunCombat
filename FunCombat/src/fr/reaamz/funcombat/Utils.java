@@ -10,6 +10,9 @@ import org.bukkit.potion.PotionEffect;
 
 public class Utils 
 {
+	
+	public static final String PLUGIN_NAME = "FunCombat";
+	
 	public static void sendCustomMessageAllPlayers(String message)
 	{
 		for(Player p : Bukkit.getServer().getOnlinePlayers())
@@ -103,5 +106,29 @@ public class Utils
 			return (byte) 15;
 		
 		return (byte) 0;
+	}
+	
+	public enum SlotNames
+	{
+		MC_CREATIVE("container.inventory"),
+		MC_SURVIVAL("container.crafting"),
+		
+		FC_MAINMENU(ChatColor.UNDERLINE + "Menu principal"),
+		FC_KITPVP(ChatColor.UNDERLINE + "Sélécteur de kit"),
+		FC_METAMORPH(ChatColor.UNDERLINE + "Sélécteur de Métamorphoses"),
+		FC_COLORS(ChatColor.UNDERLINE + "Choissisez votre couleur"),
+		FC_HATS(ChatColor.UNDERLINE + "Sélécteur de chapeaux");
+		
+		private String name;
+		
+		private SlotNames(String name)
+		{
+			this.name = name;
+		}
+
+		public String getName()
+		{
+			return this.name;
+		}
 	}
 }

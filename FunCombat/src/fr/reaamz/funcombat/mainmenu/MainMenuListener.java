@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.hats.HatsMenuVirtualInventory;
 import fr.reaamz.funcombat.hats.HatsUitls;
 import fr.reaamz.funcombat.kitpvp.KitpvpUtils;
@@ -16,7 +17,7 @@ import fr.reaamz.funcombat.metamorphoses.MetamorphUtils;
 import fr.reaamz.funcombat.metamorphoses.MetamorphVirtualInventory;
 import fr.reaamz.funcombat.player.FCPlayer;
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
-import fr.reaamz.funcombat.selectioncouleur.SelectionCouleursVirtualMenu;
+import fr.reaamz.funcombat.selectioncouleur.SelectionCouleursVirtualInventory;
 
 public class MainMenuListener implements Listener 
 {
@@ -31,11 +32,11 @@ public class MainMenuListener implements Listener
 		
 		MetamorphVirtualInventory morphVMInstance  = new MetamorphVirtualInventory();
 		
-		SelectionCouleursVirtualMenu couleurInstance = new SelectionCouleursVirtualMenu();
+		SelectionCouleursVirtualInventory couleurInstance = new SelectionCouleursVirtualInventory();
 		
 		HatsMenuVirtualInventory hatsInstance = new HatsMenuVirtualInventory();
 
-		if (e.getInventory().getName().contains("Menu principal"))
+		if (e.getInventory().getName().equals(Utils.SlotNames.FC_MAINMENU.getName()))
 		{	
 			if(e.getCurrentItem() != null && e.getCurrentItem().getType() != Material.AIR && e.getCurrentItem().hasItemMeta())
 			{									

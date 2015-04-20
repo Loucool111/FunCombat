@@ -1,15 +1,14 @@
 package fr.reaamz.funcombat.selectioncouleur;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.virtualinventory.IVirtualInventory;
 
-public class SelectionCouleursVirtualMenu implements IVirtualInventory, Listener
+public class SelectionCouleursVirtualInventory implements IVirtualInventory
 {
 	Inventory inventory;
 	
@@ -20,9 +19,9 @@ public class SelectionCouleursVirtualMenu implements IVirtualInventory, Listener
 	}
 
 	@Override
-	public Inventory createInventory(ItemStack[] items) 
+	public Inventory createInventory(ItemStack[] items)
 	{
-		this.inventory = Bukkit.createInventory(null, 18, ChatColor.UNDERLINE + "Choissisez votre couleur");
+		this.inventory = Bukkit.createInventory(null, 18, Utils.SlotNames.FC_COLORS.getName());
 		
 		this.inventory.setContents(items);
 		

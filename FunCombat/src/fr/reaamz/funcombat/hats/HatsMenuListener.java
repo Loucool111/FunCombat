@@ -29,7 +29,7 @@ public class HatsMenuListener implements Listener
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onInventoryClick(InventoryClickEvent event)
 	{
-		if (event.getInventory().getName().contains("Sélécteur de chapeaux"))
+		if (event.getInventory().getName().equals(Utils.SlotNames.FC_HATS.getName()))
 		{
 			if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR && event.getCurrentItem().hasItemMeta())
 			{
@@ -79,7 +79,7 @@ public class HatsMenuListener implements Listener
 				}
 			}
 		}
-		if (event.getInventory().getName() == "container.inventory" || event.getInventory().getName() == "container.crafting")
+		if (event.getInventory().getName().equals(Utils.SlotNames.MC_CREATIVE.getName()) || event.getInventory().getName().equals(Utils.SlotNames.MC_SURVIVAL.getName()))
 		{
 			if (event.getCurrentItem() != null)
 			{
@@ -90,7 +90,25 @@ public class HatsMenuListener implements Listener
 						if (type.getType() == event.getWhoClicked().getInventory().getHelmet().getType())
 						{
 							event.setCancelled(true);
-							event.getWhoClicked().getInventory().setHelmet(new ItemStack(type.getType()));
+							Player player = (Player)event.getWhoClicked();
+							
+							if (type.getType() == Material.BANNER)
+							{
+								refreshColor(player);
+								Banner banner = new Banner(Material.BANNER);
+								banner.setData(Utils.getDataFromDyeColor(dColor));
+								player.getInventory().setHelmet(banner.toItemStack(1));
+							}
+							else if (type.getType() == Material.WOOL)
+							{
+								refreshColor(player);
+								Wool wool = new Wool(dColor);
+								player.getInventory().setHelmet(wool.toItemStack(1));
+							}
+							else
+							{
+								event.getWhoClicked().getInventory().setHelmet(new ItemStack(type.getType()));
+							}
 						}
 					}
 				}
@@ -100,7 +118,7 @@ public class HatsMenuListener implements Listener
 	
 	private void refreshColor(Player player)
 	{
-		File file = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
+		File file = new File(Bukkit.getPluginManager().getPlugin(Utils.PLUGIN_NAME).getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
 		
 		BufferedReader br = null;
 		

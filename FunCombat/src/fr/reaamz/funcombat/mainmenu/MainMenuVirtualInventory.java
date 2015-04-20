@@ -1,11 +1,11 @@
 package fr.reaamz.funcombat.mainmenu;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.virtualinventory.IVirtualInventory;
 
 public class MainMenuVirtualInventory implements IVirtualInventory
@@ -21,7 +21,7 @@ public class MainMenuVirtualInventory implements IVirtualInventory
 	@Override
 	public Inventory createInventory(ItemStack[] items) 
 	{
-		this.inventory = Bukkit.createInventory(null, 27, ChatColor.UNDERLINE + "Menu principal");
+		this.inventory = Bukkit.createInventory(null, 27, Utils.SlotNames.FC_MAINMENU.getName());
 		
 		this.inventory.setContents(items);
 		

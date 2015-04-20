@@ -1,11 +1,11 @@
 package fr.reaamz.funcombat.kitpvp;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.virtualinventory.IVirtualInventory;
 
 public class KitpvpVirtualInventory implements IVirtualInventory
@@ -21,7 +21,7 @@ public class KitpvpVirtualInventory implements IVirtualInventory
 	@Override
 	public Inventory createInventory(ItemStack[] items) 
 	{
-		this.inventory = Bukkit.createInventory(null, 9, ChatColor.UNDERLINE + "Sélécteur de kit");
+		this.inventory = Bukkit.createInventory(null, 9, Utils.SlotNames.FC_KITPVP.getName());
 		
 		this.inventory.setContents(items);
 		

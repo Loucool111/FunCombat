@@ -24,7 +24,7 @@ public class SelectionCouleurListener implements Listener
 	{
 		Player player = (Player) e.getWhoClicked();
 		
-		if (e.getInventory().getName().contains("Choissisez votre couleur"))
+		if (e.getInventory().getName().equals(Utils.SlotNames.FC_COLORS.getName()))
 		{
 			e.setCancelled(true);
 			
@@ -117,8 +117,8 @@ public class SelectionCouleurListener implements Listener
 						if(!e.getCurrentItem().getItemMeta().getDisplayName().contains("Menu principal"))
 						{
 							//Variables nécessaires au système
-							File dossier = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\Couleurs\\");
-							File color = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
+							File dossier = new File(Bukkit.getPluginManager().getPlugin(Utils.PLUGIN_NAME).getDataFolder() + "\\Couleurs\\");
+							File color = new File(Bukkit.getPluginManager().getPlugin(Utils.PLUGIN_NAME).getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
 							FileWriter out = null;
 						
 							//création du fichier avec contenu

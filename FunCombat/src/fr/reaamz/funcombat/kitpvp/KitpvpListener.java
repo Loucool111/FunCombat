@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.kitpvp.KitpvpKits.Kits;
 
 public class KitpvpListener implements Listener 
@@ -23,7 +24,7 @@ public class KitpvpListener implements Listener
 	{
 		Player player = (Player) e.getWhoClicked();
 		
-		if (e.getInventory().getTitle().contains("Sélécteur de kit"))
+		if (e.getInventory().getName().equals(Utils.SlotNames.FC_KITPVP.getName()))
 		{
 			e.setCancelled(true);
 			if(!(e.getCurrentItem() == null))

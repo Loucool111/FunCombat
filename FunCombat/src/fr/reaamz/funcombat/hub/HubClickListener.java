@@ -18,7 +18,6 @@ public class HubClickListener implements Listener
 	@EventHandler
 	public void onPlayerInteract(final PlayerInteractEvent event)
 	{
-		
 		MainMenuVirtualInventory MainMenuInstance = new MainMenuVirtualInventory();
 		
 		if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
