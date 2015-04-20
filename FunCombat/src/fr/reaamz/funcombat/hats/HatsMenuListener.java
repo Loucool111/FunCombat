@@ -26,7 +26,7 @@ public class HatsMenuListener implements Listener
 	private DyeColor dColor;
 	
 	@SuppressWarnings("deprecation")
-	@EventHandler(priority = EventPriority.HIGHEST)
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onInventoryClick(InventoryClickEvent event)
 	{
 		if (event.getInventory().getName().contains("Sélécteur de chapeaux"))
@@ -79,17 +79,18 @@ public class HatsMenuListener implements Listener
 				}
 			}
 		}
-		if (event.getInventory().getName() == "container.inventory")
+		if (event.getInventory().getName() == "container.inventory" || event.getInventory().getName() == "container.crafting")
 		{
 			if (event.getCurrentItem() != null)
 			{
 				for (HatsType type : HatsType.values())
 				{
-					if (event.getWhoClicked().getInventory().getHelmet() != null)
+					if (event.getWhoClicked().getInventory().getHelmet().getType() != Material.AIR && event.getWhoClicked().getInventory().getHelmet() != null)
 					{
 						if (type.getType() == event.getWhoClicked().getInventory().getHelmet().getType())
 						{
 							event.setCancelled(true);
+							event.getWhoClicked().getInventory().setHelmet(new ItemStack(type.getType()));
 						}
 					}
 				}
