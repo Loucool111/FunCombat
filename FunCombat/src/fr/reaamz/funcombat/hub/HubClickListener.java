@@ -24,7 +24,7 @@ public class HubClickListener implements Listener
 		{
 			if(!(event.getItem() == null))
 			{
-				if(event.getMaterial() == Material.COMPASS)
+				if(event.getItem().equals(HubUtils.getMenuItem()))
 				{
 					Inventory inv = MainMenuInstance.createInventory(MainMenuUtils.getMainMenuItems());
 					
