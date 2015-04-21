@@ -29,4 +29,18 @@ public class HubUtils
 		
 		player.getInventory().setContents(items);
 	}
+	
+	public static ItemStack getMenuItem()
+	{
+		ItemStack compass = new ItemStack(Material.COMPASS,1);
+		ItemMeta compassMeta = compass.getItemMeta();
+		
+		compassMeta.setDisplayName(ChatColor.GREEN + "Menu principal");
+		
+		compassMeta.setLore(Arrays.asList(ChatColor.GRAY + "Clic droit pour ouvrir"));
+		
+		compass.setItemMeta(compassMeta);
+		
+		return compass;
+	}
 }

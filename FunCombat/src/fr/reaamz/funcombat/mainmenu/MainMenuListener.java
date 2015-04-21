@@ -55,7 +55,7 @@ public class MainMenuListener implements Listener
 					
 				if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Choissisez votre couleur"))
 				{					
-					Inventory colorWools = couleurInstance.createInventory(SelectionCouleurUtils.getItemsForMenu());
+					Inventory colorWools = couleurInstance.createInventory(SelectionCouleurUtils.getInventoryContentsForMenu());
 							
 					couleurInstance.showInventory(player, colorWools);
 				}

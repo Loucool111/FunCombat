@@ -39,7 +39,7 @@ public class FunCombat extends JavaPlugin
 		initCommands();
 		
 		//petit message dans la console
-		Utils.logInfo("Init de " + Utils.PLUGIN_NAME);
+		Utils.logInfo("Loaded " + Utils.PLUGIN_NAME);
 	}
 
 	@Override
