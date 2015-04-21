@@ -22,7 +22,7 @@ public class HubJoinListener implements Listener
 		
 		HubUtils.equipHubStuff(player);
 		
-		Utils.sendCustomMessage(player, ChatColor.AQUA + "Bienvenue sur FunCombat, " + ChatColor.YELLOW + player.getName());
+		Utils.sendCustomMessage(player, ChatColor.AQUA + "Bienvenue sur " + Utils.PLUGIN_NAME + ", " + ChatColor.YELLOW + player.getName());
 		
 		player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());	
 		

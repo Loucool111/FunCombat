@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -13,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
 
 public class SelectionCouleurListener implements Listener
@@ -24,7 +24,7 @@ public class SelectionCouleurListener implements Listener
 	{
 		Player player = (Player) e.getWhoClicked();
 		
-		if (e.getInventory().getName().equals(Utils.SlotNames.FC_COLORS.getName()))
+		if (e.getInventory().getName().equals(Utils.InventoryNames.FC_COLORS.getName()))
 		{
 			e.setCancelled(true);
 			
@@ -117,8 +117,8 @@ public class SelectionCouleurListener implements Listener
 						if(!e.getCurrentItem().getItemMeta().getDisplayName().contains("Menu principal"))
 						{
 							//Variables nécessaires au système
-							File dossier = new File(Bukkit.getPluginManager().getPlugin(Utils.PLUGIN_NAME).getDataFolder() + "\\Couleurs\\");
-							File color = new File(Bukkit.getPluginManager().getPlugin(Utils.PLUGIN_NAME).getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
+							File dossier = new File(FunCombat.instance.getDataFolder() + "\\Couleurs\\");
+							File color = new File(FunCombat.instance.getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
 							FileWriter out = null;
 						
 							//création du fichier avec contenu

@@ -9,6 +9,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
 import fr.reaamz.funcombat.FunCombat;
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.title.TabTitle;
 import fr.reaamz.funcombat.title.Title;
 import fr.reaamz.funcombat.title.TitleType;
@@ -37,8 +38,8 @@ public class FCPlayer
 	
 	public void sendWelcomeMessages()
 	{
-		TabTitle.sendTabTitle(this.player, "$eVous êtes sur FunCombat !", "$4Have Fun !");
-		setTitleBar(ChatColor.YELLOW + "Bienvenue sur FunCombat !");
+		TabTitle.sendTabTitle(this.player, "$eVous êtes sur " + Utils.PLUGIN_NAME + " !", "$4Have Fun !");
+		setTitleBar(ChatColor.YELLOW + "Bienvenue sur " + Utils.PLUGIN_NAME + " !");
 	}
 	
 	public void sendRawTitle(int fadeIn, int stayTime, int fadeOut, String title, String subtitle)

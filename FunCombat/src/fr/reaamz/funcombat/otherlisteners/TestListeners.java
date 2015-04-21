@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.TNTPrimed;
@@ -13,6 +12,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import fr.reaamz.funcombat.FunCombat;
 
 public class TestListeners implements Listener
 {
@@ -44,7 +45,7 @@ public class TestListeners implements Listener
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
-		File file = new File(Bukkit.getPluginManager().getPlugin("FunCombat").getDataFolder() + "\\UUIDs.txt");
+		File file = new File(FunCombat.instance.getDataFolder() + "\\UUIDs.txt");
 		FileWriter out = null;
 		
 		try

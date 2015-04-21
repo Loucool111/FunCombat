@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -17,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Banner;
 import org.bukkit.material.Wool;
 
+import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 
@@ -28,7 +28,7 @@ public class HatsMenuListener implements Listener
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event)
 	{
-		if (event.getInventory().getName().equals(Utils.SlotNames.FC_HATS.getName()))
+		if (event.getInventory().getName().equals(Utils.InventoryNames.FC_HATS.getName()))
 		{
 			if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR && event.getCurrentItem().hasItemMeta())
 			{
@@ -78,7 +78,7 @@ public class HatsMenuListener implements Listener
 				}
 			}
 		}
-		if (event.getInventory().getName().equals(Utils.SlotNames.MC_CREATIVE.getName()) || event.getInventory().getName().equals(Utils.SlotNames.MC_SURVIVAL.getName()))
+		if (event.getInventory().getName().equals(Utils.InventoryNames.MC_CREATIVE.getName()) || event.getInventory().getName().equals(Utils.InventoryNames.MC_SURVIVAL.getName()))
 		{
 			if (event.getCurrentItem() != null)
 			{
@@ -124,7 +124,7 @@ public class HatsMenuListener implements Listener
 	
 	private void refreshColor(Player player)
 	{
-		File file = new File(Bukkit.getPluginManager().getPlugin(Utils.PLUGIN_NAME).getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
+		File file = new File(FunCombat.instance.getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
 		
 		BufferedReader br = null;
 		

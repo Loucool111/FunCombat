@@ -14,14 +14,14 @@ public class HatsMenuVirtualInventory implements IVirtualInventory
 	
 	@Override
 	public Inventory getInventory()
-{
+	{
 		return this.inventory;
 	}
 
 	@Override
 	public Inventory createInventory(ItemStack[] items) 
 	{
-		this.inventory = Bukkit.createInventory(null, 27, Utils.SlotNames.FC_HATS.getName());
+		this.inventory = Bukkit.createInventory(null, 27, Utils.InventoryNames.FC_HATS.getName());
 		
 		this.inventory.setContents(items);
 		
@@ -33,5 +33,4 @@ public class HatsMenuVirtualInventory implements IVirtualInventory
 	{
 		player.openInventory(this.inventory);
 	}
-
 }

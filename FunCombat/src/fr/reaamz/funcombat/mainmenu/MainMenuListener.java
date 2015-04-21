@@ -29,14 +29,11 @@ public class MainMenuListener implements Listener
 		FCPlayer fcplayer = new FCPlayer(player);
 
 		KitpvpVirtualInventory kitpvpVMInstance = new KitpvpVirtualInventory();
-		
 		MetamorphVirtualInventory morphVMInstance  = new MetamorphVirtualInventory();
-		
 		SelectionCouleursVirtualInventory couleurInstance = new SelectionCouleursVirtualInventory();
-		
 		HatsMenuVirtualInventory hatsInstance = new HatsMenuVirtualInventory();
 
-		if (e.getInventory().getName().equals(Utils.SlotNames.FC_MAINMENU.getName()))
+		if (e.getInventory().getName().equals(Utils.InventoryNames.FC_MAINMENU.getName()))
 		{	
 			if(e.getCurrentItem() != null && e.getCurrentItem().getType() != Material.AIR && e.getCurrentItem().hasItemMeta())
 			{									

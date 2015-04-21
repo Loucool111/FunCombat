@@ -21,7 +21,7 @@ public class KitpvpVirtualInventory implements IVirtualInventory
 	@Override
 	public Inventory createInventory(ItemStack[] items) 
 	{
-		this.inventory = Bukkit.createInventory(null, 9, Utils.SlotNames.FC_KITPVP.getName());
+		this.inventory = Bukkit.createInventory(null, 9, Utils.InventoryNames.FC_KITPVP.getName());
 		
 		this.inventory.setContents(items);
 		

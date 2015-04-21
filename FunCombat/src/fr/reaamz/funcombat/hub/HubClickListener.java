@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.mainmenu.MainMenuUtils;
 import fr.reaamz.funcombat.mainmenu.MainMenuVirtualInventory;
 
@@ -39,18 +40,20 @@ public class HubClickListener implements Listener
 	{
 		MainMenuVirtualInventory MainMenuInstance = new MainMenuVirtualInventory();
 		
-		if (!(e.getCurrentItem() == null))
+		if(e.getInventory().getName().equals(Utils.InventoryNames.MC_CREATIVE.getName()) || e.getInventory().getName().equals(Utils.InventoryNames.MC_SURVIVAL.getName()))
 		{
-			if (!(e.getCurrentItem().getType() == Material.AIR))
+			if (!(e.getCurrentItem() == null))
 			{
-				
-				if(e.getCurrentItem().getType() == Material.COMPASS)
+				if (!(e.getCurrentItem().getType() == Material.AIR))
 				{
-					Inventory inv = MainMenuInstance.createInventory(MainMenuUtils.getMainMenuItems());
-					
-					MainMenuInstance.showInventory((Player)e.getWhoClicked(),inv);
-					
-					e.setCancelled(true);
+					if(e.getCurrentItem().getType() == Material.COMPASS)
+					{
+						Inventory inv = MainMenuInstance.createInventory(MainMenuUtils.getMainMenuItems());
+						
+						MainMenuInstance.showInventory((Player)e.getWhoClicked(),inv);
+						
+						e.setCancelled(true);
+					}
 				}
 			}
 		}

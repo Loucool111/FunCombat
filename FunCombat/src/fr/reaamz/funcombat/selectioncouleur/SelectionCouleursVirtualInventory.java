@@ -21,7 +21,7 @@ public class SelectionCouleursVirtualInventory implements IVirtualInventory
 	@Override
 	public Inventory createInventory(ItemStack[] items)
 	{
-		this.inventory = Bukkit.createInventory(null, 18, Utils.SlotNames.FC_COLORS.getName());
+		this.inventory = Bukkit.createInventory(null, 18, Utils.InventoryNames.FC_COLORS.getName());
 		
 		this.inventory.setContents(items);
 		

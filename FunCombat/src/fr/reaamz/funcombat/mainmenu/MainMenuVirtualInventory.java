@@ -21,7 +21,7 @@ public class MainMenuVirtualInventory implements IVirtualInventory
 	@Override
 	public Inventory createInventory(ItemStack[] items) 
 	{
-		this.inventory = Bukkit.createInventory(null, 27, Utils.SlotNames.FC_MAINMENU.getName());
+		this.inventory = Bukkit.createInventory(null, 27, Utils.InventoryNames.FC_MAINMENU.getName());
 		
 		this.inventory.setContents(items);
 		

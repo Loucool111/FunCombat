@@ -16,7 +16,7 @@ public class Utils
 	{
 		for(Player p : Bukkit.getServer().getOnlinePlayers())
 		{
-			p.sendMessage(ChatColor.GOLD + "[FunCombat] " + ChatColor.RESET + message);
+			p.sendMessage(ChatColor.GOLD + "[" + PLUGIN_NAME + "] " + ChatColor.RESET + message);
 		}
 	}
 	
@@ -30,7 +30,7 @@ public class Utils
 	
 	public static void sendCustomMessage(Player p , String message)
 	{
-		p.sendMessage(ChatColor.GOLD + "[FunCombat] " + ChatColor.RESET + message);
+		p.sendMessage(ChatColor.GOLD + "[" + PLUGIN_NAME + "] " + ChatColor.RESET + message);
 	}
 	
 	public static void logInfo(String info)
@@ -107,7 +107,7 @@ public class Utils
 		return (byte) 0;
 	}
 	
-	public enum SlotNames
+	public enum InventoryNames
 	{
 		MC_CREATIVE("container.inventory"),
 		MC_SURVIVAL("container.crafting"),
@@ -116,11 +116,12 @@ public class Utils
 		FC_KITPVP(ChatColor.UNDERLINE + "Sélécteur de kit"),
 		FC_METAMORPH(ChatColor.UNDERLINE + "Sélécteur de Métamorphoses"),
 		FC_COLORS(ChatColor.UNDERLINE + "Choissisez votre couleur"),
-		FC_HATS(ChatColor.UNDERLINE + "Sélécteur de chapeaux");
+		FC_HATS(ChatColor.UNDERLINE + "Sélécteur de chapeaux"),
+		;
 		
 		private String name;
 		
-		private SlotNames(String name)
+		private InventoryNames(String name)
 		{
 			this.name = name;
 		}

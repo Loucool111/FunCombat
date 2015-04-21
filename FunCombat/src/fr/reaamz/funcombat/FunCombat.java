@@ -24,7 +24,7 @@ public class FunCombat extends JavaPlugin
 	public static Plugin instance;
 	
 	@Override
-	public void onEnable() 
+	public void onEnable()
 	{
 		//définition de l'instance du plugin
 		instance = this;
@@ -39,7 +39,7 @@ public class FunCombat extends JavaPlugin
 		initCommands();
 		
 		//petit message dans la console
-		Utils.logInfo("Init de FunCombat");
+		Utils.logInfo("Init de " + Utils.PLUGIN_NAME);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class FunCombat extends JavaPlugin
 		saveConfig();
 		
 		//message de fin
-		Utils.logInfo("Savegarde de FunCombat");
+		Utils.logInfo("Savegarde de " + Utils.PLUGIN_NAME);
 	}
 	
 	private void initListeners()

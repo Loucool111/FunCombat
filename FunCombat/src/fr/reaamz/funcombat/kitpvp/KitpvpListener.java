@@ -24,7 +24,7 @@ public class KitpvpListener implements Listener
 	{
 		Player player = (Player) e.getWhoClicked();
 		
-		if (e.getInventory().getName().equals(Utils.SlotNames.FC_KITPVP.getName()))
+		if (e.getInventory().getName().equals(Utils.InventoryNames.FC_KITPVP.getName()))
 		{
 			e.setCancelled(true);
 			if(!(e.getCurrentItem() == null))

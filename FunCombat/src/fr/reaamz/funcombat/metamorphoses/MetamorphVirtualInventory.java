@@ -21,7 +21,7 @@ public class MetamorphVirtualInventory implements IVirtualInventory
 	@Override
 	public Inventory createInventory(ItemStack[] items) 
 	{
-		this.inventory = Bukkit.createInventory(null, 18, Utils.SlotNames.FC_METAMORPH.getName());
+		this.inventory = Bukkit.createInventory(null, 18, Utils.InventoryNames.FC_METAMORPH.getName());
 		
 		this.inventory.setContents(items);
 		
