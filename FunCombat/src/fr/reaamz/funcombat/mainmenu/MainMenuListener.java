@@ -48,7 +48,7 @@ public class MainMenuListener implements Listener
 					
 				if(e.getCurrentItem().getType() == Material.BLAZE_ROD)
 				{						
-					Inventory metamorphInv = morphVMInstance.createInventory(MetamorphUtils.getMetaMorphMenuItems());
+					Inventory metamorphInv = morphVMInstance.createInventory(MetamorphUtils.getItemsForMenu());
 							
 					morphVMInstance.showInventory(player, metamorphInv);
 				}

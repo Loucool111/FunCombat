@@ -21,6 +21,8 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 
 public class FunCombat extends JavaPlugin
 {
+	//TODO le custom code avec les method dans Metamorph
+	
 	public static Plugin instance;
 	
 	@Override

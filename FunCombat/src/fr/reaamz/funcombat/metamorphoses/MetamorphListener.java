@@ -13,11 +13,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Chicken;
-import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Giant;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Horse.Variant;
 import org.bukkit.entity.Player;
@@ -43,7 +40,7 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 
 public class MetamorphListener implements Listener 
 {
-	private DyeColor dColor;
+	private DyeColor dColor = DyeColor.WHITE;
 	
 	private HashMap<Player, Entity> entities = Maps.newHashMap();
 	
@@ -263,131 +260,63 @@ public class MetamorphListener implements Listener
 			e.setCancelled(true);
 						
 			if(!(e.getCurrentItem() == null))
-			{				
-				if(e.getCurrentItem().getType().equals(Material.WOOL))
+			{
+				boolean sent = false;
+				
+				for (MetamorphType type : MetamorphType.values())
 				{
-					refreshColor(player);
-					
-					if (dColor == null)
+					if (type.getItemMaterial() == e.getCurrentItem().getType())
 					{
-						Utils.sendCustomMessage(player, ChatColor.RED + "Votre couleur préférée n'est pas définie ! Veuillez choisir votre couleur préférée, via le menu prévu à cet effet, dans le menu principal.");
-					}
-					else
-					{
-						if(!(entities.containsKey(player)))
-						{				
-							Entity sheep = spawnNewEntity(player, Sheep.class);
-							setTeleporter(player, sheep);
-							Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en mouton !");
+						if (!(entities.containsKey(player)))
+						{
+							refreshColor(player);
+							Entity ent = spawnNewEntity(player, type.getClassEntity());
+							setTeleporter(player, ent);
+							Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en " + type.getText() + " !");
 						}
 						else
 						{
-							Utils.sendCustomMessage(player, ChatColor.RED + "Vous êtes déjà Métamorphosé !");
+							if (!sent)
+							{
+								Utils.sendCustomMessage(player, ChatColor.RED + "Vous êtes déjà Métamorphosé !");
+								sent = true;
+							}
 						}
 						player.closeInventory();
-					}					
-				}
-				
-				if(e.getCurrentItem().getType().equals(Material.SULPHUR))
-				{
-					if(!(entities.containsKey(player)))
-					{
-						Entity creep = spawnNewEntity(player, Creeper.class);
-						setTeleporter(player, creep);
-						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en creeper !");
 					}
-					else
+					
+					if(e.getCurrentItem().getType().equals(Material.THIN_GLASS))
 					{
-						Utils.sendCustomMessage(player, ChatColor.RED + "Vous êtes déjà Métamorphosé !");
-					}
-					player.closeInventory();				
-				}
-				
-				if(e.getCurrentItem().getType().equals(Material.LEATHER))
-				{
-					if(!(entities.containsKey(player)))
-					{
-						Entity cow = spawnNewEntity(player, Cow.class);
-						setTeleporter(player, cow);
-						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en vache !");
-					}
-					else
-					{
-						Utils.sendCustomMessage(player, ChatColor.RED + "Vous êtes déjà Métamorphosé !");
-					}
-					player.closeInventory();				
-				}
-				
-				if(e.getCurrentItem().getType().equals(Material.ROTTEN_FLESH))
-				{
-					if(!(entities.containsKey(player)))
-					{
-						Entity giant = spawnNewEntity(player, Giant.class);
-						setTeleporter(player, giant);
-						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en géant !");
-					}
-					else
-					{
-						Utils.sendCustomMessage(player, ChatColor.RED + "Vous êtes déjà Métamorphosé !");
-					}
-					player.closeInventory();
-				}
-				
-				if(e.getCurrentItem().getType().equals(Material.FEATHER))
-				{
-					if(!(entities.containsKey(player)))
-					{
-						Entity chicken = spawnNewEntity(player, Chicken.class);
-						setTeleporter(player, chicken);
-						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en poulet !");
-					}
-					else
-					{
-						Utils.sendCustomMessage(player, ChatColor.RED + "Vous êtes déjà Métamorphosé !");
-					}
-					player.closeInventory();
-				}
-				
-				if(e.getCurrentItem().getType().equals(Material.SADDLE))
-				{
-					if(!(entities.containsKey(player)))
-					{
-						Entity horse = spawnNewEntity(player, Horse.class);
-						setTeleporter(player, horse);
-						Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en cheval-squelette !");
-					}
-					else
-					{
-						Utils.sendCustomMessage(player, ChatColor.RED + "Vous êtes déjà Métamorphosé !");
-					}
-					player.closeInventory();
-				}
-				
-				if(e.getCurrentItem().getType().equals(Material.THIN_GLASS))
-				{
-					if (entities.containsKey(player))
-					{
-						Entity ent = entities.get(player);
-						
-						ent.remove();
-						Utils.sendCustomMessage(player,ChatColor.GREEN + "Votre Métamorphose à été supprimée");
-						
-						entities.remove(player);
-						
-						Bukkit.getScheduler().cancelTask(tasksIds.get(player));
-						tasksIds.remove(player);
-						
-						Utils.removeAllPotionEffects(player);
-						
-						player.closeInventory();
-					}
-					else
-					{
-						Utils.sendCustomMessage(player,ChatColor.RED + "Aucune Métamorphose à supprimer");
-						player.closeInventory();
+						if (entities.containsKey(player))
+						{
+							Entity ent = entities.get(player);
+							
+							ent.remove();
+							Utils.sendCustomMessage(player,ChatColor.GREEN + "Votre Métamorphose à été supprimée");
+							sent = true;
+							
+							entities.remove(player);
+							
+							Bukkit.getScheduler().cancelTask(tasksIds.get(player));
+							tasksIds.remove(player);
+							
+							Utils.removeAllPotionEffects(player);
+							
+							player.closeInventory();
+						}
+						else
+						{
+							if (!sent)
+							{
+								sent = true;
+								Utils.sendCustomMessage(player,ChatColor.RED + "Aucune Métamorphose à supprimer");
+							}
+							player.closeInventory();
+						}
 					}
 				}
-			}	
+				sent = false;
+			}
 		}
 	}
 }
