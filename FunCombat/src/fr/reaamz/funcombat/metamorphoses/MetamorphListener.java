@@ -1,9 +1,5 @@
 package fr.reaamz.funcombat.metamorphoses;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -36,7 +32,6 @@ import com.google.common.collect.Maps;
 
 import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
-import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 
 public class MetamorphListener implements Listener 
 {
@@ -117,35 +112,7 @@ public class MetamorphListener implements Listener
 		
 		tasksIds.put(player, id);
 	}
-	
-	private void refreshColor(Player player)
-	{
-		File file = new File(FunCombat.instance.getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
 		
-		BufferedReader br = null;
-		
-		if (file.exists())
-		{
-			try
-			{
-				String currentLine;
-			
-				br = new BufferedReader(new FileReader(file));
-			
-				currentLine = br.readLine();
-				
-				if(!(currentLine == null))
-					dColor = SelectionCouleurUtils.getDyeColorFromString(currentLine);
-			
-				br.close();
-			}
-			catch (IOException e1)
-			{
-				e1.printStackTrace();
-			}
-		}
-	}
-	
 	@EventHandler
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent event)
 	{
@@ -269,7 +236,7 @@ public class MetamorphListener implements Listener
 					{
 						if (!(entities.containsKey(player)))
 						{
-							refreshColor(player);
+							dColor = Utils.refreshColor(player);
 							Entity ent = spawnNewEntity(player, type.getClassEntity());
 							setTeleporter(player, ent);
 							Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en " + type.getText() + " !");

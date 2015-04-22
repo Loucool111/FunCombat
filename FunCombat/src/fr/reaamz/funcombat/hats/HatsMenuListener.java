@@ -1,10 +1,5 @@
 package fr.reaamz.funcombat.hats;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -16,9 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Banner;
 import org.bukkit.material.Wool;
 
-import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
-import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 
 public class HatsMenuListener implements Listener
 {
@@ -41,14 +34,14 @@ public class HatsMenuListener implements Listener
 					{
 						if (type.getType() == Material.BANNER)
 						{
-							refreshColor(player);
+							dColor = Utils.refreshColor(player);
 							Banner banner = new Banner(Material.BANNER);
 							banner.setData(Utils.getDataFromDyeColor(dColor));
 							player.getInventory().setHelmet(banner.toItemStack(1));
 						}
 						else if (type.getType() == Material.WOOL)
 						{
-							refreshColor(player);
+							dColor = Utils.refreshColor(player);
 							Wool wool = new Wool(dColor);
 							player.getInventory().setHelmet(wool.toItemStack(1));
 						}
@@ -93,14 +86,14 @@ public class HatsMenuListener implements Listener
 							
 							if (type.getType() == Material.BANNER)
 							{
-								refreshColor(player);
+								dColor = Utils.refreshColor(player);
 								Banner banner = new Banner(Material.BANNER);
 								banner.setData(Utils.getDataFromDyeColor(dColor));
 								player.getInventory().setHelmet(banner.toItemStack(1));
 							}
 							else if (type.getType() == Material.WOOL)
 							{
-								refreshColor(player);
+								dColor = Utils.refreshColor(player);
 								if (dColor != null)
 								{
 									Wool wool = new Wool(dColor);
@@ -118,34 +111,6 @@ public class HatsMenuListener implements Listener
 						}
 					}
 				}
-			}
-		}
-	}
-	
-	private void refreshColor(Player player)
-	{
-		File file = new File(FunCombat.instance.getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
-		
-		BufferedReader br = null;
-		
-		if (file.exists())
-		{
-			try
-			{
-				String currentLine;
-			
-				br = new BufferedReader(new FileReader(file));
-			
-				currentLine = br.readLine();
-				
-				if(!(currentLine == null))
-					dColor = SelectionCouleurUtils.getDyeColorFromString(currentLine);
-			
-				br.close();
-			}
-			catch (IOException e1)
-			{
-				e1.printStackTrace();
 			}
 		}
 	}
