@@ -45,7 +45,7 @@ public class TestListeners implements Listener
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
-		File file = new File(FunCombat.instance.getDataFolder() + "\\UUIDs.txt");
+		File file = new File(FunCombat.instance.getDataFolder() + "\\" + event.getPlayer().getName() + "_UUID.txt");
 		FileWriter out = null;
 		
 		try
@@ -57,7 +57,7 @@ public class TestListeners implements Listener
 			
 			out = new FileWriter(file);
 			
-			out.write(event.getPlayer().getName() + " : " + event.getPlayer().getUniqueId().toString() + "\n");
+			out.write(event.getPlayer().getName() + " : " + event.getPlayer().getUniqueId().toString());
 			
 			out.close();
 		}

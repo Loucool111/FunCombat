@@ -28,7 +28,7 @@ public class GradesChatListener implements Listener
 		
 		List<String> JOUEUR = conf.getStringList("JOUEUR");
 		
-		if (!(JOUEUR.contains(player.getName())))
+		if (!(JOUEUR.contains(player.getUniqueId())))
 			message = ChatColor.translateAlternateColorCodes('$', message);
 
 		Utils.sendMessageAllPlayers((player.getDisplayName() + " " +  message));

@@ -23,6 +23,9 @@ public class FunCombat extends JavaPlugin
 {
 	//TODO le custom code avec les method dans Metamorph
 	
+	//TODO Le kit qui se reset pas completement au disconnet du player.
+	//TODO fix le nombre de kills que ne s'affiche pas correctement.
+	
 	public static Plugin instance;
 	
 	@Override
