@@ -13,6 +13,7 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Horse.Variant;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
@@ -25,6 +26,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -57,24 +59,6 @@ public class MetamorphListener implements Listener
 			addPotionEffect.setAccessible(true);
 			addPotionEffect.invoke(ent, new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,1000000000,127));
 			addPotionEffect.invoke(ent, (new PotionEffect(PotionEffectType.SLOW,1000000000,127)));
-			
-			if (ent instanceof Creeper)
-			{
-				Creeper creeper = (Creeper) ent;
-				creeper.setPowered(true);
-			}
-			
-			if (ent instanceof Horse)
-			{
-				Horse horse = (Horse) ent;
-				horse.setVariant(Variant.SKELETON_HORSE);
-			}
-			
-			if (ent instanceof Sheep)
-			{
-				Sheep sheep = (Sheep) ent;
-				sheep.setColor(dColor);
-			}
 			
 			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,10000000,1));
 			
@@ -238,6 +222,19 @@ public class MetamorphListener implements Listener
 						{
 							dColor = Utils.refreshColor(player);
 							Entity ent = spawnNewEntity(player, type.getClassEntity());
+							if (type.hasCustomCode())
+							{
+								try 
+								{
+									Method m = getClass().getMethod(type.getMethodName(),Entity.class);
+									m.setAccessible(true);
+									ent = (Entity) m.invoke(this, ent);
+								} 
+								catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) 
+								{
+									e1.printStackTrace();
+								}
+							}
 							setTeleporter(player, ent);
 							Utils.sendCustomMessage(player, ChatColor.GREEN + "Vous voilà transformé en " + type.getText() + " !");
 						}
@@ -250,40 +247,69 @@ public class MetamorphListener implements Listener
 							}
 						}
 						player.closeInventory();
-					}
-					
-					if(e.getCurrentItem().getType().equals(Material.THIN_GLASS))
-					{
-						if (entities.containsKey(player))
-						{
-							Entity ent = entities.get(player);
-							
-							ent.remove();
-							Utils.sendCustomMessage(player,ChatColor.GREEN + "Votre Métamorphose à été supprimée");
-							sent = true;
-							
-							entities.remove(player);
-							
-							Bukkit.getScheduler().cancelTask(tasksIds.get(player));
-							tasksIds.remove(player);
-							
-							Utils.removeAllPotionEffects(player);
-							
-							player.closeInventory();
-						}
-						else
-						{
-							if (!sent)
-							{
-								sent = true;
-								Utils.sendCustomMessage(player,ChatColor.RED + "Aucune Métamorphose à supprimer");
-							}
-							player.closeInventory();
-						}
-					}
+					}	
 				}
+				
 				sent = false;
+				
+				if(e.getCurrentItem().getType().equals(Material.THIN_GLASS))
+				{
+					if (entities.containsKey(player))
+					{
+						Entity ent = entities.get(player);
+						
+						ent.remove();
+						Utils.sendCustomMessage(player,ChatColor.GREEN + "Votre Métamorphose à été supprimée");						
+						
+						entities.remove(player);
+						
+						Bukkit.getScheduler().cancelTask(tasksIds.get(player));
+						tasksIds.remove(player);
+						
+						Utils.removeAllPotionEffects(player);
+						
+						player.closeInventory();
+					}
+					else
+					{
+						if (!sent)
+						{
+							Utils.sendCustomMessage(player,ChatColor.RED + "Aucune Métamorphose à supprimer");
+						}
+						player.closeInventory();
+					}
+				}				
 			}
 		}
+	}
+	
+	public Entity creeperMethod(Entity ent)
+	{
+		Creeper creeper = (Creeper) ent;
+		creeper.setPowered(true);
+		return (Entity) creeper;
+	}
+	
+	public Entity horseMethod(Entity ent)
+	{
+		Horse horse = (Horse) ent;
+		horse.setVariant(Variant.SKELETON_HORSE);
+		horse.setAdult();
+		return (Entity) horse;
+	}
+	
+	public Entity sheepMethod(Entity ent)
+	{
+		Sheep sheep = (Sheep) ent;
+		sheep.setColor(dColor);
+		return (Entity) sheep;
+	}
+	
+	public Entity pigzombieMethod(Entity ent)
+	{
+		PigZombie pz = (PigZombie) ent;
+		pz.getEquipment().setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
+		pz.setBaby(false);
+		return (Entity) pz;
 	}
 }
