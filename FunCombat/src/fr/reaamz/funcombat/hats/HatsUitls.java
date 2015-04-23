@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Banner;
 
-import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.chat.UnsafeText;
 
 public class HatsUitls 
@@ -32,7 +31,7 @@ public class HatsUitls
 				meta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour porter " + type.getText() + " !",ChatColor.WHITE + "Couleur selon couleur préférée"));
 				
 				Banner banner = new Banner(Material.BANNER);
-				banner.setData(Utils.getDataFromDyeColor(DyeColor.WHITE));
+				banner.setData(DyeColor.WHITE.getData());
 				stack[i] = banner.toItemStack(1);
 			}
 			if (type == HatsType.WOOL)

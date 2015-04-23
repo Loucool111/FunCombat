@@ -36,7 +36,7 @@ public class HatsMenuListener implements Listener
 						{
 							dColor = Utils.refreshColor(player);
 							Banner banner = new Banner(Material.BANNER);
-							banner.setData(Utils.getDataFromDyeColor(dColor));
+							banner.setData(dColor.getData());
 							player.getInventory().setHelmet(banner.toItemStack(1));
 						}
 						else if (type.getType() == Material.WOOL)
@@ -44,6 +44,11 @@ public class HatsMenuListener implements Listener
 							dColor = Utils.refreshColor(player);
 							Wool wool = new Wool(dColor);
 							player.getInventory().setHelmet(wool.toItemStack(1));
+						}
+						else if (type.getType() == Material.GLASS)
+						{
+							dColor = Utils.refreshColor(player);
+							player.getInventory().setHelmet(new ItemStack(Material.STAINED_GLASS, 1, dColor.getData()));
 						}
 						else
 						{
@@ -88,7 +93,7 @@ public class HatsMenuListener implements Listener
 							{
 								dColor = Utils.refreshColor(player);
 								Banner banner = new Banner(Material.BANNER);
-								banner.setData(Utils.getDataFromDyeColor(dColor));
+								banner.setData(dColor.getData());
 								player.getInventory().setHelmet(banner.toItemStack(1));
 							}
 							else if (type.getType() == Material.WOOL)
