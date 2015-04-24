@@ -38,6 +38,10 @@ public class HatsUitls
 			{
 				meta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour porter " + type.getText() + " !",ChatColor.WHITE + "Couleur selon couleur préférée"));
 			}
+			if (type == HatsType.GLASS)
+			{
+				meta.setLore(Arrays.asList(ChatColor.WHITE + "Cliquez pour porter " + type.getText() + " !",ChatColor.WHITE + "Couleur selon couleur préférée"));
+			}
 			
 			stack[i].setItemMeta(meta);
 			++i;

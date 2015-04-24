@@ -116,6 +116,10 @@ public class HatsMenuListener implements Listener
 						}
 					}
 				}
+				if (event.getCurrentItem().getType() == Material.STAINED_GLASS)
+				{
+					event.setCancelled(true);
+				}
 			}
 		}
 	}

@@ -45,9 +45,7 @@ public class Kitpvp implements Listener
 	private void registerPass(Player player, KitpvpKits.Kits type, HashMap<Player, Integer> level)
 	{
 		Scoreboard sc = Bukkit.getScoreboardManager().getNewScoreboard();
-		
-		scs.put(player, sc);
-		
+				
 		Objective object = sc.registerNewObjective(type.toStringKit(), "dummy");
 		
 		object.setDisplayName(ChatColor.GREEN + "Kit : " + type.toStringKit());
@@ -62,6 +60,8 @@ public class Kitpvp implements Listener
 		ScoreKills.get(player).setScore(level.get(player));
 		ScoreNiv.get(player).setScore(KitpvpUtils.getLevelFromKills(player, level));
 		
+		scs.put(player, sc);
+		
 		player.setScoreboard(sc);
 	}
 	
@@ -71,27 +71,24 @@ public class Kitpvp implements Listener
 		{
 			String name = null;
 			
-			try {
-				//Utils.sendCustomMessage(player, "av");
-				name = scs.get(player).getObjective(type.toStringKit()).getName();
-				//Utils.sendCustomMessage(player, "ap");
-			} catch (IllegalArgumentException | NullPointerException ex) {}
+			try 
+			{
+				name = scs.get(player).getObjective(type.toStringKit()).getName(); // on essaye de recup le nom de l'objective
+			}
+			catch (IllegalArgumentException | NullPointerException ex) {}
 			
 			if (name == type.toStringKit())
 			{
 				player.setScoreboard(scs.get(player));
-				//Utils.sendCustomMessage(player, "score existe objective exsite");
 			}
 			else
 			{
 				registerPass(player, type, level);
-				//Utils.sendCustomMessage(player, "score existe mais pas objective");
 			}
 		}
 		else
 		{
 			registerPass(player, type, level);
-			//Utils.sendCustomMessage(player, "score n'existe pas");
 		}
 	}
 	
@@ -172,6 +169,7 @@ public class Kitpvp implements Listener
 		if (playerKit.containsKey(e.getPlayer()))
 		{
 			playerKit.remove(e.getPlayer());
+			e.getPlayer().getInventory().clear();
 		}
 	}
 	
