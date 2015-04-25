@@ -66,7 +66,7 @@ public class FunCombat extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new KitpvpListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HubMotdListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HatsMenuListener(), this);
-		
+
 		//Grades listeners
 		Bukkit.getPluginManager().registerEvents(new GradesJoinListener(), this);
 		Bukkit.getPluginManager().registerEvents(new GradesChatListener(), this);

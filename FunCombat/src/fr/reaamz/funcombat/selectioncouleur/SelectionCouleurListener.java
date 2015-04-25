@@ -18,7 +18,7 @@ import fr.reaamz.funcombat.Utils;
 public class SelectionCouleurListener implements Listener
 {
 	DyeColor dColor = null;
-
+	
 	@EventHandler
 	public void onInventoryClick(final InventoryClickEvent e)
 	{
