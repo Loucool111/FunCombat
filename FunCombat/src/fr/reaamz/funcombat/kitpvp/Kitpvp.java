@@ -185,8 +185,8 @@ public class Kitpvp implements Listener
 			ede.getDrops().clear();
 			
 			if (playerKit.containsKey(killer))
-			{				
-				if(playerKit.get(killer).equals(KitpvpKits.Kits.ARCHER))			
+			{
+				if(playerKit.get(killer).equals(KitpvpKits.Kits.ARCHER.toStringKit()))
 				{
 					ArcherLevels.put(killer, ArcherLevels.get(killer) + 1);
 
@@ -202,7 +202,7 @@ public class Kitpvp implements Listener
 					ScoreNiv.get(killer).setScore(KitpvpUtils.getLevelFromKills(killer, ArcherLevels));
 				}
 				
-				if(playerKit.get(killer).equals(KitpvpKits.Kits.GUERRIER))
+				if(playerKit.get(killer).equals(KitpvpKits.Kits.GUERRIER.toStringKit()))
 				{
 					GuerrierLevels.put(killer, GuerrierLevels.get(killer) + 1);
 
@@ -223,7 +223,7 @@ public class Kitpvp implements Listener
 			
 			if (playerKit.containsKey(victim))
 			{
-				if (playerKit.get(victim).equals(KitpvpKits.Kits.ARCHER))
+				if (playerKit.get(victim).equals(KitpvpKits.Kits.ARCHER.toStringKit()))
 				{
 					if (ArcherLevels.get(victim) > 1)
 					{
@@ -242,7 +242,7 @@ public class Kitpvp implements Listener
 					}
 				}
 			
-				if (playerKit.get(victim).equals(KitpvpKits.Kits.GUERRIER))
+				if (playerKit.get(victim).equals(KitpvpKits.Kits.GUERRIER.toStringKit()))
 				{
 					if (GuerrierLevels.get(victim) > 1)
 					{

@@ -21,7 +21,6 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 
 public class FunCombat extends JavaPlugin
 {
-	//TODO fix le nombre de kills que ne s'affiche pas correctement.
 	//TODO la grosse optimisation avec les kits qui gère une seul HashMap<Player, HashMap<KitpvpKits.Kits, Integer>>
 	
 	public static Plugin instance;
