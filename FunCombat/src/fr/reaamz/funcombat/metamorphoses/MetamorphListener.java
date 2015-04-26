@@ -34,6 +34,7 @@ import com.google.common.collect.Maps;
 
 import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
+import fr.reaamz.funcombat.event.HubEvent;
 
 public class MetamorphListener implements Listener 
 {
@@ -96,7 +97,25 @@ public class MetamorphListener implements Listener
 		
 		tasksIds.put(player, id);
 	}
-		
+	
+	@EventHandler
+	public void onHubEvent(HubEvent e)
+	{
+		if (entities.containsKey(e.getPlayer()))
+		{
+			Entity ent = entities.get(e.getPlayer());
+			
+			entities.remove(e.getPlayer());
+
+			Bukkit.getScheduler().cancelTask(tasksIds.get(e.getPlayer()));
+			tasksIds.remove(e.getPlayer());
+			
+			ent.remove();
+			
+			Utils.removeAllPotionEffects(e.getPlayer());
+		}
+	}
+	
 	@EventHandler
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent event)
 	{
