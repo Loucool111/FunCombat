@@ -2,6 +2,7 @@ package fr.reaamz.funcombat.hub;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,6 +22,10 @@ public class HubJoinListener implements Listener
 		final FCPlayer fcplayer = new FCPlayer(player);		
 		
 		HubUtils.equipHubStuff(player);
+		
+		player.getInventory().setArmorContents(null);
+		
+		player.setGameMode(GameMode.CREATIVE);
 		
 		Utils.sendCustomMessage(player, ChatColor.AQUA + "Bienvenue sur " + Utils.PLUGIN_NAME + ", " + ChatColor.YELLOW + player.getName());
 		

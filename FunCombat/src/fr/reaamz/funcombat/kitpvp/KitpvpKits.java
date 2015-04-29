@@ -16,278 +16,301 @@ import fr.reaamz.funcombat.Utils;
 
 public class KitpvpKits 
 {
-	public static void equipKitArcherArmor(Player player, int level)
+	public enum Kits
 	{
-		ItemStack[] armor = new ItemStack[]{
-				new ItemStack(Material.CHAINMAIL_BOOTS),
-				new ItemStack(Material.CHAINMAIL_LEGGINGS),
-				new ItemStack(Material.CHAINMAIL_CHESTPLATE),
-				new ItemStack(Material.CHAINMAIL_HELMET)
-		};
+		ARCHER("Archer"),
+		GUERRIER("Guerrier"),
+		;
 		
-		if(level >= 1)
+		private String type;
+		
+		Kits(String type)
 		{
-			for(ItemStack arm : armor)
-			{
-				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);				
-			}
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
-		}
-		if (level >= 5)
-		{
-			for(ItemStack arm : armor)
-			{
-				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
-				arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1);				
-			}
-			
-			armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,1);
-						
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
-		}
-		if (level >= 10)
-		{
-			for(ItemStack arm : armor)
-			{
-				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
-				arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,2);				
-			}
-			
-			armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,2);
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
-		}
-		if (level >= 20)
-		{
-			for(ItemStack arm : armor)
-			{
-				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
-				arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,3);				
-			}
-			
-			armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,3);
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
-		}
-		if (level >= 50)
-		{
-			for(ItemStack arm : armor)
-			{
-				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
-				arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,4);				
-			}
-			
-			armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,4);
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			this.type = type;
 		}
 		
-		player.getInventory().setArmorContents(armor);
+		public String toStringKit()
+		{
+			return this.type;
+		}
 	}
 	
-	public static void equipKitArcherStuff(Player player, int level)
+	public static void equipKitArmor(Player player, int level, Kits kit)
 	{
-		ItemStack bow = new ItemStack(Material.BOW, 1);
-		ItemMeta bowMeta = bow.getItemMeta();
-		
-		bowMeta.setDisplayName("Arc de " + player.getName());
-		
-		ArrayList<String> Bowlore = new ArrayList<String>();
-		Bowlore.add(ChatColor.RESET + "Stuff du kit Archer");
-		
-		if (level >= 1 && level <= 4)
-		{	
-			bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-			
-			Bowlore.add(ChatColor.RESET + "Niv.1");
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 1");
-		}
-		if (level >= 5 && level <= 9)
+		if (kit.equals(Kits.ARCHER))
 		{
-			bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,1, true);
-			bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+			ItemStack[] armor = new ItemStack[]{
+					new ItemStack(Material.CHAINMAIL_BOOTS),
+					new ItemStack(Material.CHAINMAIL_LEGGINGS),
+					new ItemStack(Material.CHAINMAIL_CHESTPLATE),
+					new ItemStack(Material.CHAINMAIL_HELMET)
+			};
 			
-			Bowlore.add(ChatColor.RESET + "Niv.2");
+			if (level >= 1 && level <= 4)
+			{
+				for(ItemStack arm : armor)
+				{
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);				
+				}
+				
+				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			}
+			if (level >= 5 && level <= 9)
+			{
+				for(ItemStack arm : armor)
+				{
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1);				
+				}
+				
+				armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,1);
+							
+				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			}
+			if (level >= 10 && level <= 19)
+			{
+				for(ItemStack arm : armor)
+				{
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,2);				
+				}
+				
+				armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,2);
+				
+				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			}
+			if (level >= 20 && level <= 49)
+			{
+				for(ItemStack arm : armor)
+				{
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,3);				
+				}
+				
+				armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,3);
+				
+				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			}
+			if (level >= 50)
+			{
+				for(ItemStack arm : armor)
+				{
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,4);				
+				}
+				
+				armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,4);
+				
+				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			}
 			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 2");
+			player.getInventory().setArmorContents(armor);
 		}
-		if (level >= 10 && level <= 19)
+		if (kit.equals(Kits.GUERRIER))
 		{
-			bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,2, true);
-			bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-		
-			Bowlore.add(ChatColor.RESET + "Niv.3");
+			ItemStack[] armor = new ItemStack[]{
+					new ItemStack(Material.IRON_BOOTS),
+					new ItemStack(Material.IRON_LEGGINGS),
+					new ItemStack(Material.IRON_CHESTPLATE),
+					new ItemStack(Material.IRON_HELMET)
+			};
 			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 3");
+			if (level >= 1 && level <= 4)
+			{
+				for (ItemStack arm : armor)
+				{
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+				}
+				
+				
+				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			}
+			if (level >= 5 && level <= 9)
+			{
+				for (ItemStack arm : armor)
+				{
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+				}
+				
+				armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 1);
+				
+				
+				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			}
+			if (level >= 10 && level <= 19)
+			{
+				for (ItemStack arm : armor)
+				{
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+				}
+				
+				armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 2);
+				
+				
+				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			}
+			if (level >= 20 && level <= 49)
+			{
+				for (ItemStack arm : armor)
+				{
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+				}
+				
+				armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 3);
+				
+				
+				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			}
+			if (level >= 50)
+			{
+				for (ItemStack arm : armor)
+				{
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+				}
+				
+				armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 4);
+				
+				
+				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			}
+			
+			player.getInventory().setArmorContents(armor);
 		}
-		if (level >= 20 && level <= 49)
-		{
-			bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,3, true);
-			bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-			
-			Bowlore.add(ChatColor.RESET + "Niv.4");
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 4");
-		}
-		if (level >= 50)
-		{
-			bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,4, true);
-			bowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
-			bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-			
-			Bowlore.add(ChatColor.RESET + "Niv.5");
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 5");
-		}
-		
-		
-		bowMeta.setLore(Bowlore);
-		
-		bow.setItemMeta(bowMeta);
-	
-		player.getInventory().addItem(bow);
-		player.getInventory().addItem(new ItemStack(Material.ARROW,1));
-		player.getInventory().addItem(new ItemStack(Material.GOLDEN_CARROT,64));
 	}
 	
-	public static void equipKitGuerrierArmure(Player player, int level)
+	public static void equipKitStuff(Player player, int level, Kits kit)
 	{
-		ItemStack[] armor = new ItemStack[]{
-				new ItemStack(Material.IRON_BOOTS),
-				new ItemStack(Material.IRON_LEGGINGS),
-				new ItemStack(Material.IRON_CHESTPLATE),
-				new ItemStack(Material.IRON_HELMET)
-		};
-		
-		if (level >= 1)
+		if (kit.equals(Kits.ARCHER))
 		{
-			for (ItemStack arm : armor)
+			ItemStack bow = new ItemStack(Material.BOW, 1);
+			ItemMeta bowMeta = bow.getItemMeta();
+			
+			bowMeta.setDisplayName("Arc de " + player.getName());
+			
+			ArrayList<String> Bowlore = new ArrayList<String>();
+			Bowlore.add(ChatColor.RESET + "Stuff du kit Archer");
+			
+			if (level >= 1 && level <= 4)
+			{	
+				bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+				
+				Bowlore.add(ChatColor.RESET + "Niv.1");
+				
+				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 1");
+			}
+			if (level >= 5 && level <= 9)
 			{
-				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+				bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,1, true);
+				bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+				
+				Bowlore.add(ChatColor.RESET + "Niv.2");
+				
+				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 2");
+			}
+			if (level >= 10 && level <= 19)
+			{
+				bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,2, true);
+				bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+			
+				Bowlore.add(ChatColor.RESET + "Niv.3");
+				
+				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 3");
+			}
+			if (level >= 20 && level <= 49)
+			{
+				bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,3, true);
+				bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+				
+				Bowlore.add(ChatColor.RESET + "Niv.4");
+				
+				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 4");
+			}
+			if (level >= 50)
+			{
+				bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,4, true);
+				bowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
+				bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+				
+				Bowlore.add(ChatColor.RESET + "Niv.5");
+				
+				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 5");
 			}
 			
 			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			bowMeta.setLore(Bowlore);
+			
+			bow.setItemMeta(bowMeta);
+		
+			player.getInventory().addItem(bow);
+			player.getInventory().addItem(new ItemStack(Material.ARROW,1));
+			player.getInventory().addItem(new ItemStack(Material.GOLDEN_CARROT,64));
 		}
-		if (level >= 5)
+		if (kit.equals(Kits.GUERRIER))
 		{
-			for (ItemStack arm : armor)
+			ItemStack sword = new ItemStack(Material.DIAMOND_SWORD,1);
+			ItemMeta swordMeta = sword.getItemMeta();
+			
+			swordMeta.setDisplayName("Epée de " + player.getName());
+			
+			ArrayList<String> lore = new ArrayList<String>();
+			lore.add(ChatColor.RESET + "Stuff du kit guerrier");
+			
+			if (level >= 1 && level <= 4)
 			{
-				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
-				arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+				lore.add(ChatColor.RESET + "Niv.1");
+				
+				swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
+				
+				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 1");
+			}
+			if (level >= 5 && level <= 9)
+			{
+				lore.add(ChatColor.RESET + "Niv.2");
+				
+				swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
+				swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+				
+				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 2");
+			}
+			if (level >= 10 && level <= 19)
+			{
+				lore.add(ChatColor.RESET + "Niv.3");
+				
+				swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
+				swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
+				
+				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 3");
+			}
+			if (level >= 20 && level <= 49)
+			{
+				lore.add(ChatColor.RESET + "Niv.4");
+				
+				swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
+				swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+				
+				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 4");
+			}
+			if (level >= 50)
+			{
+				lore.add(ChatColor.RESET + "Niv.5");
+				
+				swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
+				swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 4, true);
+				swordMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
+				
+				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 5");
 			}
 			
-			armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 1);
+			swordMeta.setLore(lore);
 			
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			sword.setItemMeta(swordMeta);
+			player.getInventory().addItem(sword);
+			player.getInventory().addItem(new ItemStack(Material.GOLDEN_CARROT,64));
 		}
-		if (level >= 10)
-		{
-			for (ItemStack arm : armor)
-			{
-				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
-				arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-			}
-			
-			armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 2);
-			
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
-		}
-		if (level >= 20)
-		{
-			for (ItemStack arm : armor)
-			{
-				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
-				arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
-			}
-			
-			armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 3);
-			
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
-		}
-		if (level >= 50)
-		{
-			for (ItemStack arm : armor)
-			{
-				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
-				arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
-			}
-			
-			armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 4);
-			
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
-		}
-		
-		player.getInventory().setArmorContents(armor);
-	}
-	
-	public static void equipKitGuerrierStuff(Player player, int level)
-	{
-		ItemStack sword = new ItemStack(Material.DIAMOND_SWORD,1);
-		ItemMeta swordMeta = sword.getItemMeta();
-		
-		swordMeta.setDisplayName("Epée de " + player.getName());
-		
-		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.RESET + "Stuff du kit guerrier");
-		
-		if (level >= 1 && level <= 4)
-		{
-			lore.add(ChatColor.RESET + "Niv.1");
-			
-			swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 1");
-		}
-		if (level >= 5 && level <= 9)
-		{
-			lore.add(ChatColor.RESET + "Niv.2");
-			
-			swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
-			swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 2");
-		}
-		if (level >= 10 && level <= 19)
-		{
-			lore.add(ChatColor.RESET + "Niv.3");
-			
-			swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
-			swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 3");
-		}
-		if (level >= 20 && level <= 49)
-		{
-			lore.add(ChatColor.RESET + "Niv.4");
-			
-			swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
-			swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 4");
-		}
-		if (level >= 50)
-		{
-			lore.add(ChatColor.RESET + "Niv.5");
-			
-			swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
-			swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 4, true);
-			swordMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 5");
-		}
-		
-		swordMeta.setLore(lore);
-		
-		sword.setItemMeta(swordMeta);
-		player.getInventory().addItem(sword);
-		player.getInventory().addItem(new ItemStack(Material.GOLDEN_CARROT,64));
 	}
 	
 	public static void equipKitAdmArmure(Player player)
@@ -333,23 +356,5 @@ public class KitpvpKits
 	
 		sword.setItemMeta(swordMeta);
 		player.getInventory().addItem(sword);
-	}
-	
-	public enum Kits
-	{
-		ARCHER("Archer"),
-		GUERRIER("Guerrier");
-		
-		private String type;
-		
-		Kits(String type)
-		{
-			this.type = type;
-		}
-		
-		public String toStringKit()
-		{
-			return this.type;
-		}
 	}
 }

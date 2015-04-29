@@ -1,7 +1,6 @@
 package fr.reaamz.funcombat.kitpvp;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -47,9 +46,10 @@ public class KitpvpUtils
 		};
 	}
 	
-	public static int getLevelFromKills(Player player, Map<Player, Integer> kitLevel)
+	public static int getLevelFromKills(Player player, int kitLevel)
 	{
-		switch (kitLevel.get(player)) {
+		switch (kitLevel) {
+		case 0:
 		case 1: 
 		case 2:
 		case 3:

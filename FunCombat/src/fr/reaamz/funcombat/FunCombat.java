@@ -21,7 +21,7 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 
 public class FunCombat extends JavaPlugin
 {
-	//TODO la grosse optimisation avec les kits qui gère une seul HashMap<Player, HashMap<KitpvpKits.Kits, Integer>>
+	//TODO fix les message de niveau de kit qui apparaissent trop souvent
 	
 	public static Plugin instance;
 	
