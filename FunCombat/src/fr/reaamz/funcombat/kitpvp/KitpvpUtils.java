@@ -14,6 +14,7 @@ public class KitpvpUtils
 	public static ItemStack[] getItemsPourMenu()
 	{
 		//-------------ARCHER-------------
+		
 		ItemStack kitArcher = new ItemStack(Material.BOW,1);
 		ItemMeta arcMeta = kitArcher.getItemMeta();
 	
@@ -37,12 +38,24 @@ public class KitpvpUtils
 		swordMeta.setLore(Arrays.asList(ChatColor.WHITE +""+ ChatColor.UNDERLINE + "Contient :","",ChatColor.WHITE + "1 Epée diams enchantée",ChatColor.WHITE + "1 Full stuff fer enchanté"));
 	
 		kitGuerrier.setItemMeta(swordMeta);
-		//-----------------------------------
+		//-------------SORCIERE--------------
+		
+		ItemStack kitSorciere = new ItemStack(Material.STICK);
+		ItemMeta stickMeta = kitSorciere.getItemMeta();
+		
+		stickMeta.setDisplayName(ChatColor.GOLD + "Kit sorcière");
+		
+		stickMeta.setLore(Arrays.asList(ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Contient :","",ChatColor.WHITE + "1 Armure",ChatColor.WHITE + "1 Bâton de sorcière", ChatColor.WHITE + "Differentes potions"));
+		
+		stickMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+		
+		kitSorciere.setItemMeta(stickMeta);
 		
 		//-----------------------------------
 		return new ItemStack[]{
 				kitArcher,
-				kitGuerrier
+				kitGuerrier,
+				kitSorciere
 		};
 	}
 	

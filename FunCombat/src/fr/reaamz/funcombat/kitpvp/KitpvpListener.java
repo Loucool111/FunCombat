@@ -1,7 +1,6 @@
 package fr.reaamz.funcombat.kitpvp;
 
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,25 +26,20 @@ public class KitpvpListener implements Listener
 		if (e.getInventory().getName().equals(InventoryNames.FC_KITPVP.getName()))
 		{
 			e.setCancelled(true);
+			
 			if(!(e.getCurrentItem() == null))
 			{
-				if(e.getCurrentItem().getType().equals(Material.DIAMOND_SWORD))
+				for (Kits kit : Kits.values())
 				{
-					kits.newKitpvpPlayer(player, Kits.GUERRIER);
-					e.setCancelled(true);
-					player.closeInventory();
-					player.setGameMode(GameMode.SURVIVAL);
-				}
-				
-				if(e.getCurrentItem().getType().equals(Material.BOW))
-				{
-					kits.newKitpvpPlayer(player, Kits.ARCHER);
-					e.setCancelled(true);
-					player.closeInventory();
-					player.setGameMode(GameMode.SURVIVAL);
+					if (e.getCurrentItem().getType().equals(kit.getTypeInv()))
+					{
+						kits.newKitpvpPlayer(player, kit);
+						e.setCancelled(true);
+						player.closeInventory();
+						player.setGameMode(GameMode.SURVIVAL);
+					}
 				}
 			}
 		}
 	}
-
 }

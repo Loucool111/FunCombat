@@ -22,6 +22,7 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
+	//TODO kit avec potions et kit avec enderpearls et idée : laser
 	
 	public static Plugin instance;
 	
