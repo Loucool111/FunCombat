@@ -30,7 +30,7 @@ public class SelectionCouleurListener implements Listener
 			
 			if (e.getCurrentItem() != null)
 			{
-				if(e.getCurrentItem().getType() != Material.AIR)
+				if(e.getCurrentItem().getType() != Material.AIR && e.getCurrentItem().hasItemMeta())
 				{
 					try
 					{

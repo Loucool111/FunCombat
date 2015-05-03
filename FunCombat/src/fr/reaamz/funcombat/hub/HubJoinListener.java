@@ -3,7 +3,6 @@ package fr.reaamz.funcombat.hub;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -17,19 +16,17 @@ public class HubJoinListener implements Listener
 	@EventHandler
 	public void onPlayerJoin(final PlayerJoinEvent event)
 	{
-		final Player player = event.getPlayer();
+		final FCPlayer fcplayer = new FCPlayer(event.getPlayer());
 		
-		final FCPlayer fcplayer = new FCPlayer(player);		
+		HubUtils.equipHubStuff(fcplayer.getPlayer());
 		
-		HubUtils.equipHubStuff(player);
+		fcplayer.getPlayer().getInventory().setArmorContents(null);
 		
-		player.getInventory().setArmorContents(null);
+		fcplayer.getPlayer().setGameMode(GameMode.CREATIVE);
 		
-		player.setGameMode(GameMode.CREATIVE);
+		Utils.sendCustomMessage(fcplayer.getPlayer(), ChatColor.AQUA + "Bienvenue sur " + Utils.PLUGIN_NAME + ", " + ChatColor.YELLOW + fcplayer.getPlayer().getName());
 		
-		Utils.sendCustomMessage(player, ChatColor.AQUA + "Bienvenue sur " + Utils.PLUGIN_NAME + ", " + ChatColor.YELLOW + player.getName());
-		
-		player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());	
+		fcplayer.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());	
 		
 		fcplayer.sendWelcomeMessages();
 				
