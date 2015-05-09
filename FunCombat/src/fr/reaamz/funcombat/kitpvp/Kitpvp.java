@@ -299,6 +299,19 @@ public class Kitpvp implements Listener
 											{
 												Utils.sendCustomMessage(player, "kill task");
 												Bukkit.getScheduler().cancelTask(kitSorciereTaskIds.get(player));
+												
+												for (ItemStack item : player.getInventory().getContents())
+												{
+													if (item != null)
+													{
+														if (item.getType().equals(Material.STICK))
+														{
+															ItemMeta meta = item.getItemMeta();
+															meta.setDisplayName(baseName);
+															item.setItemMeta(meta);
+														}
+													}
+												}
 											}
 											counter--;
 										}
