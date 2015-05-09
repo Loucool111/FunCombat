@@ -239,8 +239,8 @@ public class Kitpvp implements Listener
 	}
 	
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
-	//Stick du kit sorcière //TODO cooldown
+
+	//Stick du kit sorcière
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
@@ -264,60 +264,67 @@ public class Kitpvp implements Listener
 								
 								if (playerKit.containsKey(target))
 								{
-									target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 0));
-									target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,200,0));
-									target.damage(2, player);
-									target.playSound(target.getLocation(), Sound.FIZZ, 50F, 1F);
-									Utils.sendCustomMessage(target, ChatColor.RED + "Vous avez été touché par une sorcière !");
-									//add to cooldown and annuler le clic droit si pas fini de cooldown
-									
-									final String baseName = ChatColor.DARK_PURPLE + "Bâton de sorcière";
-									
-									int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(FunCombat.instance, new Runnable() 
+									if (!(kitSorciereTaskIds.containsKey(player)))
 									{
-										int counter = 20;
-										
-										@Override
-										public void run()
-										{
-											if (counter >= 0)
-											{
-												for (ItemStack item : player.getInventory().getContents())
-												{
-													if (item != null)
-													{
-														if (item.getType().equals(Material.STICK))
-														{
-															ItemMeta meta = item.getItemMeta();
-															meta.setDisplayName(baseName + ChatColor.AQUA + " (" + counter + ")");
-															item.setItemMeta(meta);
-														}
-													}
-												}
-											}
-											else
-											{
-												Utils.sendCustomMessage(player, "kill task");
-												Bukkit.getScheduler().cancelTask(kitSorciereTaskIds.get(player));
-												
-												for (ItemStack item : player.getInventory().getContents())
-												{
-													if (item != null)
-													{
-														if (item.getType().equals(Material.STICK))
-														{
-															ItemMeta meta = item.getItemMeta();
-															meta.setDisplayName(baseName);
-															item.setItemMeta(meta);
-														}
-													}
-												}
-											}
-											counter--;
-										}
-									}, 0L , 20L);
+										target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 0));
+										target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,200,0));
+										target.damage(2, player);
+										target.playSound(target.getLocation(), Sound.FIZZ, 50F, 1F);
+										Utils.sendCustomMessage(target, ChatColor.RED + "Vous avez été touché par une sorcière !");
 									
-									kitSorciereTaskIds.put(player, id);
+										final String baseName = ChatColor.DARK_PURPLE + "Bâton de sorcière";
+									
+										int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(FunCombat.instance, new Runnable() 
+										{
+											int counter = 20;
+										
+											@Override
+											public void run()
+											{
+												if (counter > 0)
+												{
+													for (ItemStack item : player.getInventory().getContents())
+													{
+														if (item != null)
+														{
+															if (item.getType().equals(Material.STICK))
+															{
+																ItemMeta meta = item.getItemMeta();
+																meta.setDisplayName(baseName + ChatColor.AQUA + " (" + counter + ")");
+																item.setItemMeta(meta);
+															}
+														}
+													}
+												}
+												else
+												{
+													Bukkit.getScheduler().cancelTask(kitSorciereTaskIds.get(player));
+													
+													kitSorciereTaskIds.remove(player);
+													
+													for (ItemStack item : player.getInventory().getContents())
+													{
+														if (item != null)
+														{
+															if (item.getType().equals(Material.STICK))
+															{
+																ItemMeta meta = item.getItemMeta();
+																meta.setDisplayName(baseName);
+																item.setItemMeta(meta);
+															}
+														}
+													}
+												}
+												counter--;
+											}
+										}, 0L , 20L);
+									
+										kitSorciereTaskIds.put(player, id);									
+									}
+									else
+									{
+										Utils.sendCustomMessage(player, ChatColor.RED + "Vous ne pouvez pas utiliser votre bâton pour le moment !");
+									}
 								}
 							}
 						}

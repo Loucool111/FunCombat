@@ -431,10 +431,11 @@ public class KitpvpKits
 			player.getInventory().addItem(rod);
 			player.getInventory().addItem(new ItemStack(Material.GOLDEN_CARROT, 64));
 			
-			for (int i = 0; i<= 6; i++)
+			for (int i = 0; i<= 5; i++)
 			{
 				player.getInventory().addItem(popo);
 			}
+			player.getInventory().addItem(new ItemStack(Material.ENDER_PEARL,16));
 		}
 	}
 	
