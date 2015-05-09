@@ -1,15 +1,25 @@
 package fr.reaamz.funcombat.kitpvp;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -31,6 +41,10 @@ public class Kitpvp implements Listener
 	private HashMap<Player, Score> ScoreNiv = Maps.newHashMap();
 	
 	private HashMap<Player, Scoreboard> scs = Maps.newHashMap();
+	
+	//---------------Kits Stuff----------------
+	private HashMap<Player, Integer> kitSorciereTaskIds = Maps.newHashMap();
+	//-----------------------------------------
 	
 	public Kitpvp()
 	{
@@ -222,5 +236,81 @@ public class Kitpvp implements Listener
 				}
 			}
 		}
+	}
+	
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	//Stick du kit sorcière //TODO cooldown
+	@EventHandler
+	public void onPlayerInteract(PlayerInteractEvent event)
+	{
+		final Player player = event.getPlayer();
+		
+		if (event.getAction().equals(Action.RIGHT_CLICK_AIR) && playerKit.containsKey(player))
+		{
+			if (playerKit.get(player).equals(Kits.SORCIERE.toStringKit()))
+			{
+				List<Entity> entList = player.getNearbyEntities(7, 7, 7);
+				
+				for (Entity ent : entList)
+				{
+					if (ent instanceof Player)
+					{
+						if (player.getInventory().getItemInHand() != null && player.getItemInHand().getType().equals(Material.STICK))
+						{
+							if (Utils.getTargetPlayer(player) != null)
+							{
+								Player target = Utils.getTargetPlayer(player);
+								
+								if (playerKit.containsKey(target))
+								{
+									target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 0));
+									target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,200,0));
+									target.damage(2, player);
+									target.playSound(target.getLocation(), Sound.FIZZ, 50F, 1F);
+									Utils.sendCustomMessage(target, ChatColor.RED + "Vous avez été touché par une sorcière !");
+									//add to cooldown and annuler le clic droit si pas fini de cooldown
+									
+									final String baseName = ChatColor.DARK_PURPLE + "Bâton de sorcière";
+									
+									int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(FunCombat.instance, new Runnable() 
+									{
+										int counter = 20;
+										
+										@Override
+										public void run()
+										{
+											if (counter >= 0)
+											{
+												for (ItemStack item : player.getInventory().getContents())
+												{
+													if (item != null)
+													{
+														if (item.getType().equals(Material.STICK))
+														{
+															ItemMeta meta = item.getItemMeta();
+															meta.setDisplayName(baseName + ChatColor.AQUA + " (" + counter + ")");
+															item.setItemMeta(meta);
+														}
+													}
+												}
+											}
+											else
+											{
+												Utils.sendCustomMessage(player, "kill task");
+												Bukkit.getScheduler().cancelTask(kitSorciereTaskIds.get(player));
+											}
+											counter--;
+										}
+									}, 0L , 20L);
+									
+									kitSorciereTaskIds.put(player, id);
+								}
+							}
+						}
+					}
+				}
+			}		
+		}		
 	}
 }

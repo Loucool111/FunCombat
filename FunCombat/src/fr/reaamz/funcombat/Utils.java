@@ -9,14 +9,41 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.util.Vector;
 
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 
 public class Utils 
 {
 	public static final String PLUGIN_NAME = "FunCombat";
+	
+	public enum InventoryNames
+	{
+		MC_CREATIVE("container.inventory"),
+		MC_SURVIVAL("container.crafting"),
+		
+		FC_MAINMENU(ChatColor.UNDERLINE + "Menu principal"),
+		FC_KITPVP(ChatColor.UNDERLINE + "Sélécteur de kit"),
+		FC_METAMORPH(ChatColor.UNDERLINE + "Sélécteur de Métamorphoses"),
+		FC_COLORS(ChatColor.UNDERLINE + "Choissisez votre couleur"),
+		FC_HATS(ChatColor.UNDERLINE + "Sélécteur de chapeaux"),
+		;
+		
+		private String name;
+		
+		private InventoryNames(String name)
+		{
+			this.name = name;
+		}
+
+		public String getName()
+		{
+			return this.name;
+		}
+	}
 	
 	public static void sendCustomMessageAllPlayers(String message)
 	{
@@ -106,28 +133,35 @@ public class Utils
 		return dColor;
 	}
 	
-	public enum InventoryNames
+	public static Player getTargetPlayer(Player player)
 	{
-		MC_CREATIVE("container.inventory"),
-		MC_SURVIVAL("container.crafting"),
-		
-		FC_MAINMENU(ChatColor.UNDERLINE + "Menu principal"),
-		FC_KITPVP(ChatColor.UNDERLINE + "Sélécteur de kit"),
-		FC_METAMORPH(ChatColor.UNDERLINE + "Sélécteur de Métamorphoses"),
-		FC_COLORS(ChatColor.UNDERLINE + "Choissisez votre couleur"),
-		FC_HATS(ChatColor.UNDERLINE + "Sélécteur de chapeaux"),
-		;
-		
-		private String name;
-		
-		private InventoryNames(String name)
+		return getTarget(player, player.getWorld().getPlayers());
+	}
+	
+	//Credits to "Njol" for this code : https://bukkit.org/threads/gettargetentity-something-like-this.59837/
+	private static <T extends Entity> T getTarget(final Entity entity, final Iterable<T> entities) 
+	{
+		if (entity == null)
 		{
-			this.name = name;
-		}
-
-		public String getName()
-		{
-			return this.name;
-		}
+			return null;
+	    }
+	        
+	    T target = null;
+	    
+	    final double seuil = 1.5;
+	        
+	    for (final T other : entities) 
+	    {
+	        final Vector n = other.getLocation().toVector().subtract(entity.getLocation().toVector());
+	            
+	         if (entity.getLocation().getDirection().normalize().crossProduct(n).lengthSquared() < seuil && n.normalize().dot(entity.getLocation().getDirection().normalize()) >= 0) 
+	         {
+	             if (target == null || target.getLocation().distanceSquared(entity.getLocation()) > other.getLocation().distanceSquared(entity.getLocation()))
+	             {
+	                 target = other;
+	             }
+	         }
+	     }
+	     return target;
 	}
 }

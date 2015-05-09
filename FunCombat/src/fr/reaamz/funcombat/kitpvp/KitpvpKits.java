@@ -61,7 +61,7 @@ public class KitpvpKits
 			{
 				for(ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);				
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);				
 				}
 				
 				player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
@@ -70,7 +70,7 @@ public class KitpvpKits
 			{
 				for(ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1);				
 				}
 				
@@ -82,7 +82,7 @@ public class KitpvpKits
 			{
 				for(ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,2);				
 				}
 				
@@ -94,7 +94,7 @@ public class KitpvpKits
 			{
 				for(ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,3);				
 				}
 				
@@ -106,7 +106,7 @@ public class KitpvpKits
 			{
 				for(ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,4);				
 				}
 				
@@ -130,7 +130,7 @@ public class KitpvpKits
 			{
 				for (ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 				}
 				
 				
@@ -140,7 +140,7 @@ public class KitpvpKits
 			{
 				for (ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 				}
 				
@@ -153,7 +153,7 @@ public class KitpvpKits
 			{
 				for (ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 				}
 				
@@ -166,7 +166,7 @@ public class KitpvpKits
 			{
 				for (ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
 				}
 				
@@ -179,7 +179,7 @@ public class KitpvpKits
 			{
 				for (ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 				}
 				
@@ -204,7 +204,7 @@ public class KitpvpKits
 			{
 				for (ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 				}
 				
 				
@@ -214,7 +214,7 @@ public class KitpvpKits
 			{
 				for (ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 				}
 				
@@ -227,7 +227,7 @@ public class KitpvpKits
 			{
 				for (ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 				}
 				
@@ -240,7 +240,7 @@ public class KitpvpKits
 			{
 				for (ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
 				}
 				
@@ -253,7 +253,7 @@ public class KitpvpKits
 			{
 				for (ItemStack arm : armor)
 				{
-					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 127);
+					arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 					arm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 				}
 				
@@ -409,23 +409,23 @@ public class KitpvpKits
 			
 			if (level >= 1 && level <= 4)
 			{
-				rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
+				rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
 			}
 			if (level >= 5 && level <= 9)
 			{
-				rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);	
+				rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);	
 			}
 			if (level >= 10 && level <= 19)
 			{
-				rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 7);
+				rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
 			}
 			if (level >= 20 && level <= 49)
 			{
-				rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 9);
+				rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);
 			}
 			if (level >= 50)
 			{
-				rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 15);
+				rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
 			}
 			
 			player.getInventory().addItem(rod);
