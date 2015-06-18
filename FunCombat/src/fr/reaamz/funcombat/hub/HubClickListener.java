@@ -1,34 +1,29 @@
 package fr.reaamz.funcombat.hub;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.Inventory;
 
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.mainmenu.MainMenuUtils;
-import fr.reaamz.funcombat.mainmenu.MainMenuVirtualInventory;
+import fr.reaamz.funcombat.virtualinventory.GenericVirtualInventory;
 
 public class HubClickListener implements Listener
 {	
 	@EventHandler
 	public void onPlayerInteract(final PlayerInteractEvent event)
-	{
-		MainMenuVirtualInventory MainMenuInstance = new MainMenuVirtualInventory();
-		
+	{		
 		if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 		{
 			if(!(event.getItem() == null))
 			{
 				if(event.getItem().equals(HubUtils.getMenuItem()))
-				{
-					Inventory inv = MainMenuInstance.createInventory(MainMenuUtils.getMainMenuItems());
-					
-					MainMenuInstance.showInventory(event.getPlayer(),inv);
+				{					
+					event.getPlayer().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_MAINMENU.getName(), 27, MainMenuUtils.getMainMenuItems()).getInventory());
 				}
 			}
 		}
@@ -37,17 +32,13 @@ public class HubClickListener implements Listener
 	@EventHandler
 	public void onInventoryClick(final InventoryClickEvent e)
 	{
-		MainMenuVirtualInventory MainMenuInstance = new MainMenuVirtualInventory();
-		
 		if (!(e.getCurrentItem() == null))
 		{
 			if (!(e.getCurrentItem().getType() == Material.AIR))
 			{
 				if(e.getCurrentItem().equals(HubUtils.getMenuItem()))
 				{
-					Inventory inv = MainMenuInstance.createInventory(MainMenuUtils.getMainMenuItems());
-						
-					MainMenuInstance.showInventory((Player)e.getWhoClicked(),inv);
+					e.getWhoClicked().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_MAINMENU.getName(), 27, MainMenuUtils.getMainMenuItems()).getInventory());
 						
 					e.setCancelled(true);
 				}

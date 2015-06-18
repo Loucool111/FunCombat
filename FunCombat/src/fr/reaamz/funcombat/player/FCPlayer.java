@@ -52,7 +52,7 @@ public class FCPlayer
 		BarAPI.setMessage(this.player, message);
 	}
 	
-	public void sentToServer(String serverName)	
+	public void sendToServer(String serverName)	
 	{
 		ByteArrayDataOutput out = ByteStreams.newDataOutput();
 		

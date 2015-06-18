@@ -139,7 +139,7 @@ public class Utils
 	}
 	
 	//Credits to "Njol" for this code : https://bukkit.org/threads/gettargetentity-something-like-this.59837/
-	private static <T extends Entity> T getTarget(final Entity entity, final Iterable<T> entities) 
+	private static <T extends Entity> T getTarget(final Entity entity, final Iterable<T> entities)
 	{
 		if (entity == null)
 		{
