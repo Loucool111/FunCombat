@@ -176,6 +176,11 @@ public class Kitpvp implements Listener
 		}
 	}
 	
+	private boolean checkScores(Player player, KitpvpKits.Kits kit)
+	{
+		return KitLevels.get(player).get(kit) == 5||KitLevels.get(player).get(kit) == 10||KitLevels.get(player).get(kit) == 20||KitLevels.get(player).get(kit) == 50;
+	}
+	
 	@EventHandler
 	public void onEntityDeath(final EntityDeathEvent ede)
 	{
@@ -200,7 +205,7 @@ public class Kitpvp implements Listener
 							
 							ScoreNiv.get(killer).setScore(KitpvpUtils.getLevelFromKills(killer, KitLevels.get(killer).get(kit)));
 							
-							if (KitLevels.get(killer).get(kit) == 5||KitLevels.get(killer).get(kit) == 10||KitLevels.get(killer).get(kit) == 20||KitLevels.get(killer).get(kit) == 50)
+							if (checkScores(killer, kit))
 							{
 								Utils.ClearInventoryAndPotionEffects(killer);
 								KitpvpKits.equipKitArmor(killer, KitLevels.get(killer).get(kit), kit);
@@ -224,7 +229,7 @@ public class Kitpvp implements Listener
 								
 								ScoreNiv.get(victim).setScore(KitpvpUtils.getLevelFromKills(victim, KitLevels.get(victim).get(kit)));
 							
-								if (KitLevels.get(victim).get(kit) == 5||KitLevels.get(victim).get(kit) == 10||KitLevels.get(victim).get(kit) == 20||KitLevels.get(victim).get(kit) == 50)
+								if (checkScores(victim, kit))
 								{
 									Utils.ClearInventoryAndPotionEffects(victim);
 									KitpvpKits.equipKitArmor(victim, KitLevels.get(victim).get(kit), kit);

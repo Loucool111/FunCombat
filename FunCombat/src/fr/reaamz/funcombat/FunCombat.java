@@ -22,7 +22,6 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
-	//TODO optimisation au niveau du give des kits (1,5,10,20,50)
 	
 	public static Plugin instance;
 	
