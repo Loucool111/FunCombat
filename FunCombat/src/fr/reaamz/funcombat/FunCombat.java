@@ -12,6 +12,7 @@ import fr.reaamz.funcombat.hats.HatsMenuListener;
 import fr.reaamz.funcombat.hub.HubClickListener;
 import fr.reaamz.funcombat.hub.HubJoinListener;
 import fr.reaamz.funcombat.hub.HubMotdListener;
+import fr.reaamz.funcombat.jump.JumpListener;
 import fr.reaamz.funcombat.kitpvp.KitpvpListener;
 import fr.reaamz.funcombat.mainmenu.MainMenuListener;
 import fr.reaamz.funcombat.metamorphoses.MetamorphListener;
@@ -65,6 +66,7 @@ public class FunCombat extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new KitpvpListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HubMotdListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HatsMenuListener(), this);
+		Bukkit.getPluginManager().registerEvents(new JumpListener(), this);
 
 		//Grades listeners
 		Bukkit.getPluginManager().registerEvents(new GradesJoinListener(), this);

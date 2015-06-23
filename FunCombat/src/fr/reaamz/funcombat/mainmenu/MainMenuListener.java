@@ -1,6 +1,5 @@
 package fr.reaamz.funcombat.mainmenu;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,6 +8,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.hats.HatsUitls;
+import fr.reaamz.funcombat.jump.JumpUtils;
 import fr.reaamz.funcombat.kitpvp.KitpvpUtils;
 import fr.reaamz.funcombat.metamorphoses.MetamorphUtils;
 import fr.reaamz.funcombat.player.FCPlayer;
@@ -52,7 +52,7 @@ public class MainMenuListener implements Listener
 						
 				if (e.getCurrentItem().getType() == Material.FEATHER)
 				{
-					player.teleport(new Location(player.getWorld(),-265,100,361));	
+					e.getWhoClicked().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_JUMP.getName(), 27, JumpUtils.getMenuItems()).getInventory());
 				}
 				
 				if (e.getCurrentItem().getType() == Material.CHAINMAIL_HELMET)

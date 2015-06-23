@@ -30,6 +30,8 @@ public class Utils
 		FC_METAMORPH(ChatColor.UNDERLINE + "Sélécteur de Métamorphoses"),
 		FC_COLORS(ChatColor.UNDERLINE + "Choissisez votre couleur"),
 		FC_HATS(ChatColor.UNDERLINE + "Sélécteur de chapeaux"),
+		FC_JUMP(ChatColor.UNDERLINE + "Sélécteur de Jumps"),
+		FC_JUMPSCORES(ChatColor.UNDERLINE + "Scores des Jumps"),
 		;
 		
 		private String name;

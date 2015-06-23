@@ -5,9 +5,10 @@ import net.minecraft.server.v1_8_R1.EnumTitleAction;
 import net.minecraft.server.v1_8_R1.IChatBaseComponent;
 import net.minecraft.server.v1_8_R1.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R1.PlayerConnection;
+
+import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.ChatColor;
 
 public class Title 
 {

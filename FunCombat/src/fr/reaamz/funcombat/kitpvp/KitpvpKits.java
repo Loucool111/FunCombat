@@ -40,6 +40,12 @@ public class KitpvpKits
 			return this.type;
 		}
 		
+		@Override
+		public String toString()
+		{
+			return this.type;
+		}
+		
 		public Material getTypeInv()
 		{
 			return this.itemInv;
