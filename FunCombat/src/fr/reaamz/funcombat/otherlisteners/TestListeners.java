@@ -3,6 +3,7 @@ package fr.reaamz.funcombat.otherlisteners;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,7 +18,6 @@ import fr.reaamz.funcombat.FunCombat;
 
 public class TestListeners implements Listener
 {
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerUse(PlayerInteractEvent event)	
 	{
@@ -25,7 +25,8 @@ public class TestListeners implements Listener
 		{
 			if(event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getType() == Material.LEVER)
 			{
-				Block block = event.getPlayer().getTargetBlock(null, 30);
+				Block block = event.getPlayer().getTargetBlock(new HashSet<Material>(), 30);
+				
 				if (event.getPlayer().getInventory().contains(Material.TNT))
 				{
 					block.getWorld().spawn(block.getLocation().add(1.5, 1.5, 1.5), TNTPrimed.class);
