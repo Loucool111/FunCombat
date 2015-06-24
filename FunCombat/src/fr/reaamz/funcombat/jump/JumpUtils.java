@@ -1,6 +1,5 @@
 package fr.reaamz.funcombat.jump;
 
-import java.io.File;
 import java.util.Arrays;
 
 import org.bukkit.ChatColor;
@@ -8,12 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.reaamz.funcombat.FunCombat;
-
 public class JumpUtils
-{
-	public static final File scoreFile = new File(FunCombat.instance.getDataFolder() + "\\JumpScore\\JumpScore.txt");
-	
+{	
 	public static ItemStack[] getMenuItems()
 	{
 		//3 paper et un book

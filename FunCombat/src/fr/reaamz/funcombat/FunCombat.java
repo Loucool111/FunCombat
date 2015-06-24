@@ -1,11 +1,14 @@
 package fr.reaamz.funcombat;
 
+import java.sql.SQLException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.reaamz.funcombat.command.HubCommandExecutor;
+import fr.reaamz.funcombat.db.MySQLManager;
 import fr.reaamz.funcombat.grades.GradesChatListener;
 import fr.reaamz.funcombat.grades.GradesJoinListener;
 import fr.reaamz.funcombat.hats.HatsMenuListener;
@@ -26,11 +29,25 @@ public class FunCombat extends JavaPlugin
 	
 	public static Plugin instance;
 	
+	public MySQLManager mysql = new MySQLManager();
+	
 	@Override
 	public void onEnable()
 	{
 		//définition de l'instance du plugin
 		instance = this;
+		
+		//setup de la database
+		try
+		{
+			mysql.setupDatabase();
+		}
+		catch (ClassNotFoundException | SQLException e)
+		{
+			Utils.logInfo("=========================DATABASE ERROR==========================");
+			Utils.logInfo(e.toString());
+			Utils.logInfo("=================================================================");			
+		}
 		
 		//init du command executor
 		HubCommandExecutor.init();
@@ -50,6 +67,16 @@ public class FunCombat extends JavaPlugin
 	{
 		//Sauvegarde de la config
 		saveConfig();
+		
+		//Fermeture de la database
+		try
+		{
+			mysql.closeDatabase();
+		}
+		catch (SQLException e)
+		{			
+			e.printStackTrace();
+		}
 		
 		//message de fin
 		Utils.logInfo("Savegarde de " + Utils.PLUGIN_NAME);
