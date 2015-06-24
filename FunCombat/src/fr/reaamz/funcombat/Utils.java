@@ -1,9 +1,6 @@
 package fr.reaamz.funcombat;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.sql.SQLException;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -13,8 +10,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.Vector;
-
-import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 
 public class Utils 
 {
@@ -105,34 +100,15 @@ public class Utils
     }
 	
 	public static DyeColor refreshColor(Player player)
-	{
-		DyeColor dColor = DyeColor.WHITE;
-		
-		File file = new File(FunCombat.instance.getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
-		
-		BufferedReader br = null;
-		
-		if (file.exists())
+	{		
+		try
 		{
-			try
-			{
-				String currentLine;
-			
-				br = new BufferedReader(new FileReader(file));
-			
-				currentLine = br.readLine();
-				
-				if(!(currentLine == null))
-					dColor = SelectionCouleurUtils.getDyeColorFromString(currentLine);
-			
-				br.close();
-			}
-			catch (IOException e1)
-			{
-				e1.printStackTrace();
-			}
+			return FunCombat.mysql.getColor(player);
 		}
-		return dColor;
+		catch (SQLException e)
+		{
+			return null;
+		}
 	}
 	
 	public static Player getTargetPlayer(Player player)

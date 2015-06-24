@@ -22,3 +22,7 @@ commands:
  getmenu:
   description: test
   usage: /<command>
+
+ grade:
+  description: changement de grade
+  usage: /<command>

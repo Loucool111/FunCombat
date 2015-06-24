@@ -27,13 +27,13 @@ public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
 	//TODO database
-	//TODO fix les titles et les tabtitles
 	//TODO finir jumpscore
-	//TODO couleur dans database et grade dans database
+	//TODO grade dans database //TODO Finir la command /grade qui marche pas, obj = /grade set <playername> <gradename>
+	//TODO fix la couleur des banières dans hats
 	
 	public static Plugin instance;
 	
-	public MySQLManager mysql = new MySQLManager();
+	public static MySQLManager mysql = new MySQLManager();
 	
 	@Override
 	public void onEnable()

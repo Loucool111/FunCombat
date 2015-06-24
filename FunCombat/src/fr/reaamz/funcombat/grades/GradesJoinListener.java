@@ -1,12 +1,8 @@
 package fr.reaamz.funcombat.grades;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
+import java.sql.SQLException;
 
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,7 +11,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.reaamz.funcombat.FunCombat;
-import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.player.FCPlayer;
 
 public class GradesJoinListener implements Listener 
@@ -25,64 +20,48 @@ public class GradesJoinListener implements Listener
 	{
 		Player player = event.getPlayer();
 		
-		File file = new File(FunCombat.instance.getDataFolder()+"\\Grades\\Grades.yml");
-		FileConfiguration conf = YamlConfiguration.loadConfiguration(file);
-		
-		List<String> ADMIN = conf.getStringList("ADMIN");
-		List<String> DEV = conf.getStringList("DEV");
-		List<String> MODO = conf.getStringList("MODO");
-		List<String> JOUEUR = conf.getStringList("JOUEUR");
-		
-		if (!(ADMIN.contains(player.getUniqueId().toString()) || DEV.contains(player.getUniqueId().toString()) || MODO.contains(player.getUniqueId().toString()) || JOUEUR.contains(player.getUniqueId().toString())))
-		{
-			JOUEUR.add(player.getUniqueId().toString());
-			conf.set("JOUEUR", JOUEUR);
-			
-			Utils.logInfo("added to player");
-		}
-		
 		try
 		{
-			conf.save(file);
+			if (FunCombat.mysql.getGrade(player) == null)
+			{
+				FunCombat.mysql.updateGrade(player, GradeType.JOUEUR);
+			}
+			
+			if (FunCombat.mysql.getGrade(player).equals(GradeType.ADMIN))
+			{
+				player.setDisplayName(ChatColor.RED + "[ADMIN] " + player.getName() + ChatColor.RESET);
+				player.setCustomName(ChatColor.RED + "[ADMIN] " + player.getName() + ChatColor.RESET);
+				player.setPlayerListName(ChatColor.RED + "[ADMIN] " + player.getName());
+			}
+			if (FunCombat.mysql.getGrade(player).equals(GradeType.DEV))
+			{
+				player.setDisplayName(ChatColor.GOLD + "[DEV] " + player.getName() + ChatColor.RESET);
+				player.setCustomName(ChatColor.GOLD + "[DEV] " + player.getName() + ChatColor.RESET);
+				player.setPlayerListName(ChatColor.GOLD + "[DEV] " + player.getName());
+			}
+			if (FunCombat.mysql.getGrade(player).equals(GradeType.MODO))
+			{
+				player.setDisplayName(ChatColor.AQUA + "[MODO] " + player.getName() + ChatColor.RESET);
+				player.setCustomName(ChatColor.AQUA + "[MODO] " + player.getName() + ChatColor.RESET);
+				player.setPlayerListName(ChatColor.AQUA + "[MODO] " + player.getName());
+			}
+			if (FunCombat.mysql.getGrade(player).equals(GradeType.JOUEUR))
+			{
+				player.setDisplayName(ChatColor.GRAY + player.getName() + ChatColor.RESET + ChatColor.GRAY);
+				player.setCustomName(ChatColor.GRAY  + player.getName() + ChatColor.RESET + ChatColor.GRAY);
+				player.setPlayerListName(ChatColor.GRAY + player.getName());
+			}
+			
+			if (FunCombat.mysql.getGrade(player).equals(GradeType.JOUEUR))
+			{
+				event.setJoinMessage(player.getDisplayName() + ChatColor.GRAY + "" + ChatColor.ITALIC + " joined the game");
+			}
+			else
+			{
+				event.setJoinMessage(player.getDisplayName() + ChatColor.WHITE + "" + ChatColor.ITALIC + " joined the game");
+			}
 		}
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-		
-		if (ADMIN.contains(player.getUniqueId().toString()))
-		{
-			player.setDisplayName(ChatColor.RED + "[ADMIN] " + player.getName() + ChatColor.RESET);
-			player.setCustomName(ChatColor.RED + "[ADMIN] " + player.getName() + ChatColor.RESET);
-			player.setPlayerListName(ChatColor.RED + "[ADMIN] " + player.getName());
-		}
-		if (DEV.contains(player.getUniqueId().toString()))
-		{
-			player.setDisplayName(ChatColor.GOLD + "[DEV] " + player.getName() + ChatColor.RESET);
-			player.setCustomName(ChatColor.GOLD + "[DEV] " + player.getName() + ChatColor.RESET);
-			player.setPlayerListName(ChatColor.GOLD + "[DEV] " + player.getName());
-		}
-		if (MODO.contains(player.getUniqueId().toString()))
-		{
-			player.setDisplayName(ChatColor.AQUA + "[MODO] " + player.getName() + ChatColor.RESET);
-			player.setCustomName(ChatColor.AQUA + "[MODO] " + player.getName() + ChatColor.RESET);
-			player.setPlayerListName(ChatColor.AQUA + "[MODO] " + player.getName());
-		}
-		if (JOUEUR.contains(player.getUniqueId().toString()))
-		{
-			player.setDisplayName(ChatColor.GRAY + player.getName() + ChatColor.RESET + ChatColor.GRAY);
-			player.setCustomName(ChatColor.GRAY  + player.getName() + ChatColor.RESET + ChatColor.GRAY);
-			player.setPlayerListName(ChatColor.GRAY + player.getName());
-		}
-		
-		if (JOUEUR.contains(player.getUniqueId().toString()))
-		{
-			event.setJoinMessage(player.getDisplayName() + ChatColor.GRAY + "" + ChatColor.ITALIC + " joined the game");
-		}
-		else
-		{
-			event.setJoinMessage(player.getDisplayName() + ChatColor.WHITE + "" + ChatColor.ITALIC + " joined the game");
-		}
+		catch (SQLException e1){ e1.printStackTrace(); }		
 	}
 	
 	@EventHandler

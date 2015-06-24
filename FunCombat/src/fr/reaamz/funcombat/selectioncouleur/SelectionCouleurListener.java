@@ -1,9 +1,5 @@
 package fr.reaamz.funcombat.selectioncouleur;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -115,40 +111,14 @@ public class SelectionCouleurListener implements Listener
 						}
 						
 						if(!e.getCurrentItem().getItemMeta().getDisplayName().contains("Menu principal"))
-						{
-							//Variables nécessaires au système
-							File dossier = new File(FunCombat.instance.getDataFolder() + "\\Couleurs\\");
-							File color = new File(FunCombat.instance.getDataFolder() + "\\Couleurs\\" + player.getUniqueId().toString() + ".txt");
-							FileWriter out = null;
-						
-							//création du fichier avec contenu
-							try 
-							{	
-								if (!(dossier.exists()))
-								{
-									dossier.mkdir();
-								}
-								
-								if (!(color.exists()))
-								{
-									color.createNewFile();
-								}
-								
-								out = new FileWriter(color);
-							
-								if (!(dColor == null))
-								{													
-									out.write(dColor.toString().toLowerCase());
-									Utils.sendCustomMessage(player, ChatColor.GREEN + "Votre couleur a bien été modifiée : " + dColor.toString().toLowerCase());
-									player.closeInventory();
-								}
-							
-								out.close();
-							}
-							catch (IOException e2) 
-							{
-								e2.printStackTrace();
-							}
+						{							
+							//insertion des données dans la database
+							if (dColor != null)
+							{													
+								FunCombat.mysql.updateDyeColor(player, dColor);
+								Utils.sendCustomMessage(player, ChatColor.GREEN + "Votre couleur a bien été modifiée : " + dColor.toString().toLowerCase());
+								player.closeInventory();
+							}							
 						}
 					}
 					catch (Exception e1){}					
