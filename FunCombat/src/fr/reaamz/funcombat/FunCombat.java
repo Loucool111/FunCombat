@@ -26,6 +26,10 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
+	//TODO database
+	//TODO fix les titles et les tabtitles
+	//TODO finir jumpscore
+	//TODO couleur dans database et grade dans database
 	
 	public static Plugin instance;
 	
