@@ -1,6 +1,7 @@
 package fr.reaamz.funcombat.command;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -23,16 +24,14 @@ public class GradeCommandExecutor implements CommandExecutor
 			
 			if (cmd.getName().equals("grade"))
 			{
-				if (args.length < 1) return false;
+				if (args.length < 3) return false;
 				
 				if (args[0].equals("set"))
 				{
-					if (args.length < 2) return false;
-					
 					try
 					{
-						FunCombat.mysql.updateGrade(player, GradeUtils.getGradeFromString(args[1]));
-						Utils.sendCustomMessage(player, "Le Grade de " + ChatColor.AQUA + player.getName() + " à été modifié en " + args[1]);
+						FunCombat.database.updateGrade(UUID.fromString(args[1]), GradeUtils.getGradeFromString(args[2]));
+						Utils.sendCustomMessage(player, "Le Grade de " + ChatColor.AQUA + "'" + args[1] + "'" + ChatColor.WHITE + " à été modifié en " + ChatColor.AQUA + args[2]);
 					}
 					catch (SQLException e) { e.printStackTrace(); }
 					
@@ -40,16 +39,20 @@ public class GradeCommandExecutor implements CommandExecutor
 				}
 				if (args[0].equals("get"))
 				{
-					if (args.length < 2) return false;
-					
 					try
 					{
-						Utils.sendCustomMessage(player, "Le Grade de " + ChatColor.AQUA + player.getName() + " est " + FunCombat.mysql.getGrade(player));
+						Utils.sendCustomMessage(player, "Le Grade de " + ChatColor.AQUA + "'" + args[1] + "'" + ChatColor.WHITE + " est " + ChatColor.AQUA + FunCombat.database.getGrade(UUID.fromString(args[1])));
 					}
 					catch (SQLException e) { e.printStackTrace(); }
 					
 					return true;
 				}
+			}
+			
+			if (cmd.getName().equals("uuid"))
+			{
+				Utils.sendCustomMessage(player, player.getUniqueId().toString());
+				return true;
 			}
 		}
 		return false;

@@ -65,7 +65,7 @@ public class SelectionCouleurListener implements Listener
 							dColor = DyeColor.CYAN;
 						}
 					
-						if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GRAY + "Gris Clair"))
+						if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GRAY + "Gris claire"))
 						{
 							dColor = DyeColor.SILVER;
 						}
@@ -115,7 +115,7 @@ public class SelectionCouleurListener implements Listener
 							//insertion des données dans la database
 							if (dColor != null)
 							{													
-								FunCombat.mysql.updateDyeColor(player, dColor);
+								FunCombat.database.updateDyeColor(player.getUniqueId(), dColor);
 								Utils.sendCustomMessage(player, ChatColor.GREEN + "Votre couleur a bien été modifiée : " + dColor.toString().toLowerCase());
 								player.closeInventory();
 							}							

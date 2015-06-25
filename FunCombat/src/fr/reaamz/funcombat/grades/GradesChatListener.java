@@ -23,7 +23,7 @@ public class GradesChatListener implements Listener
 		
 		try
 		{
-			if (FunCombat.mysql.getGrade(player) != GradeType.JOUEUR)
+			if (FunCombat.database.getGrade(player.getUniqueId()) != GradeType.JOUEUR)
 				message = ChatColor.translateAlternateColorCodes('$', message);
 		}
 		catch (SQLException e){}

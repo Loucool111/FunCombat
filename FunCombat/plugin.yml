@@ -25,4 +25,8 @@ commands:
 
  grade:
   description: changement de grade
+  usage: /<command> [set;get] <UUID> <GRADE_NAME>
+
+ uuid:
+  description: uuid
   usage: /<command>

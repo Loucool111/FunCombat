@@ -22,37 +22,37 @@ public class GradesJoinListener implements Listener
 		
 		try
 		{
-			if (FunCombat.mysql.getGrade(player) == null)
+			if (FunCombat.database.getGrade(player.getUniqueId()) == null)
 			{
-				FunCombat.mysql.updateGrade(player, GradeType.JOUEUR);
+				FunCombat.database.updateGrade(player.getUniqueId(), GradeType.JOUEUR);
 			}
 			
-			if (FunCombat.mysql.getGrade(player).equals(GradeType.ADMIN))
+			if (FunCombat.database.getGrade(player.getUniqueId()).equals(GradeType.ADMIN))
 			{
 				player.setDisplayName(ChatColor.RED + "[ADMIN] " + player.getName() + ChatColor.RESET);
 				player.setCustomName(ChatColor.RED + "[ADMIN] " + player.getName() + ChatColor.RESET);
 				player.setPlayerListName(ChatColor.RED + "[ADMIN] " + player.getName());
 			}
-			if (FunCombat.mysql.getGrade(player).equals(GradeType.DEV))
+			if (FunCombat.database.getGrade(player.getUniqueId()).equals(GradeType.DEV))
 			{
 				player.setDisplayName(ChatColor.GOLD + "[DEV] " + player.getName() + ChatColor.RESET);
 				player.setCustomName(ChatColor.GOLD + "[DEV] " + player.getName() + ChatColor.RESET);
 				player.setPlayerListName(ChatColor.GOLD + "[DEV] " + player.getName());
 			}
-			if (FunCombat.mysql.getGrade(player).equals(GradeType.MODO))
+			if (FunCombat.database.getGrade(player.getUniqueId()).equals(GradeType.MODO))
 			{
 				player.setDisplayName(ChatColor.AQUA + "[MODO] " + player.getName() + ChatColor.RESET);
 				player.setCustomName(ChatColor.AQUA + "[MODO] " + player.getName() + ChatColor.RESET);
 				player.setPlayerListName(ChatColor.AQUA + "[MODO] " + player.getName());
 			}
-			if (FunCombat.mysql.getGrade(player).equals(GradeType.JOUEUR))
+			if (FunCombat.database.getGrade(player.getUniqueId()).equals(GradeType.JOUEUR))
 			{
 				player.setDisplayName(ChatColor.GRAY + player.getName() + ChatColor.RESET + ChatColor.GRAY);
 				player.setCustomName(ChatColor.GRAY  + player.getName() + ChatColor.RESET + ChatColor.GRAY);
 				player.setPlayerListName(ChatColor.GRAY + player.getName());
 			}
 			
-			if (FunCombat.mysql.getGrade(player).equals(GradeType.JOUEUR))
+			if (FunCombat.database.getGrade(player.getUniqueId()).equals(GradeType.JOUEUR))
 			{
 				event.setJoinMessage(player.getDisplayName() + ChatColor.GRAY + "" + ChatColor.ITALIC + " joined the game");
 			}

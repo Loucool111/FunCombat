@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.reaamz.funcombat.command.GradeCommandExecutor;
 import fr.reaamz.funcombat.command.HubCommandExecutor;
 import fr.reaamz.funcombat.db.MySQLManager;
 import fr.reaamz.funcombat.grades.GradesChatListener;
@@ -26,14 +27,12 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
-	//TODO database
 	//TODO finir jumpscore
-	//TODO grade dans database //TODO Finir la command /grade qui marche pas, obj = /grade set <playername> <gradename>
 	//TODO fix la couleur des banières dans hats
 	
 	public static Plugin instance;
 	
-	public static MySQLManager mysql = new MySQLManager();
+	public static MySQLManager database = new MySQLManager();
 	
 	@Override
 	public void onEnable()
@@ -44,13 +43,14 @@ public class FunCombat extends JavaPlugin
 		//setup de la database
 		try
 		{
-			mysql.setupDatabase();
+			database.connectDatabase();
+			database.setupTables();
 		}
 		catch (ClassNotFoundException | SQLException e)
 		{
-			Utils.logInfo("=========================DATABASE ERROR==========================");
+			Utils.logInfo("====================DATABASE CONNECTION ERROR=====================");
 			Utils.logInfo(e.toString());
-			Utils.logInfo("=================================================================");			
+			Utils.logInfo("==================================================================");			
 		}
 		
 		//init du command executor
@@ -75,7 +75,7 @@ public class FunCombat extends JavaPlugin
 		//Fermeture de la database
 		try
 		{
-			mysql.closeDatabase();
+			database.closeDatabase();
 		}
 		catch (SQLException e)
 		{			
@@ -124,5 +124,12 @@ public class FunCombat extends JavaPlugin
 		getCommand("gethub").setExecutor(hubExecutor);
 		getCommand("resethubdata").setExecutor(hubExecutor);
 		getCommand("getmenu").setExecutor(hubExecutor);
+		
+		//instance du grade exector
+		CommandExecutor gradeExecutor = new GradeCommandExecutor();
+		
+		//définition des commandes
+		getCommand("grade").setExecutor(gradeExecutor);
+		getCommand("uuid").setExecutor(gradeExecutor);
 	}
 }

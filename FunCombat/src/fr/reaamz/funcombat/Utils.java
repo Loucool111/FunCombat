@@ -103,7 +103,7 @@ public class Utils
 	{		
 		try
 		{
-			return FunCombat.mysql.getColor(player);
+			return FunCombat.database.getColor(player.getUniqueId());
 		}
 		catch (SQLException e)
 		{
@@ -141,5 +141,26 @@ public class Utils
 	         }
 	     }
 	     return target;
+	}
+	
+	public static byte convertColor(byte b)
+	{
+		if (b == (byte) 0) return 15;
+		if (b == (byte) 1) return 14;
+		if (b == (byte) 2) return 13;
+		if (b == (byte) 3) return 12;
+		if (b == (byte) 4) return 11;
+		if (b == (byte) 5) return 10;
+		if (b == (byte) 6) return 9;
+		if (b == (byte) 7) return 8;
+		if (b == (byte) 8) return 7;
+		if (b == (byte) 9) return 6;
+		if (b == (byte) 10) return 5;
+		if (b == (byte) 11) return 4;
+		if (b == (byte) 12) return 3;
+		if (b == (byte) 13) return 2;
+		if (b == (byte) 14) return 1;
+		if (b == (byte) 15) return 0;
+		else return (byte) 0;
 	}
 }

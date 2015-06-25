@@ -36,7 +36,7 @@ public class HatsMenuListener implements Listener
 						{
 							dColor = Utils.refreshColor(player);
 							Banner banner = new Banner(Material.BANNER);
-							banner.setData(dColor.getData());
+							banner.setData(Utils.convertColor(dColor.getData()));
 							player.getInventory().setHelmet(banner.toItemStack(1));
 						}
 						else if (type.getType() == Material.WOOL)
