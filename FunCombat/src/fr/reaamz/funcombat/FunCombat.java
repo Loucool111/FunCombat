@@ -28,7 +28,7 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
-	//TODO finir jumpscore (faire un enum JumpNames)
+	//TODO finir jumpscore
 	
 	public static Plugin instance;
 	
