@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.reaamz.funcombat.command.GradeCommandExecutor;
 import fr.reaamz.funcombat.command.HubCommandExecutor;
+import fr.reaamz.funcombat.command.JumpCommandExecutor;
 import fr.reaamz.funcombat.db.MySQLManager;
 import fr.reaamz.funcombat.grades.GradesChatListener;
 import fr.reaamz.funcombat.grades.GradesJoinListener;
@@ -130,5 +131,10 @@ public class FunCombat extends JavaPlugin
 		//définition des commandes
 		getCommand("grade").setExecutor(gradeExecutor);
 		getCommand("uuid").setExecutor(gradeExecutor);
+		
+		CommandExecutor jumpExecutor = new JumpCommandExecutor();
+		
+		
+		getCommand("setjump").setExecutor(jumpExecutor);
 	}
 }
