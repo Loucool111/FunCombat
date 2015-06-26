@@ -19,7 +19,7 @@ public class JumpScore
 		ItemMeta score1timemeta = score1time.getItemMeta();
 		
 		score1timemeta.setDisplayName(ChatColor.YELLOW + "Temps du Jump #1");
-		score1timemeta.setLore(getTime("test"));
+		score1timemeta.setLore(getTime("jump1"));
 		
 		score1time.setItemMeta(score1timemeta);
 		
@@ -27,7 +27,7 @@ public class JumpScore
 		ItemMeta score1tentmeta = score1tent.getItemMeta();
 		
 		score1tentmeta.setDisplayName(ChatColor.YELLOW + "Tentatives du Jump #1");
-		score1tentmeta.setLore(Arrays.asList(ChatColor.WHITE + ""));
+		score1tentmeta.setLore(getTent("jump1"));
 		
 		score1tent.setItemMeta(score1tentmeta);
 		
@@ -82,9 +82,15 @@ public class JumpScore
 	private static List<String> getTime(String jumpname)
 	{
 		//get info from database
-		
-		
+				
 		return Arrays.asList(ChatColor.WHITE + jumpname);
 		
+	}
+	
+	private static List<String> getTent(String jumpname)
+	{
+		//get info from database
+		
+		return Arrays.asList(ChatColor.WHITE + jumpname);
 	}
 }

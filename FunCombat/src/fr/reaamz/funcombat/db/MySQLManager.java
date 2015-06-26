@@ -30,6 +30,10 @@ public class MySQLManager
 		state.executeUpdate("CREATE TABLE IF NOT EXISTS `tColor` (`UUID` varchar(64), `COLOR` varchar(16))");
 		state.executeUpdate("CREATE TABLE IF NOT EXISTS `tGrades` (`UUID` varchar(64), `GRADE` varchar(16))");
 		
+		state.executeUpdate("CREATE TABLE IF NOT EXISTS `tJump1` (`UUID` varchar(64), `TENT` varchar(6), `BESTTIME` varchar(10), `LASTTIME` varchar(10))");
+		state.executeUpdate("CREATE TABLE IF NOT EXISTS `tJump2` (`UUID` varchar(64), `TENT` varchar(6), `BESTTIME` varchar(10), `LASTTIME` varchar(10))");
+		state.executeUpdate("CREATE TABLE IF NOT EXISTS `tJump3` (`UUID` varchar(64), `TENT` varchar(6), `BESTTIME` varchar(10), `LASTTIME` varchar(10))");
+		
 		state.close();
 	}
 	
@@ -102,5 +106,33 @@ public class MySQLManager
 		String grade = res.getString("GRADE");		
 		state.close();
 		return GradeUtils.getGradeFromString(grade);
+	}
+	
+	public void updateTime(String jumpname, UUID uuid, int besttime, int lasttime)
+	{
+		
+	}
+	
+	public String getBestTime(String jumpname, UUID uuid) throws SQLException
+	{
+		Statement state = this.db.getConnection().createStatement();
+		
+		ResultSet res;
+		
+		if (jumpname.equals("jump1"))
+			res = state.executeQuery("SELECT * FROM `tJump1` WHERE `UUID`='" + uuid + "'");
+		else if (jumpname.equals("jump2"))
+			res = state.executeQuery("SELECT * FROM `tJump1` WHERE `UUID`='" + uuid + "'");
+		else 
+			res = state.executeQuery("SELECT * FROM `tJump1` WHERE `UUID`='" + uuid + "'");
+		
+		String besttime = res.getString("BESTTIME");
+		state.close();
+		return besttime;
+	}
+	
+	public String getLastTime(String jumpname, UUID uuid)
+	{
+		return "";
 	}
 }
