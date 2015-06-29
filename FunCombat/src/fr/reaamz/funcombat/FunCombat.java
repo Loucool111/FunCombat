@@ -29,6 +29,7 @@ public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
 	//TODO finir jumpscore
+	//TODO try les partys
 	
 	public static Plugin instance;
 	
