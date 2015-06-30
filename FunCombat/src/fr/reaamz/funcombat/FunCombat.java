@@ -17,6 +17,7 @@ import fr.reaamz.funcombat.hats.HatsMenuListener;
 import fr.reaamz.funcombat.hub.HubClickListener;
 import fr.reaamz.funcombat.hub.HubJoinListener;
 import fr.reaamz.funcombat.hub.HubMotdListener;
+import fr.reaamz.funcombat.jump.JumpDoneListener;
 import fr.reaamz.funcombat.jump.JumpListener;
 import fr.reaamz.funcombat.kitpvp.KitpvpListener;
 import fr.reaamz.funcombat.mainmenu.MainMenuListener;
@@ -29,7 +30,8 @@ public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
 	//TODO finir jumpscore
-	//TODO try les partys
+	//TODO database table avec des truc random tmtc
+	//FIX LE TRUC DES COORS DANS tJumpLoc...
 	
 	public static Plugin instance;
 	
@@ -99,6 +101,7 @@ public class FunCombat extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new HubMotdListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HatsMenuListener(), this);
 		Bukkit.getPluginManager().registerEvents(new JumpListener(), this);
+		Bukkit.getPluginManager().registerEvents(new JumpDoneListener(), this);
 
 		//Grades listeners
 		Bukkit.getPluginManager().registerEvents(new GradesJoinListener(), this);

@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.TNTPrimed;
@@ -15,6 +16,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import fr.reaamz.funcombat.FunCombat;
+import fr.reaamz.funcombat.event.JumpDoneEvent;
+import fr.reaamz.funcombat.jump.JumpNames;
 
 public class TestListeners implements Listener
 {
@@ -32,7 +35,7 @@ public class TestListeners implements Listener
 					block.getWorld().spawn(block.getLocation().add(1.5, 1.5, 1.5), TNTPrimed.class);
 					block.getWorld().strikeLightning(block.getLocation());
 				}
-				
+				Bukkit.getPluginManager().callEvent(new JumpDoneEvent(JumpNames.JUMP2.getName(), event.getPlayer(), 6969));
 				/*
 				JSONChat.sendClicMessage(event.getPlayer(), "Destinations: ", "HUB", ChatUtils.ClicActions.RUN_COMMAND , "/hub");
 				JSONChat.sendHoverMessage(event.getPlayer(), "----------------> ", "HOVER !", ChatUtils.HoverActions.SHOW_TEXT , "YEAH le HoverEvent marche !");

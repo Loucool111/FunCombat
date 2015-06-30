@@ -25,8 +25,12 @@ commands:
 
  grade:
   description: changement de grade
-  usage: /<command> [set;get] <UUID> <GRADE_NAME>
+  usage: /<command> get;set UUID;PName GRADE_NAME
 
  uuid:
   description: uuid
   usage: /<command>
+
+ setjump:
+  description: setjump [DO THEM IN ORDER OR IT WILL NOT WORK]
+  usage: /<command> <JUMPNAME> [startZone;startBlock;endBlock] {DO THEM IN ORDER OR IT WILL NOT WORK}

@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.UUID;
 
 import org.bukkit.DyeColor;
+import org.bukkit.Location;
 
 import code.husky.mysql.MySQL;
 import fr.reaamz.funcombat.FunCombat;
@@ -30,6 +31,7 @@ public class MySQLManager
 		state.executeUpdate("CREATE TABLE IF NOT EXISTS `tColor` (`UUID` varchar(64), `COLOR` varchar(16))");
 		state.executeUpdate("CREATE TABLE IF NOT EXISTS `tGrades` (`UUID` varchar(64), `GRADE` varchar(16))");
 		
+		state.executeUpdate("CREATE TABLE IF NOT EXISTS `tJumpLoc` (`JUMPNAME` varchar(16), `ZONESTART` varchar(128), `BLOCKSTART` varchar(128), `BLOCKEND` varchar(128))");
 		state.executeUpdate("CREATE TABLE IF NOT EXISTS `tJump` (`UUID` varchar(64),`JUMPNAME` varchar(16), `TENT` varchar(6), `BESTTIME` varchar(10), `LASTTIME` varchar(10))");
 		
 		state.close();
@@ -161,5 +163,103 @@ public class MySQLManager
 		String lasttime = res.getString("LASTTIME");
 		state.close();
 		return lasttime;
+	}
+	
+	public void updateJumpLoc(String jumpName, Location startZone, Location startBlock, Location endBlock) throws SQLException
+	{
+		Statement state = this.db.getConnection().createStatement();
+		
+		String startZoneSer = null, startBlockSer = null, endBlockSer = null;
+		
+		try { startZoneSer = startZone.serialize().toString(); } catch (NullPointerException e) { e.printStackTrace(); } 
+		
+		try { startBlockSer = startBlock.serialize().toString(); } catch (NullPointerException e) { e.printStackTrace(); }
+		
+		try { endBlockSer = endBlock.serialize().toString(); } catch (NullPointerException e) { e.printStackTrace(); }
+		
+		if (getStartZone(jumpName) != null)
+		{
+			state.executeUpdate("UPDATE `tJumpLoc` SET `ZONESTART`='" + startZoneSer + "' WHERE `JUMPNAME`='" + jumpName + "';");
+		}
+		else if (getStartBlock(jumpName) != null)
+		{
+			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKSTART`='" + startBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "';");
+		}
+		if (getEndBlock(jumpName) != null)
+		{
+			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKEND`='" + endBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "';");
+		}
+		else
+		{
+			state.executeUpdate("INSERT INTO `tJumpLoc` (`JUMPNAME`,`ZONESTART`,`BLOCKSTART`,`BLOCKEND`) VALUES ('" + jumpName + "','" + startZoneSer + "','" + startBlockSer + "','" + endBlockSer + "')");			
+		}
+		
+		state.close();
+	}
+	
+	public String getStartZone(String jumpName) throws SQLException
+	{
+		Statement state = this.db.getConnection().createStatement();
+		
+		ResultSet res;
+		
+		res = state.executeQuery("SELECT * FROM `tJumpLoc` WHERE `JUMPNAME`='" + jumpName + "'");
+		String loc;
+		try
+		{
+			loc = res.getString("ZONESTART");
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			loc = null;
+		}
+		
+		state.close();
+		return loc;
+	}
+	
+	public String getStartBlock(String jumpName) throws SQLException
+	{
+		Statement state = this.db.getConnection().createStatement();
+		
+		ResultSet res;
+		
+		res = state.executeQuery("SELECT * FROM `tJumpLoc` WHERE `JUMPNAME`='" + jumpName + "'");
+		String loc;
+		try
+		{
+			loc = res.getString("BLOCKSTART");
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			loc = null;
+		}
+		
+		state.close();
+		return loc;
+	}
+	
+	public String getEndBlock(String jumpName) throws SQLException
+	{
+		Statement state = this.db.getConnection().createStatement();
+		
+		ResultSet res;
+		
+		res = state.executeQuery("SELECT * FROM `tJumpLoc` WHERE `JUMPNAME`='" + jumpName + "'");
+		String loc;
+		try
+		{
+			loc = res.getString("BLOCKEND");
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			loc = null;
+		}
+		
+		state.close();
+		return loc;
 	}
 }

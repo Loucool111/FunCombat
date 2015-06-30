@@ -29,17 +29,12 @@ public class JumpListener implements Listener
 				}
 				else if (event.getCurrentItem().getType().equals(Material.FEATHER))
 				{
-					if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Jump #1"))
+					for (JumpNames jump : JumpNames.values())
 					{
-						Utils.sendCustomMessage(player, "Jump #1");
-					}
-					else if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Jump #2"))
-					{
-						Utils.sendCustomMessage(player, "Jump #2");
-					}
-					else if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Jump #3"))
-					{
-						Utils.sendCustomMessage(player, "Jump #3");
+						if (jump.getItemName().equals(event.getCurrentItem().getItemMeta().getDisplayName()))
+						{
+							Utils.sendCustomMessage(player, jump.getItemName());
+						}
 					}
 				}
 			}			
