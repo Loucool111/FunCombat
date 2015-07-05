@@ -53,7 +53,7 @@ public class FunCombat extends JavaPlugin
 		{
 			Utils.logInfo("====================DATABASE CONNECTION ERROR=====================");
 			Utils.logInfo(e.toString());
-			Utils.logInfo("==================================================================");			
+			Utils.logInfo("==================================================================");
 		}
 		
 		//init du command executor

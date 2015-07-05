@@ -177,17 +177,17 @@ public class MySQLManager
 		
 		try { endBlockSer = endBlock.serialize().toString(); } catch (NullPointerException e) { e.printStackTrace(); }
 		
-		if (getStartZone(jumpName) != null)
+		if (getStartZone(jumpName) != null && getStartBlock(jumpName) != null && getEndBlock(jumpName) != null)
 		{
 			state.executeUpdate("UPDATE `tJumpLoc` SET `ZONESTART`='" + startZoneSer + "' WHERE `JUMPNAME`='" + jumpName + "';");
 		}
-		else if (getStartBlock(jumpName) != null)
+		else if (getStartBlock(jumpName) != null && getStartZone(jumpName) != null)
 		{
-			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKSTART`='" + startBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "';");
+			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKSTART`='" + startBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='" + startZoneSer + "';");
 		}
 		if (getEndBlock(jumpName) != null)
 		{
-			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKEND`='" + endBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "';");
+			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKEND`='" + endBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='" + startZoneSer + "';");
 		}
 		else
 		{

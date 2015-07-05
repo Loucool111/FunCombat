@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.jump.JumpNames;
+import fr.reaamz.funcombat.jump.JumpUtils;
 
 public class JumpCommandExecutor implements CommandExecutor
 {
@@ -35,11 +36,11 @@ public class JumpCommandExecutor implements CommandExecutor
 							}
 							if (args[1].equalsIgnoreCase("startBlock"))
 							{
-								FunCombat.database.updateJumpLoc(jump.getName(), null, player.getLocation(), null);
+								FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), player.getLocation(), null);
 							}
 							if (args[1].equalsIgnoreCase("endBlock"))
 							{
-								FunCombat.database.updateJumpLoc(jump.getName(), null, null, player.getLocation());
+								FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), JumpUtils.getLocation(FunCombat.database.getStartBlock(jump.getName())), player.getLocation());
 							}
 						}
 						catch (SQLException e)
