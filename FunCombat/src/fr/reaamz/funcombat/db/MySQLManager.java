@@ -10,6 +10,7 @@ import org.bukkit.Location;
 
 import code.husky.mysql.MySQL;
 import fr.reaamz.funcombat.FunCombat;
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.grades.GradeType;
 import fr.reaamz.funcombat.grades.GradeUtils;
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
@@ -171,21 +172,21 @@ public class MySQLManager
 		
 		String startZoneSer = null, startBlockSer = null, endBlockSer = null;
 		
-		try { startZoneSer = startZone.serialize().toString(); } catch (NullPointerException e) { e.printStackTrace(); } 
+		try { startZoneSer = startZone.serialize().toString(); } catch (NullPointerException e) { Utils.logInfo("startZoneSer = null"); } 
 		
-		try { startBlockSer = startBlock.serialize().toString(); } catch (NullPointerException e) { e.printStackTrace(); }
+		try { startBlockSer = startBlock.serialize().toString(); } catch (NullPointerException e) { Utils.logInfo("startBlockSer = null"); }
 		
-		try { endBlockSer = endBlock.serialize().toString(); } catch (NullPointerException e) { e.printStackTrace(); }
+		try { endBlockSer = endBlock.serialize().toString(); } catch (NullPointerException e) { Utils.logInfo("endBlockSer = null"); }
 		
 		if (getStartZone(jumpName) != null && getStartBlock(jumpName) != null && getEndBlock(jumpName) != null)
 		{
 			state.executeUpdate("UPDATE `tJumpLoc` SET `ZONESTART`='" + startZoneSer + "' WHERE `JUMPNAME`='" + jumpName + "';");
 		}
-		else if (getStartBlock(jumpName) != null && getStartZone(jumpName) != null)
+		else if (getStartBlock(jumpName) != null && getEndBlock(jumpName) != null)
 		{
 			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKSTART`='" + startBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='" + startZoneSer + "';");
 		}
-		if (getEndBlock(jumpName) != null)
+		else if (getEndBlock(jumpName) != null)
 		{
 			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKEND`='" + endBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='" + startZoneSer + "';");
 		}
@@ -205,13 +206,28 @@ public class MySQLManager
 		
 		res = state.executeQuery("SELECT * FROM `tJumpLoc` WHERE `JUMPNAME`='" + jumpName + "'");
 		String loc;
-		try
+//		try
+//		{
+//			loc = res.getString("ZONESTART");
+//		}
+//		catch (SQLException e)
+//		{
+//			e.printStackTrace();
+//			loc = null;
+//		}
+		
+		if (res.next())
 		{
 			loc = res.getString("ZONESTART");
+			if (loc.equals(null) || loc.equalsIgnoreCase("null"))
+			{
+				Utils.logInfo("-----------------------UNABLE TO GET ZONESTART #1-----------------------");
+				loc = null;
+			}
 		}
-		catch (SQLException e)
+		else
 		{
-			e.printStackTrace();
+			Utils.logInfo("-----------------------UNABLE TO GET ZONESTART #2-----------------------");
 			loc = null;
 		}
 		
@@ -227,14 +243,29 @@ public class MySQLManager
 		
 		res = state.executeQuery("SELECT * FROM `tJumpLoc` WHERE `JUMPNAME`='" + jumpName + "'");
 		String loc;
-		try
-		{
+//		try
+//		{
+//			loc = res.getString("BLOCKSTART");
+//		}
+//		catch (SQLException e)
+//		{
+//			e.printStackTrace();
+//			loc = null;
+//		}
+		
+		if (res.next())
+		{			
 			loc = res.getString("BLOCKSTART");
+			if (loc.equals(null) || loc.equals("null"))
+			{
+				Utils.logInfo("-----------------------UNABLE TO GET BLOCKSTART #1-----------------------");
+				loc = null;
+			}
 		}
-		catch (SQLException e)
+		else
 		{
-			e.printStackTrace();
-			loc = null;
+			Utils.logInfo("-----------------------UNABLE TO GET BLOCKSTART #2-----------------------");
+			loc = null;			
 		}
 		
 		state.close();
@@ -249,14 +280,29 @@ public class MySQLManager
 		
 		res = state.executeQuery("SELECT * FROM `tJumpLoc` WHERE `JUMPNAME`='" + jumpName + "'");
 		String loc;
-		try
+//		try
+//		{
+//			loc = res.getString("BLOCKEND");
+//		}
+//		catch (SQLException e)
+//		{
+//			e.printStackTrace();
+//			loc = null;
+//		}
+		
+		if (res.next())
 		{
 			loc = res.getString("BLOCKEND");
+			if (loc.equals(null) || loc.equals("null"))
+			{
+				Utils.logInfo("-----------------------UNABLE TO GET BLOCKEND #1-----------------------");
+				loc = null;
+			}
 		}
-		catch (SQLException e)
+		else
 		{
-			e.printStackTrace();
-			loc = null;
+			Utils.logInfo("-----------------------UNABLE TO GET BLOCKEND #2-----------------------");
+			loc = null;			
 		}
 		
 		state.close();

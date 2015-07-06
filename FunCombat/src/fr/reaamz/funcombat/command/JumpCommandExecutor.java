@@ -32,11 +32,11 @@ public class JumpCommandExecutor implements CommandExecutor
 						{
 							if (args[1].equalsIgnoreCase(("startZone")))
 							{
-								FunCombat.database.updateJumpLoc(jump.getName(), player.getLocation(), null, null);
+								FunCombat.database.updateJumpLoc(jump.getName(), player.getLocation(), JumpUtils.getLocation(FunCombat.database.getStartBlock(jump.getName())), JumpUtils.getLocation(FunCombat.database.getEndBlock(jump.getName())));
 							}
 							if (args[1].equalsIgnoreCase("startBlock"))
 							{
-								FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), player.getLocation(), null);
+								FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), player.getLocation(), JumpUtils.getLocation(FunCombat.database.getEndBlock(jump.getName())));
 							}
 							if (args[1].equalsIgnoreCase("endBlock"))
 							{
