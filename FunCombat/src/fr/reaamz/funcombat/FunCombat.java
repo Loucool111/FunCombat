@@ -32,6 +32,8 @@ public class FunCombat extends JavaPlugin
 	//TODO finir jumpscore
 	//TODO database table avec des truc random tmtc
 	//FIX LE TRUC DES COORS DANS tJumpLoc...
+	//TODO all les commands executors
+	//TODO
 	
 	public static Plugin instance;
 	

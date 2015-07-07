@@ -180,15 +180,15 @@ public class MySQLManager
 		
 		if (getStartZone(jumpName) != null && getStartBlock(jumpName) != null && getEndBlock(jumpName) != null)
 		{
-			state.executeUpdate("UPDATE `tJumpLoc` SET `ZONESTART`='" + startZoneSer + "' WHERE `JUMPNAME`='" + jumpName + "';");
+			state.executeUpdate("UPDATE `tJumpLoc` SET `ZONESTART`='" + startZoneSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='null' AND `BLOCKSTART`='null' AND `BLOCKEND`='null';");
 		}
 		else if (getStartBlock(jumpName) != null && getEndBlock(jumpName) != null)
 		{
-			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKSTART`='" + startBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='" + startZoneSer + "';");
+			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKSTART`='" + startBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='" + startZoneSer + "' AND `BLOCKSTART`='null' AND `BLOCKEND`='null';");
 		}
 		else if (getEndBlock(jumpName) != null)
 		{
-			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKEND`='" + endBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='" + startZoneSer + "';");
+			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKEND`='" + endBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='" + startZoneSer + "' AND `BLOCKSTART`='" + startBlockSer + "' AND `BLOCKEND`='null';");
 		}
 		else
 		{
@@ -307,5 +307,16 @@ public class MySQLManager
 		
 		state.close();
 		return loc;
+	}
+	
+	public void resetJump(String jumpName) throws SQLException
+	{
+		Statement state = this.db.getConnection().createStatement();
+		
+		state.executeUpdate("DELETE FROM `tJumpLoc` WHERE `JUMPNAME`='" + jumpName + "';");
+		
+		state.executeUpdate("INSERT INTO `tJumpLoc` (`JUMPNAME`,`ZONESTART`,`BLOCKSTART`,`BLOCKEND`) VALUES ('" + jumpName + "','null','null','null')");
+		
+		state.close();
 	}
 }

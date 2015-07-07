@@ -42,6 +42,10 @@ public class JumpCommandExecutor implements CommandExecutor
 							{
 								FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), JumpUtils.getLocation(FunCombat.database.getStartBlock(jump.getName())), player.getLocation());
 							}
+							if (args[1].equalsIgnoreCase("reset"))
+							{
+								FunCombat.database.resetJump(jump.getName());
+							}
 						}
 						catch (SQLException e)
 						{
