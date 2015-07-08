@@ -4,12 +4,15 @@ import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.reaamz.funcombat.command.GradeCommandExecutor;
 import fr.reaamz.funcombat.command.HubCommandExecutor;
 import fr.reaamz.funcombat.command.JumpCommandExecutor;
+import fr.reaamz.funcombat.completers.GradeTabCompleter;
+import fr.reaamz.funcombat.completers.JumpTabCompleter;
 import fr.reaamz.funcombat.db.MySQLManager;
 import fr.reaamz.funcombat.grades.GradesChatListener;
 import fr.reaamz.funcombat.grades.GradesJoinListener;
@@ -29,11 +32,13 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
-	//TODO finir jumpscore
+	//TODO finir jumpscore et jump
 	//TODO database table avec des truc random tmtc
-	//FIX LE TRUC DES COORS DANS tJumpLoc...
+	//TODO FIX LE TRUC DES COORS DANS tJumpLoc...
 	//TODO all les commands executors
-	//TODO
+	//TODO Permissions ......
+	//TODO Try Localisation with config option
+	//TODO grade avec le playerName
 	
 	public static Plugin instance;
 	
@@ -133,14 +138,18 @@ public class FunCombat extends JavaPlugin
 		
 		//instance du grade exector
 		CommandExecutor gradeExecutor = new GradeCommandExecutor();
+		TabCompleter gradeComplter = new GradeTabCompleter();
 		
 		//définition des commandes
 		getCommand("grade").setExecutor(gradeExecutor);
+		getCommand("grade").setTabCompleter(gradeComplter);
 		getCommand("uuid").setExecutor(gradeExecutor);
+		getCommand("uuid").setTabCompleter(gradeComplter);
 		
 		CommandExecutor jumpExecutor = new JumpCommandExecutor();
-		
+		TabCompleter jumpCompleter = new JumpTabCompleter();
 		
 		getCommand("setjump").setExecutor(jumpExecutor);
+		getCommand("setjump").setTabCompleter(jumpCompleter);
 	}
 }

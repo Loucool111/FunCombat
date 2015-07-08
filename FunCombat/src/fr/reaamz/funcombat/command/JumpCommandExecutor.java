@@ -2,12 +2,14 @@ package fr.reaamz.funcombat.command;
 
 import java.sql.SQLException;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.reaamz.funcombat.FunCombat;
+import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.jump.JumpNames;
 import fr.reaamz.funcombat.jump.JumpUtils;
 
@@ -33,18 +35,26 @@ public class JumpCommandExecutor implements CommandExecutor
 							if (args[1].equalsIgnoreCase(("startZone")))
 							{
 								FunCombat.database.updateJumpLoc(jump.getName(), player.getLocation(), JumpUtils.getLocation(FunCombat.database.getStartBlock(jump.getName())), JumpUtils.getLocation(FunCombat.database.getEndBlock(jump.getName())));
+								Utils.sendCustomMessage(player, ChatColor.GREEN + "startZone défini avec succès");
 							}
-							if (args[1].equalsIgnoreCase("startBlock"))
+							else if (args[1].equalsIgnoreCase("startBlock"))
 							{
 								FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), player.getLocation(), JumpUtils.getLocation(FunCombat.database.getEndBlock(jump.getName())));
+								Utils.sendCustomMessage(player, ChatColor.GREEN + "startBlock défini avec succès");
 							}
-							if (args[1].equalsIgnoreCase("endBlock"))
+							else if (args[1].equalsIgnoreCase("endBlock"))
 							{
 								FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), JumpUtils.getLocation(FunCombat.database.getStartBlock(jump.getName())), player.getLocation());
+								Utils.sendCustomMessage(player, ChatColor.GREEN + "endBlock défini avec succès");
 							}
-							if (args[1].equalsIgnoreCase("reset"))
+							else if (args[1].equalsIgnoreCase("reset"))
 							{
 								FunCombat.database.resetJump(jump.getName());
+								Utils.sendCustomMessage(player, ChatColor.GREEN + "Les coordonées du " + jump.getItemName() + " ont été reset avec succès");
+							}
+							else
+							{
+								return false;
 							}
 						}
 						catch (SQLException e)

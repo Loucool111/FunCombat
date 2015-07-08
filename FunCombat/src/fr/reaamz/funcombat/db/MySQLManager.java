@@ -178,21 +178,17 @@ public class MySQLManager
 		
 		try { endBlockSer = endBlock.serialize().toString(); } catch (NullPointerException e) { Utils.logInfo("endBlockSer = null"); }
 		
-		if (getStartZone(jumpName) != null && getStartBlock(jumpName) != null && getEndBlock(jumpName) != null)
+		if (getStartZone(jumpName) == null && getStartBlock(jumpName) == null && getEndBlock(jumpName) == null)
 		{
 			state.executeUpdate("UPDATE `tJumpLoc` SET `ZONESTART`='" + startZoneSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='null' AND `BLOCKSTART`='null' AND `BLOCKEND`='null';");
 		}
-		else if (getStartBlock(jumpName) != null && getEndBlock(jumpName) != null)
+		else if (getStartBlock(jumpName) == null && getEndBlock(jumpName) == null)
 		{
 			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKSTART`='" + startBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='" + startZoneSer + "' AND `BLOCKSTART`='null' AND `BLOCKEND`='null';");
 		}
-		else if (getEndBlock(jumpName) != null)
+		else if (getEndBlock(jumpName) == null)
 		{
 			state.executeUpdate("UPDATE `tJumpLoc` SET `BLOCKEND`='" + endBlockSer + "' WHERE `JUMPNAME`='" + jumpName + "' AND `ZONESTART`='" + startZoneSer + "' AND `BLOCKSTART`='" + startBlockSer + "' AND `BLOCKEND`='null';");
-		}
-		else
-		{
-			state.executeUpdate("INSERT INTO `tJumpLoc` (`JUMPNAME`,`ZONESTART`,`BLOCKSTART`,`BLOCKEND`) VALUES ('" + jumpName + "','" + startZoneSer + "','" + startBlockSer + "','" + endBlockSer + "')");			
 		}
 		
 		state.close();
@@ -206,28 +202,17 @@ public class MySQLManager
 		
 		res = state.executeQuery("SELECT * FROM `tJumpLoc` WHERE `JUMPNAME`='" + jumpName + "'");
 		String loc;
-//		try
-//		{
-//			loc = res.getString("ZONESTART");
-//		}
-//		catch (SQLException e)
-//		{
-//			e.printStackTrace();
-//			loc = null;
-//		}
 		
 		if (res.next())
 		{
 			loc = res.getString("ZONESTART");
 			if (loc.equals(null) || loc.equalsIgnoreCase("null"))
 			{
-				Utils.logInfo("-----------------------UNABLE TO GET ZONESTART #1-----------------------");
 				loc = null;
 			}
 		}
 		else
-		{
-			Utils.logInfo("-----------------------UNABLE TO GET ZONESTART #2-----------------------");
+		{			
 			loc = null;
 		}
 		
@@ -243,28 +228,17 @@ public class MySQLManager
 		
 		res = state.executeQuery("SELECT * FROM `tJumpLoc` WHERE `JUMPNAME`='" + jumpName + "'");
 		String loc;
-//		try
-//		{
-//			loc = res.getString("BLOCKSTART");
-//		}
-//		catch (SQLException e)
-//		{
-//			e.printStackTrace();
-//			loc = null;
-//		}
 		
 		if (res.next())
 		{			
 			loc = res.getString("BLOCKSTART");
-			if (loc.equals(null) || loc.equals("null"))
+			if (loc.equals(null) || loc.equalsIgnoreCase("null"))
 			{
-				Utils.logInfo("-----------------------UNABLE TO GET BLOCKSTART #1-----------------------");
 				loc = null;
 			}
 		}
 		else
 		{
-			Utils.logInfo("-----------------------UNABLE TO GET BLOCKSTART #2-----------------------");
 			loc = null;			
 		}
 		
@@ -280,28 +254,17 @@ public class MySQLManager
 		
 		res = state.executeQuery("SELECT * FROM `tJumpLoc` WHERE `JUMPNAME`='" + jumpName + "'");
 		String loc;
-//		try
-//		{
-//			loc = res.getString("BLOCKEND");
-//		}
-//		catch (SQLException e)
-//		{
-//			e.printStackTrace();
-//			loc = null;
-//		}
 		
 		if (res.next())
 		{
 			loc = res.getString("BLOCKEND");
-			if (loc.equals(null) || loc.equals("null"))
+			if (loc.equals(null) || loc.equalsIgnoreCase("null"))
 			{
-				Utils.logInfo("-----------------------UNABLE TO GET BLOCKEND #1-----------------------");
 				loc = null;
 			}
 		}
 		else
-		{
-			Utils.logInfo("-----------------------UNABLE TO GET BLOCKEND #2-----------------------");
+		{		
 			loc = null;			
 		}
 		
