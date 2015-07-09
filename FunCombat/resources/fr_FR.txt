@@ -1,0 +1,17 @@
+#MISC
+funcombat.loaded=Chargé
+funcombat.saved=Sauvegarde de
+
+#WELCOME
+funcombat.welcomeon=Bienvenue sur
+funcombat.youareon=$eVous êtes sur
+funcombat.havefun=$4Have Fun !
+#INVENTORY NAMES
+
+funcombat.inv.mainmenu=Menu Principal
+funcombat.inv.kitpvp=Sélécteur de kit
+funcombat.inv.metamorph=Sélécteur de Métamorphoses
+funcombat.inv.colors=Choissisez votre couleur
+funcombat.inv.hats=Sélécteur de chapeaux
+funcombat.inv.jump=Sélécteur de Jumps
+funcombat.inv.jumpscores=Scores des Jumps

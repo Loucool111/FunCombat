@@ -1,5 +1,7 @@
 package fr.reaamz.funcombat;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
@@ -23,6 +25,7 @@ import fr.reaamz.funcombat.hub.HubMotdListener;
 import fr.reaamz.funcombat.jump.JumpDoneListener;
 import fr.reaamz.funcombat.jump.JumpListener;
 import fr.reaamz.funcombat.kitpvp.KitpvpListener;
+import fr.reaamz.funcombat.localization.LocalizationManager;
 import fr.reaamz.funcombat.mainmenu.MainMenuListener;
 import fr.reaamz.funcombat.metamorphoses.MetamorphListener;
 import fr.reaamz.funcombat.otherlisteners.BungeeMessagesListener;
@@ -37,18 +40,32 @@ public class FunCombat extends JavaPlugin
 	//TODO FIX LE TRUC DES COORS DANS tJumpLoc...
 	//TODO all les commands executors
 	//TODO Permissions ......
-	//TODO Try Localisation with config option
 	//TODO grade avec le playerName
 	
 	public static Plugin instance;
 	
+	public static LocalizationManager localizer;
+	
 	public static MySQLManager database = new MySQLManager();
+	
 	
 	@Override
 	public void onEnable()
 	{
 		//définition de l'instance du plugin
 		instance = this;
+		
+		//setup de localizer
+		try
+		{
+			localizer = new LocalizationManager(this.getConfig().getString("locFileName"));
+		}
+		catch (URISyntaxException | IOException | IllegalArgumentException e)
+		{		
+			Utils.logInfo("====================LOCALIZATION FILE NOT FOUND=====================");
+			Utils.logInfo(e.toString());
+			Utils.logInfo("====================================================================");
+		}
 		
 		//setup de la database
 		try
@@ -73,7 +90,7 @@ public class FunCombat extends JavaPlugin
 		initCommands();
 		
 		//petit message dans la console
-		Utils.logInfo("Loaded " + Utils.PLUGIN_NAME);
+		Utils.logInfo(FunCombat.localizer.locate("funcombat.loaded") + " " + Utils.PLUGIN_NAME);
 	}
 
 	@Override
@@ -93,7 +110,7 @@ public class FunCombat extends JavaPlugin
 		}
 		
 		//message de fin
-		Utils.logInfo("Savegarde de " + Utils.PLUGIN_NAME);
+		Utils.logInfo(FunCombat.localizer.locate("funcombat.saved") + " " + Utils.PLUGIN_NAME);
 	}
 	
 	private void initListeners()

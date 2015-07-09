@@ -1,0 +1,17 @@
+#MISC
+funcombat.loaded=Loaded
+funcombat.saved=Saved
+
+#WELCOME
+funcombat.welcomeon=Welcome on
+funcombat.youareon=$eYou are on
+funcombat.havefun=$4Have Fun !
+
+#INVENTORY NAMES
+funcombat.inv.mainmenu=Main Menu
+funcombat.inv.kitpvp=Kit Selector
+funcombat.inv.metamorph=Transformations Selector
+funcombat.inv.colors=Colors Selector
+funcombat.inv.hats=Hats Selector
+funcombat.inv.jump=Jump Selector
+funcombat.inv.jumpscores=Jump Scores

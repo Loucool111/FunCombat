@@ -20,13 +20,13 @@ public class Utils
 		MC_CREATIVE("container.inventory"),
 		MC_SURVIVAL("container.crafting"),
 		
-		FC_MAINMENU(ChatColor.UNDERLINE + "Menu principal"),
-		FC_KITPVP(ChatColor.UNDERLINE + "Sélécteur de kit"),
-		FC_METAMORPH(ChatColor.UNDERLINE + "Sélécteur de Métamorphoses"),
-		FC_COLORS(ChatColor.UNDERLINE + "Choissisez votre couleur"),
-		FC_HATS(ChatColor.UNDERLINE + "Sélécteur de chapeaux"),
-		FC_JUMP(ChatColor.UNDERLINE + "Sélécteur de Jumps"),
-		FC_JUMPSCORES(ChatColor.UNDERLINE + "Scores des Jumps"),
+		FC_MAINMENU(ChatColor.UNDERLINE + FunCombat.localizer.locate("funcombat.inv.mainmenu")),
+		FC_KITPVP(ChatColor.UNDERLINE + FunCombat.localizer.locate("funcombat.inv.kitpvp")),
+		FC_METAMORPH(ChatColor.UNDERLINE + FunCombat.localizer.locate("funcombat.inv.metamorph")),
+		FC_COLORS(ChatColor.UNDERLINE + FunCombat.localizer.locate("funcombat.inv.colors")),
+		FC_HATS(ChatColor.UNDERLINE + FunCombat.localizer.locate("funcombat.inv.hats")),
+		FC_JUMP(ChatColor.UNDERLINE + FunCombat.localizer.locate("funcombat.inv.jump")),
+		FC_JUMPSCORES(ChatColor.UNDERLINE + FunCombat.localizer.locate("funcombat.inv.jumpscores")),
 		;
 		
 		private String name;
