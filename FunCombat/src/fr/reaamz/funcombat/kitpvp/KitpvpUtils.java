@@ -9,6 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import fr.reaamz.funcombat.FunCombat;
+
 public class KitpvpUtils 
 {	
 	public static ItemStack[] getItemsPourMenu()
@@ -18,11 +20,11 @@ public class KitpvpUtils
 		ItemStack kitArcher = new ItemStack(Material.BOW,1);
 		ItemMeta arcMeta = kitArcher.getItemMeta();
 	
-		arcMeta.setDisplayName(ChatColor.GOLD + "Kit Archer");
+		arcMeta.setDisplayName(ChatColor.GOLD + FunCombat.localizer.locate("funcombat.kit.kitarcher"));
 	
 		arcMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		
-		arcMeta.setLore(Arrays.asList(ChatColor.WHITE +""+ChatColor.UNDERLINE + "Contient :","",ChatColor.WHITE + "1 Arc enchanté",ChatColor.WHITE + "1 Full stuff Chainmail enchanté"));
+		arcMeta.setLore(Arrays.asList(ChatColor.WHITE +""+ChatColor.UNDERLINE + FunCombat.localizer.locate("funcombat.kit.contains"),"",ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.archer1"),ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.archer2")));
 	
 		kitArcher.setItemMeta(arcMeta);
 		
@@ -31,11 +33,11 @@ public class KitpvpUtils
 		ItemStack kitGuerrier = new ItemStack(Material.DIAMOND_SWORD,1);
 		ItemMeta swordMeta = kitGuerrier.getItemMeta();
 	
-		swordMeta.setDisplayName(ChatColor.GOLD + "Kit Guerrier");
+		swordMeta.setDisplayName(ChatColor.GOLD + FunCombat.localizer.locate("funcombat.kit.kitguerrier"));
 		
 		swordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 	
-		swordMeta.setLore(Arrays.asList(ChatColor.WHITE +""+ ChatColor.UNDERLINE + "Contient :","",ChatColor.WHITE + "1 Epée diams enchantée",ChatColor.WHITE + "1 Full stuff fer enchanté"));
+		swordMeta.setLore(Arrays.asList(ChatColor.WHITE +""+ ChatColor.UNDERLINE + FunCombat.localizer.locate("funcombat.kit.contains"),"",ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.guerrier1"),ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.guerrier2")));
 	
 		kitGuerrier.setItemMeta(swordMeta);
 		//-------------SORCIERE--------------
@@ -43,9 +45,9 @@ public class KitpvpUtils
 		ItemStack kitSorciere = new ItemStack(Material.STICK);
 		ItemMeta stickMeta = kitSorciere.getItemMeta();
 		
-		stickMeta.setDisplayName(ChatColor.GOLD + "Kit sorcière");
+		stickMeta.setDisplayName(ChatColor.GOLD + FunCombat.localizer.locate("funcombat.kit.kitsorciere"));
 		
-		stickMeta.setLore(Arrays.asList(ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Contient :","",ChatColor.WHITE + "1 Armure",ChatColor.WHITE + "1 Bâton de sorcière", ChatColor.WHITE + "Differentes potions"));
+		stickMeta.setLore(Arrays.asList(ChatColor.WHITE + "" + ChatColor.UNDERLINE + FunCombat.localizer.locate("funcombat.kit.contains"),"",ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.sorciere1"),ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.sorciere2"), ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.sorciere3")));
 		
 		stickMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		

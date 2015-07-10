@@ -15,3 +15,46 @@ funcombat.inv.colors=Colors Selector
 funcombat.inv.hats=Hats Selector
 funcombat.inv.jump=Jump Selector
 funcombat.inv.jumpscores=Jump Scores
+
+
+#KITPVP KITS
+funcombat.kit.kitarcher=Archer
+funcombat.kit.kitguerrier=Warrior
+funcombat.kit.kitsorciere=Witch
+
+#KITPVP ITEM MENU
+funcombat.kit.contains=Contains :
+funcombat.kit.archer1=1 Enchanted Bow
+funcombat.kit.archer2=1 Set of Enchanted Chainmail Armor
+funcombat.kit.guerrier1=1 Enchanted Diamond Sword
+funcombat.kit.guerrier2=1 Set of Enchanted Iron Armor
+funcombat.kit.sorciere1=1 Set of Armor
+funcombat.kit.sorciere2=1 Witch Stick
+funcombat.kit.sorciere3=Some Potions
+
+#KITPVP STUFF
+funcombat.kit.level1=Level 1
+funcombat.kit.level2=Level 2
+funcombat.kit.level3=Level 3
+funcombat.kit.level4=Level 4
+funcombat.kit.level5=Level 5
+funcombat.kit.ylevel1=You're now Level 1
+funcombat.kit.ylevel2=You're now Level 2
+funcombat.kit.ylevel3=You're now Level 3
+funcombat.kit.ylevel4=You're now Level 4
+funcombat.kit.ylevel5=You're now Level 5
+funcombat.kit.stuffarcher=Archer Stuff
+funcombat.kit.stuffguerrier=Warrior Stuff
+funcombat.kit.stuffsorciere=Witch Stuff
+funcombat.kit.bowof=Bow of
+funcombat.kit.swordof=Sword of
+funcombat.kit.witchstick=Witch Stick
+funcombat.kit.rightclick=Right Click to Activate
+
+
+#KITPVP MISC
+funcombat.kit.kills=Kills
+funcombat.kit.level=Level
+funcombat.kit.kit=Kit :
+funcombat.kit.sorcierehit=You've been hit by a Witch !
+funcombat.kit.sorcierecooldown=You can't use this item at the moment

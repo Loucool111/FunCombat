@@ -15,3 +15,46 @@ funcombat.inv.colors=Choissisez votre couleur
 funcombat.inv.hats=Sélécteur de chapeaux
 funcombat.inv.jump=Sélécteur de Jumps
 funcombat.inv.jumpscores=Scores des Jumps
+
+
+#KITPVP KITS
+funcombat.kit.kitarcher=Archer
+funcombat.kit.kitguerrier=Guerrier
+funcombat.kit.kitsorciere=Sorcière
+
+#KITPVP ITEM MENU
+funcombat.kit.contains=Contient :
+funcombat.kit.archer1=1 Arc Enchanté
+funcombat.kit.archer2=1 Full Stuff Chainmail Enchanté
+funcombat.kit.guerrier1=1 Epée en diams Enchantée
+funcombat.kit.guerrier2=1 Full Stuff Fer Enchanté
+funcombat.kit.sorciere1=1 Set d'Armure
+funcombat.kit.sorciere2=1 Bâton de Sorcière
+funcombat.kit.sorciere3=Différentes Potions
+
+#KITPVP STUFF
+funcombat.kit.level1=Level 1
+funcombat.kit.level2=Level 2
+funcombat.kit.level3=Level 3
+funcombat.kit.level4=Level 4
+funcombat.kit.level5=Level 5
+funcombat.kit.ylevel1=Vous êtes maintenant Level 1
+funcombat.kit.ylevel2=Vous êtes maintenant Level 2
+funcombat.kit.ylevel3=Vous êtes maintenant Level 3
+funcombat.kit.ylevel4=Vous êtes maintenant Level 4
+funcombat.kit.ylevel5=Vous êtes maintenant Level 5
+funcombat.kit.stuffarcher=Stuff du kit Archer
+funcombat.kit.stuffguerrier=Stuff du kit Guerrier
+funcombat.kit.stuffsorciere=Stuff du kit Sorcière
+funcombat.kit.bowof=Arc de
+funcombat.kit.swordof=Epée de
+funcombat.kit.witchstick=Bâton de Sorcière
+funcombat.kit.rightclick=Clic Droit pour Activer
+
+
+#KITPVP MISC
+funcombat.kit.kills=Kills
+funcombat.kit.level=Level
+funcombat.kit.kit=Kit :
+funcombat.kit.sorcierehit=Vous avez été touché par une sorcière !
+funcombat.kit.sorcierecooldown=Vous ne pouvez pas utiliser votre bâton pour le moment !

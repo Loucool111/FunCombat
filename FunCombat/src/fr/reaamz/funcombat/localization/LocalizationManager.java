@@ -28,10 +28,13 @@ public class LocalizationManager
 	public String locate(String key)
 	{
 		if (key.equals(null) || key.equals(""))
-			return ChatColor.RED + "TEXT LOCALIZED NOT FOUND";
+			return ChatColor.RED + "KEY NOT FOUND";
 		
 		String text = texts.get(key.toLowerCase());
-			
+		
+		if (text == null)
+			return ChatColor.RED + "VALUE NOT FOUND";
+					
 		text = ChatColor.translateAlternateColorCodes('$', text);
 		
 		return text;

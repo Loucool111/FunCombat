@@ -15,15 +15,16 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
+import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
 
 public class KitpvpKits 
 {
 	public enum Kits
 	{
-		ARCHER("Archer", Material.BOW),
-		GUERRIER("Guerrier", Material.DIAMOND_SWORD),
-		SORCIERE("Sorcière", Material.STICK),
+		ARCHER(FunCombat.localizer.locate("funcombat.kit.kitarcher"), Material.BOW),
+		GUERRIER(FunCombat.localizer.locate("funcombat.kit.kitguerrier"), Material.DIAMOND_SWORD),
+		SORCIERE(FunCombat.localizer.locate("funcombat.kit.kitsorciere"), Material.STICK),
 		;
 		
 		private String type;
@@ -280,45 +281,45 @@ public class KitpvpKits
 			ItemStack bow = new ItemStack(Material.BOW, 1);
 			ItemMeta bowMeta = bow.getItemMeta();
 			
-			bowMeta.setDisplayName("Arc de " + player.getName());
+			bowMeta.setDisplayName(FunCombat.localizer.locate("funcombat.kit.bowof") + " " + player.getName());
 			
 			ArrayList<String> Bowlore = new ArrayList<String>();
-			Bowlore.add(ChatColor.RESET + "Stuff du kit Archer");
+			Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.stuffarcher"));
 			
 			if (level >= 1 && level <= 4)
 			{	
 				bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 				
-				Bowlore.add(ChatColor.RESET + "Niv.1");
+				Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level1"));
 				
-				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 1");
+				Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel1"));
 			}
 			if (level >= 5 && level <= 9)
 			{
 				bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,1, true);
 				bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 				
-				Bowlore.add(ChatColor.RESET + "Niv.2");
+				Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level2"));
 				
-				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 2");
+				Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel2"));
 			}
 			if (level >= 10 && level <= 19)
 			{
 				bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,2, true);
 				bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 			
-				Bowlore.add(ChatColor.RESET + "Niv.3");
+				Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level3"));
 				
-				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 3");
+				Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel3"));
 			}
 			if (level >= 20 && level <= 49)
 			{
 				bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,3, true);
 				bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 				
-				Bowlore.add(ChatColor.RESET + "Niv.4");
+				Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level4"));
 				
-				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 4");
+				Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel4"));
 			}
 			if (level >= 50)
 			{
@@ -326,9 +327,9 @@ public class KitpvpKits
 				bowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
 				bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 				
-				Bowlore.add(ChatColor.RESET + "Niv.5");
+				Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level5"));
 				
-				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 5");
+				Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel5"));
 			}
 			
 			
@@ -345,55 +346,55 @@ public class KitpvpKits
 			ItemStack sword = new ItemStack(Material.DIAMOND_SWORD,1);
 			ItemMeta swordMeta = sword.getItemMeta();
 			
-			swordMeta.setDisplayName("Epée de " + player.getName());
+			swordMeta.setDisplayName(FunCombat.localizer.locate("funcombat.kit.swordof") + " " + player.getName());
 			
 			ArrayList<String> lore = new ArrayList<String>();
-			lore.add(ChatColor.RESET + "Stuff du kit guerrier");
+			lore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.stuffguerrier"));
 			
 			if (level >= 1 && level <= 4)
 			{
-				lore.add(ChatColor.RESET + "Niv.1");
+				lore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level1"));
 				
 				swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
 				
-				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 1");
+				Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel1"));
 			}
 			if (level >= 5 && level <= 9)
 			{
-				lore.add(ChatColor.RESET + "Niv.2");
+				lore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level2"));
 				
 				swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
 				swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 				
-				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 2");
+				Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel2"));
 			}
 			if (level >= 10 && level <= 19)
 			{
-				lore.add(ChatColor.RESET + "Niv.3");
+				lore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level3"));
 				
 				swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
 				swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
 				
-				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 3");
+				Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel3"));
 			}
 			if (level >= 20 && level <= 49)
 			{
-				lore.add(ChatColor.RESET + "Niv.4");
+				lore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level4"));
 				
 				swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
 				swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
 				
-				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 4");
+				Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel4"));
 			}
 			if (level >= 50)
 			{
-				lore.add(ChatColor.RESET + "Niv.5");
+				lore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level5"));
 				
 				swordMeta.addEnchant(Enchantment.DURABILITY, 127, true);
 				swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 4, true);
 				swordMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
 				
-				Utils.sendCustomMessage(player,ChatColor.GREEN + "Vous passez niveau 5");
+				Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel5"));
 			}
 			
 			swordMeta.setLore(lore);
@@ -406,8 +407,8 @@ public class KitpvpKits
 		{
 			ItemStack rod = new ItemStack(Material.STICK);
 			ItemMeta rodMeta = rod.getItemMeta();
-			rodMeta.setDisplayName(ChatColor.DARK_PURPLE + "Bâton de sorcière");
-			rodMeta.setLore(Arrays.asList(ChatColor.WHITE + "Clic droit pour activer"));
+			rodMeta.setDisplayName(ChatColor.DARK_PURPLE + FunCombat.localizer.locate("funcombat.kit.witchstick"));
+			rodMeta.setLore(Arrays.asList(ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.rightclick")));
 			rod.setItemMeta(rodMeta);
 			
 			Potion popop = new Potion(PotionType.INSTANT_HEAL, 1).splash();
@@ -475,7 +476,7 @@ public class KitpvpKits
 		ItemMeta swordMeta = sword.getItemMeta();
 	
 		swordMeta.setDisplayName("Destructeur de cheateurs");
-	
+
 		swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 32767,true);
 		swordMeta.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 32767,true);
 		swordMeta.addEnchant(Enchantment.DAMAGE_UNDEAD, 32767,true);

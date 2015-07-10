@@ -32,6 +32,13 @@ import fr.reaamz.funcombat.otherlisteners.BungeeMessagesListener;
 import fr.reaamz.funcombat.otherlisteners.TestListeners;
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 
+/**
+ * 
+ * @author Reaamz / Loucool111
+ * <br><br>
+ * Cette classe est la classe principale du plugin FunCombat<br>
+ * https://github.com/Loucool111/FunCombat
+ */
 public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
@@ -47,7 +54,6 @@ public class FunCombat extends JavaPlugin
 	public static LocalizationManager localizer;
 	
 	public static MySQLManager database = new MySQLManager();
-	
 	
 	@Override
 	public void onEnable()

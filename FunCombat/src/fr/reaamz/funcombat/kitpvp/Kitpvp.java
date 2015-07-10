@@ -57,11 +57,11 @@ public class Kitpvp implements Listener
 				
 		Objective object = sc.registerNewObjective(type.toStringKit(), "dummy");
 		
-		object.setDisplayName(ChatColor.GREEN + "Kit : " + type.toStringKit());
+		object.setDisplayName(ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.kit") + " " + type.toStringKit());
 		object.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
-		Score kills = object.getScore(ChatColor.AQUA + "Kills");
-		Score niv = object.getScore(ChatColor.AQUA + "Niveau");
+		Score kills = object.getScore(ChatColor.AQUA + FunCombat.localizer.locate("funcombat.kit.kills"));
+		Score niv = object.getScore(ChatColor.AQUA + FunCombat.localizer.locate("funcombat.kit.level"));
 		
 		ScoreKills.put(player, kills);
 		ScoreNiv.put(player, niv);
@@ -275,9 +275,9 @@ public class Kitpvp implements Listener
 										target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,200,0));
 										target.damage(2, player);
 										target.playSound(target.getLocation(), Sound.FIZZ, 50F, 1F);
-										Utils.sendCustomMessage(target, ChatColor.RED + "Vous avez été touché par une sorcière !");
+										Utils.sendCustomMessage(target, ChatColor.RED + FunCombat.localizer.locate("funcombat.kit.sorcierehit"));
 									
-										final String baseName = ChatColor.DARK_PURPLE + "Bâton de sorcière";
+										final String baseName = ChatColor.DARK_PURPLE + FunCombat.localizer.locate("funcombat.kit.witchstick");
 									
 										int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(FunCombat.instance, new Runnable() 
 										{
@@ -328,7 +328,7 @@ public class Kitpvp implements Listener
 									}
 									else
 									{
-										Utils.sendCustomMessage(player, ChatColor.RED + "Vous ne pouvez pas utiliser votre bâton pour le moment !");
+										Utils.sendCustomMessage(player, ChatColor.RED + FunCombat.localizer.locate("funcombat.kit.sorcierecooldown"));
 									}
 								}
 							}
