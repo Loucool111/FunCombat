@@ -55,9 +55,9 @@ public class Kitpvp implements Listener
 	{
 		Scoreboard sc = Bukkit.getScoreboardManager().getNewScoreboard();
 				
-		Objective object = sc.registerNewObjective(type.toStringKit(), "dummy");
+		Objective object = sc.registerNewObjective(type.toString(), "dummy");
 		
-		object.setDisplayName(ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.kit") + " " + type.toStringKit());
+		object.setDisplayName(ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.kit") + " " + type.toString());
 		object.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
 		Score kills = object.getScore(ChatColor.AQUA + FunCombat.localizer.locate("funcombat.kit.kills"));
@@ -82,11 +82,11 @@ public class Kitpvp implements Listener
 			
 			try 
 			{
-				name = scs.get(player).getObjective(type.toStringKit()).getName(); // on essaye de recup le nom de l'objective
+				name = scs.get(player).getObjective(type.toString()).getName(); // on essaye de recup le nom de l'objective
 			}
 			catch (IllegalArgumentException | NullPointerException ex) {}
 			
-			if (name == type.toStringKit())
+			if (name == type.toString())
 			{
 				player.setScoreboard(scs.get(player));
 			}
@@ -103,7 +103,7 @@ public class Kitpvp implements Listener
 	
 	public void newKitpvpPlayer(Player player, Kits type)
 	{
-		playerKit.put(player, type.toStringKit());
+		playerKit.put(player, type.toString());
 		
 		Utils.ClearInventoryAndPotionEffects(player);
 		
@@ -157,7 +157,7 @@ public class Kitpvp implements Listener
 		{
 			for (Kits kit : Kits.values())
 			{
-				if (kit.toStringKit().equals(playerKit.get(player)))
+				if (kit.toString().equals(playerKit.get(player)))
 				{
 					newKitpvpPlayer(player, kit);
 				}
@@ -195,7 +195,7 @@ public class Kitpvp implements Listener
 			{
 				if (playerKit.containsKey(killer))
 				{
-					if (playerKit.get(killer).equals(kit.toStringKit()))
+					if (playerKit.get(killer).equals(kit.toString()))
 					{
 						if (KitLevels.get(killer).containsKey(kit))
 						{
@@ -217,7 +217,7 @@ public class Kitpvp implements Listener
 				
 				if (playerKit.containsKey(victim))
 				{
-					if (playerKit.get(victim).equals(kit.toStringKit()))
+					if (playerKit.get(victim).equals(kit.toString()))
 					{
 						if (KitLevels.get(victim).containsKey(kit))
 						{
@@ -253,7 +253,7 @@ public class Kitpvp implements Listener
 		
 		if (event.getAction().equals(Action.RIGHT_CLICK_AIR) && playerKit.containsKey(player))
 		{
-			if (playerKit.get(player).equals(Kits.SORCIERE.toStringKit()))
+			if (playerKit.get(player).equals(Kits.SORCIERE.toString()))
 			{
 				List<Entity> entList = player.getNearbyEntities(7, 7, 7);
 				
