@@ -33,16 +33,8 @@ funcombat.kit.sorciere2=1 Witch Stick
 funcombat.kit.sorciere3=Some Potions
 
 #KITPVP STUFF
-funcombat.kit.level1=Level 1
-funcombat.kit.level2=Level 2
-funcombat.kit.level3=Level 3
-funcombat.kit.level4=Level 4
-funcombat.kit.level5=Level 5
-funcombat.kit.ylevel1=You're now Level 1
-funcombat.kit.ylevel2=You're now Level 2
-funcombat.kit.ylevel3=You're now Level 3
-funcombat.kit.ylevel4=You're now Level 4
-funcombat.kit.ylevel5=You're now Level 5
+funcombat.kit.level=Level
+funcombat.kit.ylevel=You're now
 funcombat.kit.stuffarcher=Archer Stuff
 funcombat.kit.stuffguerrier=Warrior Stuff
 funcombat.kit.stuffsorciere=Witch Stuff

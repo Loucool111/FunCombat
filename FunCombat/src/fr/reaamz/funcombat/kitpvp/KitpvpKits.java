@@ -20,20 +20,22 @@ public class KitpvpKits
 {
 	public enum Kits
 	{
-		ARCHER(FunCombat.localizer.locate("funcombat.kit.kitarcher"), Material.BOW, KitArcher.class),
-		GUERRIER(FunCombat.localizer.locate("funcombat.kit.kitguerrier"), Material.DIAMOND_SWORD, KitGuerrier.class),
-		SORCIERE(FunCombat.localizer.locate("funcombat.kit.kitsorciere"), Material.STICK, KitSorciere.class),
+		ARCHER(FunCombat.localizer.locate("funcombat.kit.kitarcher"), KitArcher.class, Material.BOW, FunCombat.localizer.locate("funcombat.kit.archer1"), FunCombat.localizer.locate("funcombat.kit.archer2")),
+		GUERRIER(FunCombat.localizer.locate("funcombat.kit.kitguerrier"), KitGuerrier.class, Material.DIAMOND_SWORD, FunCombat.localizer.locate("funcombat.kit.guerrier1"), FunCombat.localizer.locate("funcombat.kit.guerrier2")),
+		SORCIERE(FunCombat.localizer.locate("funcombat.kit.kitsorciere"), KitSorciere.class, Material.STICK, FunCombat.localizer.locate("funcombat.kit.sorciere1"), FunCombat.localizer.locate("funcombat.kit.sorciere2"), FunCombat.localizer.locate("funcombat.kit.sorciere3")),
 		;
 		
 		private String type;
 		private Material itemInv;
 		private Class<? extends IKit> clazz;
+		private String[] lores;
 		
-		Kits(String type, Material itemInv, Class<? extends IKit> clazz)
-		{
+		Kits(String type, Class<? extends IKit> clazz, Material itemInv, String ... lores)
+		{	
 			this.type = type;
-			this.itemInv = itemInv;
 			this.clazz = clazz;
+			this.itemInv = itemInv;			
+			this.lores = lores;
 		}
 		
 		@Override
@@ -51,74 +53,49 @@ public class KitpvpKits
 		{
 			return this.clazz;
 		}
+		
+		public String[] getLores()
+		{
+			return this.lores;
+		}
 	}
 	
 	public static void equipKitArmor(Player player, int level, Kits kit)
 	{
-//		if (kit.equals(Kits.ARCHER))
-//		{
-//			new KitArcher().equipArmor(player, level);
-//		}
-//		if (kit.equals(Kits.GUERRIER))
-//		{
-//			new KitGuerrier().equipArmor(player, level);
-//		}
-//		if (kit.equals(Kits.SORCIERE))
-//		{
-//			new KitSorciere().equipArmor(player, level);
-//		}
-		
 		for (Kits kk : Kits.values())
 		{
 			if (kit.equals(kk))
-			{
-				IKit kt = null;
+			{				
 				try
 				{
-					kt = kk.getKitClass().newInstance();
+					kk.getKitClass().newInstance().equipArmor(player, level);
 				}
 				catch (InstantiationException | IllegalAccessException e)
 				{				
 					e.printStackTrace();
-				}
-				kt.equipArmor(player, level);
+				}				
 			}
 		}
 	}
 	
 	public static void equipKitStuff(Player player, int level, Kits kit)
-	{
-//		if (kit.equals(Kits.ARCHER))
-//		{
-//			new KitArcher().equipStuff(player, level);
-//		}
-//		if (kit.equals(Kits.GUERRIER))
-//		{
-//			new KitGuerrier().equipStuff(player, level);
-//		}
-//		if (kit.equals(Kits.SORCIERE))
-//		{
-//			new KitSorciere().equipStuff(player, level);
-//		}
-		
+	{	
 		for (Kits kk : Kits.values())
 		{
 			if (kit.equals(kk))
 			{
-				IKit kt = null;
 				try
 				{
-					kt = kk.getKitClass().newInstance();
+					kk.getKitClass().newInstance().equipStuff(player, level);
 				}
 				catch (InstantiationException | IllegalAccessException e)
 				{				
 					e.printStackTrace();
-				}
-				kt.equipStuff(player, level);
+				}				
 			}
 		}
 	}
-	
+		
 	public static void equipKitAdmArmure(Player player)
 	{
 		ItemStack[] armor = new ItemStack[]{

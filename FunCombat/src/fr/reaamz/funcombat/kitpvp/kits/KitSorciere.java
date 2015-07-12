@@ -1,6 +1,7 @@
 package fr.reaamz.funcombat.kitpvp.kits;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -13,6 +14,8 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
 import fr.reaamz.funcombat.FunCombat;
+import fr.reaamz.funcombat.Utils;
+import fr.reaamz.funcombat.kitpvp.KitpvpUtils;
 
 public class KitSorciere implements IKit
 {
@@ -26,17 +29,14 @@ public class KitSorciere implements IKit
 				new ItemStack(Material.CHAINMAIL_HELMET)
 		};
 		
-		if (level >= 1 && level <= 4)
+		if (KitpvpUtils.estEntre1et4(level))
 		{
 			for (ItemStack arm : armor)
 			{
 				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 			}
-			
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		}
-		if (level >= 5 && level <= 9)
+		if (KitpvpUtils.estEntre4et9(level))
 		{
 			for (ItemStack arm : armor)
 			{
@@ -45,11 +45,8 @@ public class KitSorciere implements IKit
 			}
 			
 			armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 1);
-			
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		}
-		if (level >= 10 && level <= 19)
+		if (KitpvpUtils.estEntre9et19(level))
 		{
 			for (ItemStack arm : armor)
 			{
@@ -58,11 +55,8 @@ public class KitSorciere implements IKit
 			}
 			
 			armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 2);
-			
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		}
-		if (level >= 20 && level <= 49)
+		if (KitpvpUtils.estEntre19et49(level))
 		{
 			for (ItemStack arm : armor)
 			{
@@ -71,11 +65,8 @@ public class KitSorciere implements IKit
 			}
 			
 			armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 3);
-			
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		}
-		if (level >= 50)
+		if (KitpvpUtils.estPlusDe50(level))
 		{
 			for (ItemStack arm : armor)
 			{
@@ -84,9 +75,6 @@ public class KitSorciere implements IKit
 			}
 			
 			armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 4);
-			
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		}
 		
 		player.getInventory().setArmorContents(armor);
@@ -98,32 +86,41 @@ public class KitSorciere implements IKit
 		ItemStack rod = new ItemStack(Material.STICK);
 		ItemMeta rodMeta = rod.getItemMeta();
 		rodMeta.setDisplayName(ChatColor.DARK_PURPLE + FunCombat.localizer.locate("funcombat.kit.witchstick"));
-		rodMeta.setLore(Arrays.asList(ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.rightclick")));
-		rod.setItemMeta(rodMeta);
+		List<String> lore = new ArrayList<String>();
+		
+		lore.add(ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.rightclick"));
+		lore.add(ChatColor.WHITE + FunCombat.localizer.locate("funcombat.kit.stuffsorciere"));
 		
 		Potion popop = new Potion(PotionType.INSTANT_HEAL, 1).splash();
 		ItemStack popo = popop.toItemStack(1);
 		
-		if (level >= 1 && level <= 4)
+		if (KitpvpUtils.estEntre1et4(level))
 		{
 			rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
 		}
-		if (level >= 5 && level <= 9)
+		if (KitpvpUtils.estEntre4et9(level))
 		{
 			rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);	
 		}
-		if (level >= 10 && level <= 19)
+		if (KitpvpUtils.estEntre9et19(level))
 		{
 			rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
 		}
-		if (level >= 20 && level <= 49)
+		if (KitpvpUtils.estEntre19et49(level))
 		{
 			rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);
 		}
-		if (level >= 50)
+		if (KitpvpUtils.estPlusDe50(level))
 		{
 			rod.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
 		}
+		
+		lore.add(KitpvpUtils.addLevelLore(level));
+		Utils.sendCustomMessage(player, KitpvpUtils.getMessageLevel(level));
+		player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+		
+		rodMeta.setLore(lore);
+		rod.setItemMeta(rodMeta);
 		
 		player.getInventory().addItem(rod);
 		player.getInventory().addItem(new ItemStack(Material.GOLDEN_CARROT, 64));
@@ -132,6 +129,7 @@ public class KitSorciere implements IKit
 		{
 			player.getInventory().addItem(popo);
 		}
+		
 		player.getInventory().addItem(new ItemStack(Material.ENDER_PEARL,16));
 	}
 }

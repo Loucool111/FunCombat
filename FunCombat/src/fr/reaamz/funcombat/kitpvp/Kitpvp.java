@@ -67,7 +67,7 @@ public class Kitpvp implements Listener
 		ScoreNiv.put(player, niv);
 		
 		ScoreKills.get(player).setScore(level);
-		ScoreNiv.get(player).setScore(KitpvpUtils.getLevelFromKills(player, level));
+		ScoreNiv.get(player).setScore(KitpvpUtils.getLevelFromKills(level));
 		
 		scs.put(player, sc);
 		
@@ -203,7 +203,7 @@ public class Kitpvp implements Listener
 							
 							ScoreKills.get(killer).setScore(KitLevels.get(killer).get(kit));
 							
-							ScoreNiv.get(killer).setScore(KitpvpUtils.getLevelFromKills(killer, KitLevels.get(killer).get(kit)));
+							ScoreNiv.get(killer).setScore(KitpvpUtils.getLevelFromKills(KitLevels.get(killer).get(kit)));
 							
 							if (checkScores(killer, kit))
 							{
@@ -227,7 +227,7 @@ public class Kitpvp implements Listener
 								
 								ScoreKills.get(victim).setScore(KitLevels.get(victim).get(kit));
 								
-								ScoreNiv.get(victim).setScore(KitpvpUtils.getLevelFromKills(victim, KitLevels.get(victim).get(kit)));
+								ScoreNiv.get(victim).setScore(KitpvpUtils.getLevelFromKills(KitLevels.get(victim).get(kit)));
 							
 								if (checkScores(victim, kit))
 								{

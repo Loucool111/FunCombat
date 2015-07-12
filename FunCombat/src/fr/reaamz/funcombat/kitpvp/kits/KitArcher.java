@@ -1,6 +1,7 @@
 package fr.reaamz.funcombat.kitpvp.kits;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -12,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
+import fr.reaamz.funcombat.kitpvp.KitpvpUtils;
 
 public class KitArcher implements IKit
 {
@@ -25,16 +27,14 @@ public class KitArcher implements IKit
 				new ItemStack(Material.CHAINMAIL_HELMET)
 		};
 		
-		if (level >= 1 && level <= 4)
+		if (KitpvpUtils.estEntre1et4(level))
 		{
 			for(ItemStack arm : armor)
 			{
 				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);				
 			}
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		}
-		if (level >= 5 && level <= 9)
+		if (KitpvpUtils.estEntre4et9(level))
 		{
 			for(ItemStack arm : armor)
 			{
@@ -43,10 +43,8 @@ public class KitArcher implements IKit
 			}
 			
 			armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,1);
-						
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		}
-		if (level >= 10 && level <= 19)
+		if (KitpvpUtils.estEntre9et19(level))
 		{
 			for(ItemStack arm : armor)
 			{
@@ -55,10 +53,8 @@ public class KitArcher implements IKit
 			}
 			
 			armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,2);
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		}
-		if (level >= 20 && level <= 49)
+		if (KitpvpUtils.estEntre19et49(level))
 		{
 			for(ItemStack arm : armor)
 			{
@@ -67,10 +63,8 @@ public class KitArcher implements IKit
 			}
 			
 			armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,3);
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		}
-		if (level >= 50)
+		if (KitpvpUtils.estPlusDe50(level))
 		{
 			for(ItemStack arm : armor)
 			{
@@ -79,8 +73,6 @@ public class KitArcher implements IKit
 			}
 			
 			armor[0].addUnsafeEnchantment(Enchantment.PROTECTION_FALL,4);
-			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		}
 		
 		player.getInventory().setArmorContents(armor);
@@ -94,57 +86,40 @@ public class KitArcher implements IKit
 		
 		bowMeta.setDisplayName(FunCombat.localizer.locate("funcombat.kit.bowof") + " " + player.getName());
 		
-		ArrayList<String> Bowlore = new ArrayList<String>();
-		Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.stuffarcher"));
+		List<String> lore = new ArrayList<String>();
+		lore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.stuffarcher"));
 		
-		if (level >= 1 && level <= 4)
+		if (KitpvpUtils.estEntre1et4(level))
 		{	
 			bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-			
-			Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level1"));
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel1"));
 		}
-		if (level >= 5 && level <= 9)
+		if (KitpvpUtils.estEntre4et9(level))
 		{
 			bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,1, true);
 			bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-			
-			Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level2"));
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel2"));
 		}
-		if (level >= 10 && level <= 19)
+		if (KitpvpUtils.estEntre9et19(level))
 		{
 			bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,2, true);
 			bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-		
-			Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level3"));
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel3"));
 		}
-		if (level >= 20 && level <= 49)
+		if (KitpvpUtils.estEntre19et49(level))
 		{
 			bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,3, true);
 			bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-			
-			Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level4"));
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel4"));
 		}
-		if (level >= 50)
+		if (KitpvpUtils.estPlusDe50(level))
 		{
 			bowMeta.addEnchant(Enchantment.ARROW_DAMAGE,4, true);
 			bowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
 			bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-			
-			Bowlore.add(ChatColor.RESET + FunCombat.localizer.locate("funcombat.kit.level5"));
-			
-			Utils.sendCustomMessage(player,ChatColor.GREEN + FunCombat.localizer.locate("funcombat.kit.ylevel5"));
 		}
 		
+		lore.add(KitpvpUtils.addLevelLore(level));
+		Utils.sendCustomMessage(player, KitpvpUtils.getMessageLevel(level));
+		player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
 		
-		bowMeta.setLore(Bowlore);
+		bowMeta.setLore(lore);
 		
 		bow.setItemMeta(bowMeta);
 	

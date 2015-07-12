@@ -33,16 +33,8 @@ funcombat.kit.sorciere2=1 Bâton de Sorcière
 funcombat.kit.sorciere3=Différentes Potions
 
 #KITPVP STUFF
-funcombat.kit.level1=Level 1
-funcombat.kit.level2=Level 2
-funcombat.kit.level3=Level 3
-funcombat.kit.level4=Level 4
-funcombat.kit.level5=Level 5
-funcombat.kit.ylevel1=Vous êtes maintenant Level 1
-funcombat.kit.ylevel2=Vous êtes maintenant Level 2
-funcombat.kit.ylevel3=Vous êtes maintenant Level 3
-funcombat.kit.ylevel4=Vous êtes maintenant Level 4
-funcombat.kit.ylevel5=Vous êtes maintenant Level 5
+funcombat.kit.level=Niveau
+funcombat.kit.ylevel=Vous êtes maintenant
 funcombat.kit.stuffarcher=Stuff du kit Archer
 funcombat.kit.stuffguerrier=Stuff du kit Guerrier
 funcombat.kit.stuffsorciere=Stuff du kit Sorcière
