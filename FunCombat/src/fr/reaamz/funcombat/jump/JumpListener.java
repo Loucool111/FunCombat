@@ -33,7 +33,8 @@ public class JumpListener implements Listener
 					{
 						if (jump.getItemName().equals(event.getCurrentItem().getItemMeta().getDisplayName()))
 						{
-							Utils.sendCustomMessage(player, jump.getItemName());
+							//TP player to start zone
+							JumpManager.tpToStartZone(player, jump.getName());
 						}
 					}
 				}
