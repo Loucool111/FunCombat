@@ -3,6 +3,7 @@ package fr.reaamz.funcombat.command;
 import java.sql.SQLException;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,6 +16,7 @@ import fr.reaamz.funcombat.grades.GradeUtils;
 
 public class GradeCommandExecutor implements CommandExecutor
 {
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
@@ -30,7 +32,15 @@ public class GradeCommandExecutor implements CommandExecutor
 				{
 					try
 					{
-						FunCombat.database.updateGrade(UUID.fromString(args[1]), GradeUtils.getGradeFromString(args[2]));
+						UUID uuid;
+						try {
+							uuid = UUID.fromString(args[1]);
+						} catch (IllegalArgumentException e)
+						{
+							uuid = Bukkit.getPlayer(args[1]).getUniqueId();
+						}
+						
+						FunCombat.database.updateGrade(uuid, GradeUtils.getGradeFromString(args[2]));
 						Utils.sendCustomMessage(player, "Le Grade de " + ChatColor.AQUA + "'" + args[1] + "'" + ChatColor.WHITE + " à été modifié en " + ChatColor.AQUA + args[2]);
 					}
 					catch (SQLException e) { e.printStackTrace(); }

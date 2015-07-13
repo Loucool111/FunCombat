@@ -47,7 +47,6 @@ public class FunCombat extends JavaPlugin
 	//TODO FIX LE TRUC DES COORS DANS tJumpLoc...
 	//TODO all les commands executors
 	//TODO Permissions ......
-	//TODO grade avec le playerName
 	
 	public static Plugin instance;
 	
