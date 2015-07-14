@@ -212,7 +212,7 @@ public class MySQLManager
 			}
 		}
 		else
-		{			
+		{
 			loc = null;
 		}
 		

@@ -24,6 +24,7 @@ import fr.reaamz.funcombat.hub.HubJoinListener;
 import fr.reaamz.funcombat.hub.HubMotdListener;
 import fr.reaamz.funcombat.jump.JumpDoneListener;
 import fr.reaamz.funcombat.jump.JumpListener;
+import fr.reaamz.funcombat.jump.JumpManager;
 import fr.reaamz.funcombat.kitpvp.KitpvpListener;
 import fr.reaamz.funcombat.localization.LocalizationManager;
 import fr.reaamz.funcombat.mainmenu.MainMenuListener;
@@ -43,9 +44,8 @@ public class FunCombat extends JavaPlugin
 {
 	//TODO fix les message de niveau de kit qui apparaissent trop souvent
 	//TODO finir jumpscore et jump
-	//TODO database table avec des truc random tmtc
-	//TODO FIX LE TRUC DES COORS DANS tJumpLoc...
-	//TODO all les commands executors
+	//TODO database table avec des truc random (hub loc etc..)
+	//TODO stocker les infos de temps dans la db
 	//TODO Permissions ......
 	
 	public static Plugin instance;
@@ -60,7 +60,7 @@ public class FunCombat extends JavaPlugin
 		//définition de l'instance du plugin
 		instance = this;
 		
-		//setup de localizer
+		//setup du localizer
 		try
 		{
 			localizer = new LocalizationManager(this.getConfig().getString("locFileName"));
@@ -131,6 +131,7 @@ public class FunCombat extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new HatsMenuListener(), this);
 		Bukkit.getPluginManager().registerEvents(new JumpListener(), this);
 		Bukkit.getPluginManager().registerEvents(new JumpDoneListener(), this);
+		Bukkit.getPluginManager().registerEvents(new JumpManager(), this);
 
 		//Grades listeners
 		Bukkit.getPluginManager().registerEvents(new GradesJoinListener(), this);

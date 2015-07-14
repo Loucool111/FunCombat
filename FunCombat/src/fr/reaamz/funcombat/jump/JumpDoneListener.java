@@ -1,6 +1,5 @@
 package fr.reaamz.funcombat.jump;
 
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,12 +14,6 @@ public class JumpDoneListener implements Listener
 	{
 		Player player = event.getPlayer();
 		
-		Utils.sendMessageAllPlayers("Player " + player.getDisplayName() + " just finished " + event.getJumpName() + " in " + event.getTime() + "s");
-		
-		Utils.sendCustomMessage(player, player.getLocation().serialize().toString());
-		
-		Location loc = JumpUtils.getLocation(player.getLocation().serialize().toString());
-		
-		player.teleport(loc);
+		Utils.sendMessageAllPlayers("Player " + player.getName() + " just finished " + event.getJumpName() + " in " + event.getTime() + " secondes(s)");
 	}
 }
