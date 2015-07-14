@@ -42,7 +42,6 @@ import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
  */
 public class FunCombat extends JavaPlugin
 {
-	//TODO fix les message de niveau de kit qui apparaissent trop souvent
 	//TODO finir jumpscore et jump
 	//TODO database table avec des truc random (hub loc etc..)
 	//TODO stocker les infos de temps dans la db

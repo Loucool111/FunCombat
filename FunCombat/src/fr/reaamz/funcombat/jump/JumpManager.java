@@ -37,7 +37,7 @@ public class JumpManager implements Listener
 				jumpTimes.put(player, jumpTimes.get(player) + 1);
 			}
 			
-		}, 0L, 20L);
+		}, 20L, 20L);
 		
 		jumpTasksIds.put(player, id);
 	}
@@ -97,7 +97,7 @@ public class JumpManager implements Listener
 					}
 				}
 			}
-			catch (SQLException | NullPointerException e){}
+			catch (Exception e){}
 		}
 	}	
 }
