@@ -58,9 +58,9 @@ public class Utils
 		}
 	}
 	
-	public static void sendCustomMessage(Player p , String message)
+	public static void sendCustomMessage(Player player, String message)
 	{
-		p.sendMessage(ChatColor.GOLD + "[" + PLUGIN_NAME + "] " + ChatColor.RESET + message);
+		player.sendMessage(ChatColor.GOLD + "[" + PLUGIN_NAME + "] " + ChatColor.RESET + message);
 	}
 	
 	public static void logInfo(String info)

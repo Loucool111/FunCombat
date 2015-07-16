@@ -1,5 +1,7 @@
 package fr.reaamz.funcombat.player;
 
+import java.sql.SQLException;
+
 import me.confuser.barapi.BarAPI;
 
 import org.bukkit.ChatColor;
@@ -10,6 +12,8 @@ import com.google.common.io.ByteStreams;
 
 import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
+import fr.reaamz.funcombat.grades.GradeType;
+import fr.reaamz.funcombat.grades.GradeUtils;
 import fr.reaamz.funcombat.title.TabTitle;
 import fr.reaamz.funcombat.title.Title;
 import fr.reaamz.funcombat.title.TitleType;
@@ -20,10 +24,16 @@ import fr.reaamz.funcombat.title.TitleType;
 public class FCPlayer 
 {
 	private Player player;
+	private GradeType grade;
 		
 	public FCPlayer(Player player) 
 	{
 		this.player = player;
+		try
+		{
+			this.grade =  FunCombat.database.getGrade(this.player.getUniqueId());
+		}
+		catch (SQLException e){ this.grade = GradeType.JOUEUR; }
 	}
 	
 	public Player getPlayer()
@@ -60,5 +70,15 @@ public class FCPlayer
 		out.writeUTF(serverName);
 		
 		this.player.sendPluginMessage(FunCombat.instance, "BungeeCord", out.toByteArray());
+	}
+	
+	public GradeType getGrade()
+	{
+		return this.grade;
+	}
+	
+	public int getPermissionLevel()
+	{
+		return GradeUtils.getPermissionLevel(this.grade);
 	}
 }

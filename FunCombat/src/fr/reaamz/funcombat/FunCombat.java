@@ -46,6 +46,7 @@ public class FunCombat extends JavaPlugin
 	//TODO database table avec des truc random (hub loc etc..)
 	//TODO stocker les infos de temps dans la db
 	//TODO Permissions ......
+	//TODO la grade depuis la console et le perms
 	
 	public static Plugin instance;
 	

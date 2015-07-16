@@ -12,6 +12,7 @@ import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.jump.JumpNames;
 import fr.reaamz.funcombat.jump.JumpUtils;
+import fr.reaamz.funcombat.player.FCPlayerManager;
 
 public class JumpCommandExecutor implements CommandExecutor
 {
@@ -22,50 +23,55 @@ public class JumpCommandExecutor implements CommandExecutor
 		{
 			Player player = (Player) sender;
 			
-			if (cmd.getName().equals("setjump"))
-			{
-				if (args.length < 2) return false;
-				
-				for (JumpNames jump : JumpNames.values())
+			if (FCPlayerManager.loadPlayer(player).getPermissionLevel() == 2)
+			{	
+				if (cmd.getName().equals("setjump"))
 				{
-					if (args[0].equalsIgnoreCase(jump.getName()))
+					if (args.length < 2) return false;
+				
+					for (JumpNames jump : JumpNames.values())
 					{
-						try
+						if (args[0].equalsIgnoreCase(jump.getName()))
 						{
-							if (args[1].equalsIgnoreCase(("startZone")))
+							try
 							{
-								FunCombat.database.updateJumpLoc(jump.getName(), player.getLocation(), JumpUtils.getLocation(FunCombat.database.getStartBlock(jump.getName())), JumpUtils.getLocation(FunCombat.database.getEndBlock(jump.getName())));
-								Utils.sendCustomMessage(player, ChatColor.GREEN + "startZone défini avec succès");
+								if (args[1].equalsIgnoreCase(("startZone")))
+								{
+									FunCombat.database.updateJumpLoc(jump.getName(), player.getLocation(), JumpUtils.getLocation(FunCombat.database.getStartBlock(jump.getName())), JumpUtils.getLocation(FunCombat.database.getEndBlock(jump.getName())));
+									Utils.sendCustomMessage(player, ChatColor.GREEN + "startZone défini avec succès");
+								}
+								else if (args[1].equalsIgnoreCase("startBlock"))
+								{
+									FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), player.getLocation(), JumpUtils.getLocation(FunCombat.database.getEndBlock(jump.getName())));
+									Utils.sendCustomMessage(player, ChatColor.GREEN + "startBlock défini avec succès");
+								}
+								else if (args[1].equalsIgnoreCase("endBlock"))
+								{
+									FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), JumpUtils.getLocation(FunCombat.database.getStartBlock(jump.getName())), player.getLocation());
+									Utils.sendCustomMessage(player, ChatColor.GREEN + "endBlock défini avec succès");
+								}
+								else if (args[1].equalsIgnoreCase("reset"))
+								{
+									FunCombat.database.resetJump(jump.getName());
+									Utils.sendCustomMessage(player, ChatColor.GREEN + "Les coordonées du " + jump.getItemName() + " ont été reset avec succès");
+								}
+								else
+								{
+									return false;
+								}
 							}
-							else if (args[1].equalsIgnoreCase("startBlock"))
+							catch (SQLException e)
 							{
-								FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), player.getLocation(), JumpUtils.getLocation(FunCombat.database.getEndBlock(jump.getName())));
-								Utils.sendCustomMessage(player, ChatColor.GREEN + "startBlock défini avec succès");
+								e.printStackTrace();
 							}
-							else if (args[1].equalsIgnoreCase("endBlock"))
-							{
-								FunCombat.database.updateJumpLoc(jump.getName(), JumpUtils.getLocation(FunCombat.database.getStartZone(jump.getName())), JumpUtils.getLocation(FunCombat.database.getStartBlock(jump.getName())), player.getLocation());
-								Utils.sendCustomMessage(player, ChatColor.GREEN + "endBlock défini avec succès");
-							}
-							else if (args[1].equalsIgnoreCase("reset"))
-							{
-								FunCombat.database.resetJump(jump.getName());
-								Utils.sendCustomMessage(player, ChatColor.GREEN + "Les coordonées du " + jump.getItemName() + " ont été reset avec succès");
-							}
-							else
-							{
-								return false;
-							}
-						}
-						catch (SQLException e)
-						{
-							e.printStackTrace();
-						}
 						
-						return true;
+							return true;
+						}
 					}
 				}
 			}
+			else
+				Utils.sendCustomMessage(player, ChatColor.RED + "Vous n'avez pas la puissance pour effectuer cette commande.");
 		}
 		return false;
 	}
