@@ -11,7 +11,7 @@ import fr.reaamz.funcombat.hats.HatsUitls;
 import fr.reaamz.funcombat.jump.JumpUtils;
 import fr.reaamz.funcombat.kitpvp.KitpvpUtils;
 import fr.reaamz.funcombat.metamorphoses.MetamorphUtils;
-import fr.reaamz.funcombat.player.FCPlayer;
+import fr.reaamz.funcombat.player.PlayerInfo;
 import fr.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 import fr.reaamz.funcombat.virtualinventory.GenericVirtualInventory;
 
@@ -22,8 +22,6 @@ public class MainMenuListener implements Listener
 	{		
 		Player player = (Player) e.getWhoClicked();
 		
-		FCPlayer fcplayer = new FCPlayer(player);
-
 		if (e.getInventory().getName().equals(Utils.InventoryNames.FC_MAINMENU.getName()))
 		{	
 			if(e.getCurrentItem() != null && e.getCurrentItem().getType() != Material.AIR && e.getCurrentItem().hasItemMeta())
@@ -47,7 +45,7 @@ public class MainMenuListener implements Listener
 						
 				if (e.getCurrentItem().getType() == Material.HOPPER)
 				{
-					fcplayer.sendToServer("Minigame");
+					PlayerInfo.get(player).sendToServer("Minigame");
 				}
 						
 				if (e.getCurrentItem().getType() == Material.FEATHER)

@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -14,15 +13,18 @@ import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.grades.GradeUtils;
 
-public class GradeCommandExecutor implements CommandExecutor
+public class GradeCommandExecutor implements IPluginCommand
 {
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
+		Player player = null;
+		
 		if (sender instanceof Player)
 		{
-			Player player = (Player) sender;
+			player = (Player) sender;
+		}
 			
 			if (cmd.getName().equals("grade"))
 			{
@@ -33,9 +35,11 @@ public class GradeCommandExecutor implements CommandExecutor
 					try
 					{
 						UUID uuid;
-						try {
+						try
+						{
 							uuid = UUID.fromString(args[1]);
-						} catch (IllegalArgumentException e)
+						}
+						catch (IllegalArgumentException e)
 						{
 							uuid = Bukkit.getPlayer(args[1]).getUniqueId();
 						}
@@ -64,7 +68,14 @@ public class GradeCommandExecutor implements CommandExecutor
 				Utils.sendCustomMessage(player, player.getUniqueId().toString());
 				return true;
 			}
-		}
+		
 		return false;
+	}
+
+	@Override
+	public void displayHelp(Player player)
+	{	
+		Utils.sendCustomMessage(player, "Permet de modifier le grade d'un joueur.");
+		Utils.sendCustomMessage(player, "Utilisation : /grade set;get <UUID || PLAYERNAME>");
 	}
 }

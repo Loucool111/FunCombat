@@ -12,7 +12,7 @@ import fr.reaamz.funcombat.FunCombat;
 import fr.reaamz.funcombat.Utils;
 import fr.reaamz.funcombat.jump.JumpNames;
 import fr.reaamz.funcombat.jump.JumpUtils;
-import fr.reaamz.funcombat.player.FCPlayerManager;
+import fr.reaamz.funcombat.player.PlayerInfo;
 
 public class JumpCommandExecutor implements CommandExecutor
 {
@@ -23,7 +23,7 @@ public class JumpCommandExecutor implements CommandExecutor
 		{
 			Player player = (Player) sender;
 			
-			if (FCPlayerManager.loadPlayer(player).getPermissionLevel() == 2)
+			if (PlayerInfo.get(player).getPermissionLevel() == 2)
 			{	
 				if (cmd.getName().equals("setjump"))
 				{

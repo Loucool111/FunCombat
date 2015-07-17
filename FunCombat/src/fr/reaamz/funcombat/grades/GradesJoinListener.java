@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.reaamz.funcombat.FunCombat;
-import fr.reaamz.funcombat.player.FCPlayer;
+import fr.reaamz.funcombat.hub.HubWelcome;
 
 public class GradesJoinListener implements Listener 
 {
@@ -67,9 +67,7 @@ public class GradesJoinListener implements Listener
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event)
 	{
-		FCPlayer player = new FCPlayer(event.getPlayer());
-
-		player.sendWelcomeMessages();
+		HubWelcome.sendWelcomeMessages(event.getPlayer());
 	}
 	
 	@EventHandler
