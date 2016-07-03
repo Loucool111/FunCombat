@@ -21,7 +21,7 @@ public class MySQLManager
 		
 	public void connectDatabase() throws ClassNotFoundException, SQLException
 	{
-		this.db = new MySQL(FunCombat.instance, "localhost", "3306", "funcombat", "root", "");
+		this.db = new MySQL(FunCombat.instance, "localhost", "3306", "funcombat", "root", "admin");
 		this.db.openConnection();
 	}
 	

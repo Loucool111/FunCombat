@@ -34,7 +34,7 @@ public class KitGuerrier implements IKit
 				arm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 			}
 			
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+			player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 50, 1);
 		}
 		if (KitpvpUtils.estEntre4et9(level))
 		{
@@ -119,7 +119,7 @@ public class KitGuerrier implements IKit
 		
 		lore.add(KitpvpUtils.addLevelLore(level));
 		Utils.sendCustomMessage(player, KitpvpUtils.getMessageLevel(level));
-		player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+		player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 50, 1);
 		
 		swordMeta.setLore(lore);
 		

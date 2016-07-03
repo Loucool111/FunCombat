@@ -261,7 +261,7 @@ public class Kitpvp implements Listener
 				{
 					if (ent instanceof Player)
 					{
-						if (player.getInventory().getItemInHand() != null && player.getItemInHand().getType().equals(Material.STICK))
+						if (player.getInventory().getItemInMainHand() != null && player.getInventory().getItemInMainHand().getType().equals(Material.STICK))
 						{
 							if (Utils.getTargetPlayer(player) != null)
 							{
@@ -274,7 +274,7 @@ public class Kitpvp implements Listener
 										target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 0));
 										target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,200,0));
 										target.damage(2, player);
-										target.playSound(target.getLocation(), Sound.FIZZ, 50F, 1F);
+										target.playSound(target.getLocation(), Sound.ENTITY_BLAZE_HURT, 50F, 1F);
 										Utils.sendCustomMessage(target, ChatColor.RED + FunCombat.localizer.locate("funcombat.kit.sorcierehit"));
 									
 										final String baseName = ChatColor.DARK_PURPLE + FunCombat.localizer.locate("funcombat.kit.witchstick");

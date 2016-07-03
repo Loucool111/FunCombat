@@ -15,7 +15,6 @@ import fr.reaamz.funcombat.grades.GradeUtils;
 
 public class GradeCommandExecutor implements IPluginCommand
 {
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{

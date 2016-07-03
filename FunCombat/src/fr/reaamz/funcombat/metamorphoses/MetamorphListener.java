@@ -125,7 +125,7 @@ public class MetamorphListener implements Listener
 			{
 				if (ent instanceof Creeper && ent.getCustomName() == event.getRightClicked().getCustomName())
 				{
-					if (event.getPlayer().getItemInHand().getType().equals(Material.FLINT_AND_STEEL))
+					if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.FLINT_AND_STEEL))
 					{
 						event.setCancelled(true);
 					}
@@ -327,7 +327,7 @@ public class MetamorphListener implements Listener
 	public Entity pigzombieMethod(Entity ent)
 	{
 		PigZombie pz = (PigZombie) ent;
-		pz.getEquipment().setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
+		pz.getEquipment().setItemInMainHand(new ItemStack(Material.DIAMOND_SWORD));
 		pz.setBaby(false);
 		return (Entity) pz;
 	}

@@ -117,7 +117,7 @@ public class KitArcher implements IKit
 		
 		lore.add(KitpvpUtils.addLevelLore(level));
 		Utils.sendCustomMessage(player, KitpvpUtils.getMessageLevel(level));
-		player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 1);
+		player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 50, 1);
 		
 		bowMeta.setLore(lore);
 		

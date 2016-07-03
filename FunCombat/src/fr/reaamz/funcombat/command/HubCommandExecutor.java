@@ -60,7 +60,7 @@ public class HubCommandExecutor implements CommandExecutor
 				{			
 					Utils.sendCustomMessage(player,ChatColor.AQUA + "Vous retournez au hub!");
 					player.teleport(loc);
-					player.playSound(player.getLocation(), Sound.EXPLODE, 50, 1);
+					player.playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 50, 1);
 				}
 				else
 				{

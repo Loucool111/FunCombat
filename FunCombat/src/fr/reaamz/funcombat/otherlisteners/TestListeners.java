@@ -26,7 +26,7 @@ public class TestListeners implements Listener
 	{
 		if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)
 		{
-			if(event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getType() == Material.LEVER)
+			if(event.getPlayer().getInventory().getItemInMainHand() != null && event.getPlayer().getInventory().getItemInMainHand().getType() == Material.LEVER)
 			{
 				Block block = event.getPlayer().getTargetBlock(new HashSet<Material>(), 30);
 				
