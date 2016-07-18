@@ -1,9 +1,9 @@
-package ch.reaamz.funcombat.selectioncouleur;
+package ch.reaamz.funcombat.color;
 
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 
-public enum SelectionCouleurType 
+public enum ColorType 
 {
 	BLACK(DyeColor.BLACK, ChatColor.BLACK + "Noir"),
 	RED(DyeColor.RED, ChatColor.RED + "Rouge"),
@@ -25,7 +25,7 @@ public enum SelectionCouleurType
 	private DyeColor color;
 	private String caption;
 	
-	private SelectionCouleurType(DyeColor color, String caption)
+	private ColorType(DyeColor color, String caption)
 	{
 		this.color = color;
 		this.caption = caption;

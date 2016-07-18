@@ -7,12 +7,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import ch.reaamz.funcombat.Utils;
+import ch.reaamz.funcombat.color.ColorUtils;
 import ch.reaamz.funcombat.hats.HatsUitls;
 import ch.reaamz.funcombat.jump.JumpUtils;
 import ch.reaamz.funcombat.kitpvp.KitpvpUtils;
 import ch.reaamz.funcombat.metamorphoses.MetamorphUtils;
 import ch.reaamz.funcombat.player.PlayerInfo;
-import ch.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 import ch.reaamz.funcombat.virtualinventory.GenericVirtualInventory;
 
 public class MainMenuListener implements Listener 
@@ -40,7 +40,7 @@ public class MainMenuListener implements Listener
 					
 				if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Choissisez votre couleur"))
 				{					
-					e.getWhoClicked().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_COLORS.getName(), 18, SelectionCouleurUtils.getInventoryContentsForMenu()).getInventory());
+					e.getWhoClicked().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_COLORS.getName(), 18, ColorUtils.getInventoryContentsForMenu()).getInventory());
 				}
 						
 				if (e.getCurrentItem().getType() == Material.HOPPER)

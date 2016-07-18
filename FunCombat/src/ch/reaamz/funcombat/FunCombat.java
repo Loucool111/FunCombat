@@ -10,6 +10,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ch.reaamz.funcombat.color.ColorListener;
 import ch.reaamz.funcombat.command.GradeCommandExecutor;
 import ch.reaamz.funcombat.command.HubCommandExecutor;
 import ch.reaamz.funcombat.command.JumpCommandExecutor;
@@ -31,7 +32,6 @@ import ch.reaamz.funcombat.mainmenu.MainMenuListener;
 import ch.reaamz.funcombat.metamorphoses.MetamorphListener;
 import ch.reaamz.funcombat.otherlisteners.BungeeMessagesListener;
 import ch.reaamz.funcombat.otherlisteners.TestListeners;
-import ch.reaamz.funcombat.selectioncouleur.SelectionCouleurListener;
 
 /**
  * 
@@ -125,7 +125,7 @@ public class FunCombat extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new HubJoinListener(), this);
 		Bukkit.getPluginManager().registerEvents(new MetamorphListener(), this);
 		Bukkit.getPluginManager().registerEvents(new MainMenuListener(), this);
-		Bukkit.getPluginManager().registerEvents(new SelectionCouleurListener(), this);
+		Bukkit.getPluginManager().registerEvents(new ColorListener(), this);
 		Bukkit.getPluginManager().registerEvents(new KitpvpListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HubMotdListener(), this);
 		Bukkit.getPluginManager().registerEvents(new HatsMenuListener(), this);

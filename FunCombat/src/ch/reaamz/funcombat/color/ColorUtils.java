@@ -1,4 +1,4 @@
-package ch.reaamz.funcombat.selectioncouleur;
+package ch.reaamz.funcombat.color;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Wool;
 
-public class SelectionCouleurUtils 
+public class ColorUtils 
 {	
 	public static ItemStack[] getInventoryContentsForMenu()
 	{
@@ -16,7 +16,7 @@ public class SelectionCouleurUtils
 		
 		int i = 0;
 		
-		for (SelectionCouleurType type : SelectionCouleurType.values())
+		for (ColorType type : ColorType.values())
 		{
 			Wool wool = new Wool(type.getColor());
 			ItemStack stack = wool.toItemStack(1);

@@ -1,4 +1,4 @@
-package ch.reaamz.funcombat.selectioncouleur;
+package ch.reaamz.funcombat.color;
 
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -11,7 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import ch.reaamz.funcombat.FunCombat;
 import ch.reaamz.funcombat.Utils;
 
-public class SelectionCouleurListener implements Listener
+public class ColorListener implements Listener
 {
 	DyeColor dColor = null;
 	

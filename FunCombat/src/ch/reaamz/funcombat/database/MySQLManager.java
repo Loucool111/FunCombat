@@ -10,9 +10,9 @@ import org.bukkit.Location;
 
 import ch.reaamz.funcombat.FunCombat;
 import ch.reaamz.funcombat.Utils;
+import ch.reaamz.funcombat.color.ColorUtils;
 import ch.reaamz.funcombat.grades.GradeType;
 import ch.reaamz.funcombat.grades.GradeUtils;
-import ch.reaamz.funcombat.selectioncouleur.SelectionCouleurUtils;
 import code.husky.mysql.MySQL;
 
 public class MySQLManager
@@ -73,7 +73,7 @@ public class MySQLManager
 		
 		String color = res.getString("COLOR");
 		state.close();
-		return SelectionCouleurUtils.getDyeColorFromString(color);
+		return ColorUtils.getDyeColorFromString(color);
 	}
 	
 	public void updateGrade(UUID uuid, GradeType grade) throws SQLException
