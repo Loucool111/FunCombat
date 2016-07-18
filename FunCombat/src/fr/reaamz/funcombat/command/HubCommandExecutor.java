@@ -54,7 +54,7 @@ public class HubCommandExecutor implements CommandExecutor
 			
 			if(cmd.getName().equalsIgnoreCase("hub"))
 			{
-				Utils.ClearInventoryAndPotionEffects(player);
+				Utils.clearInventoryAndPotionEffects(player);
 				
 				if(FunCombat.instance.getConfig().getBoolean("isLocationSet"))
 				{			

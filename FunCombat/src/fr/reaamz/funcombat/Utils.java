@@ -42,7 +42,7 @@ public class Utils
 		}
 	}
 	
-	public static void sendCustomMessageAllPlayers(String message)
+	public static void broadcastCustomMessage(String message)
 	{
 		for(Player p : Bukkit.getServer().getOnlinePlayers())
 		{
@@ -50,7 +50,7 @@ public class Utils
 		}
 	}
 	
-	public static void sendMessageAllPlayers(String message)
+	public static void broadcastMessage(String message)
 	{
 		for(Player p : Bukkit.getServer().getOnlinePlayers())
 		{
@@ -68,19 +68,13 @@ public class Utils
 		Bukkit.getServer().getLogger().info(info);
 	}
 	
-	public static void ClearInventoryAndPotionEffects(Player player)
+	public static void clearInventoryAndPotionEffects(Player player)
 	{
 		player.getInventory().clear();
 		
 		player.getInventory().setArmorContents(null);
 		
-		for (PotionEffect e : player.getActivePotionEffects())
-		{
-			if(player.hasPotionEffect(e.getType()))
-			{
-				player.removePotionEffect(e.getType());
-			}
-		}
+		removeAllPotionEffects(player);
 	}
 	
 	public static void removeAllPotionEffects(Player player)

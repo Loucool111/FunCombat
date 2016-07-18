@@ -17,7 +17,7 @@ public class JumpDoneListener implements Listener
 	{
 		Player player = event.getPlayer();
 		
-		Utils.sendMessageAllPlayers("Player " + player.getName() + " just finished " + event.getJumpName() + " in " + event.getTime() + " secondes(s)");
+		Utils.broadcastMessage("Player " + player.getName() + " just finished " + event.getJumpName() + " in " + event.getTime() + " secondes(s)");
 		
 		try
 		{

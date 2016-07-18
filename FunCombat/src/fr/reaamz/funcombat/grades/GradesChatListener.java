@@ -28,6 +28,6 @@ public class GradesChatListener implements Listener
 		}
 		catch (SQLException e){}
 
-		Utils.sendMessageAllPlayers((player.getDisplayName() + " " +  message));
+		Utils.broadcastMessage((player.getDisplayName() + " " +  message));
 	}
 }

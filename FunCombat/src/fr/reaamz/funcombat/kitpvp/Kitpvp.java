@@ -105,7 +105,7 @@ public class Kitpvp implements Listener
 	{
 		playerKit.put(player, type.toString());
 		
-		Utils.ClearInventoryAndPotionEffects(player);
+		Utils.clearInventoryAndPotionEffects(player);
 		
 		for (Kits kit : Kits.values())
 		{
@@ -207,7 +207,7 @@ public class Kitpvp implements Listener
 							
 							if (checkScores(killer, kit))
 							{
-								Utils.ClearInventoryAndPotionEffects(killer);
+								Utils.clearInventoryAndPotionEffects(killer);
 								KitpvpKits.equipKitArmor(killer, KitLevels.get(killer).get(kit), kit);
 								KitpvpKits.equipKitStuff(killer, KitLevels.get(killer).get(kit), kit);
 							}
@@ -231,7 +231,7 @@ public class Kitpvp implements Listener
 							
 								if (checkScores(victim, kit))
 								{
-									Utils.ClearInventoryAndPotionEffects(victim);
+									Utils.clearInventoryAndPotionEffects(victim);
 									KitpvpKits.equipKitArmor(victim, KitLevels.get(victim).get(kit), kit);
 									KitpvpKits.equipKitStuff(victim, KitLevels.get(victim).get(kit), kit);
 								}

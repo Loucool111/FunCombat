@@ -1,4 +1,4 @@
-package fr.reaamz.funcombat.db;
+package fr.reaamz.funcombat.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

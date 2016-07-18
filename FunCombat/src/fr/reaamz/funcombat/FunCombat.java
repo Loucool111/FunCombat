@@ -15,7 +15,7 @@ import fr.reaamz.funcombat.command.HubCommandExecutor;
 import fr.reaamz.funcombat.command.JumpCommandExecutor;
 import fr.reaamz.funcombat.completers.GradeTabCompleter;
 import fr.reaamz.funcombat.completers.JumpTabCompleter;
-import fr.reaamz.funcombat.db.MySQLManager;
+import fr.reaamz.funcombat.database.MySQLManager;
 import fr.reaamz.funcombat.grades.GradesChatListener;
 import fr.reaamz.funcombat.grades.GradesJoinListener;
 import fr.reaamz.funcombat.hats.HatsMenuListener;
