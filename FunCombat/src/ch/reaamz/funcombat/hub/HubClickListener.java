@@ -9,8 +9,8 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import ch.reaamz.funcombat.Utils;
+import ch.reaamz.funcombat.inventory.GenericContainer;
 import ch.reaamz.funcombat.mainmenu.MainMenuUtils;
-import ch.reaamz.funcombat.virtualinventory.GenericVirtualInventory;
 
 public class HubClickListener implements Listener
 {	
@@ -23,7 +23,7 @@ public class HubClickListener implements Listener
 			{
 				if(event.getItem().equals(HubUtils.getMenuItem()))
 				{					
-					event.getPlayer().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_MAINMENU.getName(), 27, MainMenuUtils.getMainMenuItems()).getInventory());
+					event.getPlayer().openInventory(new GenericContainer(Utils.InventoryNames.FC_MAINMENU.getName(), 27, MainMenuUtils.getMainMenuItems()).getInventory());
 				}
 			}
 		}
@@ -38,7 +38,7 @@ public class HubClickListener implements Listener
 			{
 				if(e.getCurrentItem().equals(HubUtils.getMenuItem()))
 				{
-					e.getWhoClicked().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_MAINMENU.getName(), 27, MainMenuUtils.getMainMenuItems()).getInventory());
+					e.getWhoClicked().openInventory(new GenericContainer(Utils.InventoryNames.FC_MAINMENU.getName(), 27, MainMenuUtils.getMainMenuItems()).getInventory());
 						
 					e.setCancelled(true);
 				}

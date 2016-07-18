@@ -9,11 +9,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import ch.reaamz.funcombat.Utils;
 import ch.reaamz.funcombat.color.ColorUtils;
 import ch.reaamz.funcombat.hats.HatsUitls;
+import ch.reaamz.funcombat.inventory.GenericContainer;
 import ch.reaamz.funcombat.jump.JumpUtils;
 import ch.reaamz.funcombat.kitpvp.KitpvpUtils;
 import ch.reaamz.funcombat.metamorphoses.MetamorphUtils;
 import ch.reaamz.funcombat.player.PlayerInfo;
-import ch.reaamz.funcombat.virtualinventory.GenericVirtualInventory;
 
 public class MainMenuListener implements Listener 
 {
@@ -30,17 +30,17 @@ public class MainMenuListener implements Listener
 				
 				if(e.getCurrentItem().getType() == Material.DIAMOND_SWORD)
 				{					
-					e.getWhoClicked().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_KITPVP.getName(), 9, KitpvpUtils.getItemsPourMenu()).getInventory());
+					e.getWhoClicked().openInventory(new GenericContainer(Utils.InventoryNames.FC_KITPVP.getName(), 9, KitpvpUtils.getItemsPourMenu()).getInventory());
 				}
 					
 				if(e.getCurrentItem().getType() == Material.BLAZE_ROD)
 				{						
-					e.getWhoClicked().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_METAMORPH.getName(), 18, MetamorphUtils.getItemsForMenu()).getInventory());
+					e.getWhoClicked().openInventory(new GenericContainer(Utils.InventoryNames.FC_METAMORPH.getName(), 18, MetamorphUtils.getItemsForMenu()).getInventory());
 				}
 					
 				if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Choissisez votre couleur"))
 				{					
-					e.getWhoClicked().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_COLORS.getName(), 18, ColorUtils.getInventoryContentsForMenu()).getInventory());
+					e.getWhoClicked().openInventory(new GenericContainer(Utils.InventoryNames.FC_COLORS.getName(), 18, ColorUtils.getInventoryContentsForMenu()).getInventory());
 				}
 						
 				if (e.getCurrentItem().getType() == Material.HOPPER)
@@ -50,12 +50,12 @@ public class MainMenuListener implements Listener
 						
 				if (e.getCurrentItem().getType() == Material.FEATHER)
 				{
-					e.getWhoClicked().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_JUMP.getName(), 27, JumpUtils.getMenuItems()).getInventory());
+					e.getWhoClicked().openInventory(new GenericContainer(Utils.InventoryNames.FC_JUMP.getName(), 27, JumpUtils.getMenuItems()).getInventory());
 				}
 				
 				if (e.getCurrentItem().getType() == Material.CHAINMAIL_HELMET)
 				{
-					e.getWhoClicked().openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_HATS.getName(), 27, HatsUitls.getItemForMenu()).getInventory());
+					e.getWhoClicked().openInventory(new GenericContainer(Utils.InventoryNames.FC_HATS.getName(), 27, HatsUitls.getItemForMenu()).getInventory());
 				}
 			}	
 		}

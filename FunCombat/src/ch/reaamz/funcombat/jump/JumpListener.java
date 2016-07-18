@@ -7,8 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import ch.reaamz.funcombat.Utils;
+import ch.reaamz.funcombat.inventory.GenericContainer;
 import ch.reaamz.funcombat.jump.score.JumpScore;
-import ch.reaamz.funcombat.virtualinventory.GenericVirtualInventory;
 
 public class JumpListener implements Listener
 {
@@ -25,7 +25,7 @@ public class JumpListener implements Listener
 			{
 				if (event.getCurrentItem().getType().equals(Material.BOOK_AND_QUILL))
 				{
-					player.openInventory(new GenericVirtualInventory(Utils.InventoryNames.FC_JUMPSCORES.getName(), 18, JumpScore.getScore()).getInventory());
+					player.openInventory(new GenericContainer(Utils.InventoryNames.FC_JUMPSCORES.getName(), 18, JumpScore.getScore()).getInventory());
 				}
 				else if (event.getCurrentItem().getType().equals(Material.FEATHER))
 				{

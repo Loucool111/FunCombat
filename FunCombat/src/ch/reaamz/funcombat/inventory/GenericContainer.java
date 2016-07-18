@@ -1,16 +1,16 @@
-package ch.reaamz.funcombat.virtualinventory;
+package ch.reaamz.funcombat.inventory;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class GenericVirtualInventory
+public class GenericContainer
 {
 	private String name;
 	private int slots;
 	private ItemStack[] items;
 	
-	public GenericVirtualInventory(String name, int slots, ItemStack[] items)
+	public GenericContainer(String name, int slots, ItemStack[] items)
 	{
 		this.name = name;
 		this.slots = slots;
